@@ -1,0 +1,10 @@
+<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full">
+  <g transform="scale(-1,1) translate(-1600,0)">
+    <path d="M 380 380 Q 460 360 520 400 Q 540 460 480 490 Q 400 500 360 460 Q 340 410 380 380 Z" fill="none" stroke="#FF5722" stroke-width="1.5" opacity="0.6"/>
+    <path d="M 330 320 Q 450 290 570 340 Q 610 410 560 490 Q 460 540 360 520 Q 280 460 300 380 Z" fill="none" stroke="rgba(2, 1, 9, 0.18)" stroke-width="1.2" opacity="0.5"/>
+    <path d="M 260 260 Q 440 220 620 280 Q 690 380 620 510 Q 460 580 290 550 Q 200 470 220 360 Z" fill="none" stroke="rgba(2, 1, 9, 0.18)" stroke-width="1.5" opacity="0.55"/>
+    <path d="M 180 200 Q 420 160 670 220 Q 770 350 690 510 Q 480 620 250 580 Q 110 480 140 320 Z" fill="none" stroke="rgba(2, 1, 9, 0.18)" stroke-width="1.2" opacity="0.5"/>
+    <path d="M 100 130 Q 390 100 730 170 Q 860 320 770 540 Q 510 680 200 620 Q 20 490 60 290 Z" fill="none" stroke="rgba(2, 1, 9, 0.18)" stroke-width="1.2" opacity="0.5"/>
+    <path d="M 0 60 Q 360 30 810 110 Q 970 290 870 580 Q 560 750 130 680 Q -80 530 -30 260 Z" fill="none" stroke="rgba(2, 1, 9, 0.18)" stroke-width="1.2" opacity="0.35"/>
+  </g>
+</svg>
