@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OnScreen — Live Interview (Rebranded)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Geist'; src: local('Geist'); font-weight: 400; }
+  @font-face { font-family: 'Geist'; font-weight: 500; src: local('Geist Medium'); }
+  @font-face { font-family: 'Geist'; font-weight: 600; src: local('Geist SemiBold'); }
+
+  :root {
+    --p-bg: #FBFBFC;
+    --p-surface: #FFFFFF;
+    --p-surface-2: #F4F5F7;
+    --p-sidebar: #060C1C;
+    --p-sidebar-950: #0A1430;
+    --p-text: #14151A;
+    --p-text-muted: #5B5E6B;
+    --p-text-faint: #8A8D99;
+    --p-border: #E5E7EB;
+    --p-border-strong: #D1D5DB;
+    --p-ring: #13255D;
+    --p-primary: #13255D;
+    --p-primary-hover: #0F1D4B;
+    --p-accent: #FF5722;
+    --p-accent-hover: #E8480F;
+    --p-lime: #C7F252;
+    --p-success: #059669; --p-success-bg: #D1FAE5; --p-success-border: #A7F3D0;
+    --p-warning: #F59E0B; --p-warning-bg: #FEF3C7; --p-warning-border: #FDE68A;
+    --p-error: #DC2626; --p-error-bg: #FEE2E2; --p-error-border: #FECACA;
+    --p-info: #2563EB; --p-info-bg: #EFF6FF; --p-info-border: #BFDBFE;
+    --p-font: 'Geist', system-ui, sans-serif;
+    --p-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --p-radius-sm: 4px; --p-radius: 6px; --p-radius-md: 8px; --p-radius-lg: 12px;
+    --p-shadow-sm: 0 1px 2px rgba(20,21,26,0.05);
+    --p-shadow: 0 1px 3px rgba(20,21,26,0.08), 0 1px 2px rgba(20,21,26,0.04);
+    --p-shadow-md: 0 4px 12px -2px rgba(20,21,26,0.10), 0 2px 6px -2px rgba(20,21,26,0.06);
+    --p-shadow-lg: 0 12px 28px -8px rgba(20,21,26,0.16);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { background: var(--p-bg); color: var(--p-text); font-family: var(--p-font); font-size: 14px; -webkit-font-smoothing: antialiased; overflow: hidden; }
+
+  .app { display: grid; grid-template-rows: 48px 1fr 52px; height: 100vh; }
+
+  /* ===== Top bar ===== */
+  .topbar { display: flex; align-items: center; gap: 4px; background: var(--p-surface); border-bottom: 1px solid var(--p-border); padding: 0 16px; }
+  .tb-brand { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 13.5px; color: var(--p-text); padding-right: 14px; margin-right: 10px; border-right: 1px solid var(--p-border); height: 28px; }
+  .tb-brand .ico { width: 18px; height: 18px; color: var(--p-text-muted); }
+  .tb-icon-btn { width: 30px; height: 30px; border-radius: var(--p-radius); display: grid; place-items: center; color: var(--p-text-muted); cursor: pointer; }
+  .tb-icon-btn:hover { background: var(--p-surface-2); }
+  .tb-avatar { width: 22px; height: 22px; border-radius: 50%; background: var(--p-success); color: #fff; font-size: 10px; font-weight: 700; display: grid; place-items: center; }
+  .tb-tabs { display: flex; align-items: center; gap: 2px; margin-left: 8px; }
+  .tb-tab { padding: 6px 14px; font-size: 12.5px; font-weight: 500; color: var(--p-text-muted); border-radius: var(--p-radius-sm) var(--p-radius-sm) 0 0; cursor: pointer; }
+  .tb-tab.active { color: var(--p-primary); background: var(--p-surface-2); box-shadow: inset 0 -2px 0 var(--p-primary); }
+  .tb-add { width: 26px; height: 26px; display: grid; place-items: center; color: var(--p-text-faint); border-radius: var(--p-radius-sm); cursor: pointer; }
+  .tb-spacer { flex: 1; }
+  .tb-select { height: 30px; padding: 0 30px 0 12px; border: 1px solid var(--p-border-strong); border-radius: var(--p-radius); font-family: var(--p-font); font-size: 12.5px; color: var(--p-text); background: var(--p-surface); appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%238A8D99' stroke-width='1.5'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 9px center; margin-right: 12px; }
+  .tb-panel-tabs { display: flex; align-items: center; gap: 18px; margin-right: 20px; }
+  .tb-panel-tab { font-size: 13px; font-weight: 500; color: var(--p-text-muted); padding: 6px 2px; border-bottom: 2px solid transparent; cursor: pointer; }
+  .tb-panel-tab.active { color: var(--p-primary); border-bottom-color: var(--p-primary); }
+  .btn { font-family: var(--p-font); font-size: 13px; font-weight: 600; padding: 0 16px; height: 32px; border-radius: var(--p-radius); border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
+  .btn-primary { background: var(--p-primary); color: #fff; }
+  .btn-primary:hover { background: var(--p-primary-hover); }
+  .btn-destructive { background: var(--p-error); color: #fff; }
+
+  /* ===== Body columns ===== */
+  .body-row { display: grid; grid-template-columns: 320px 1fr 380px; min-height: 0; }
+
+  /* Left question panel */
+  .panel-left { background: var(--p-surface); border-right: 1px solid var(--p-border); overflow-y: auto; padding: 18px 20px 24px; }
+  .ql-tabs { display: flex; align-items: center; gap: 18px; margin-bottom: 14px; }
+  .ql-tab { font-size: 13.5px; font-weight: 600; color: var(--p-text-muted); padding-bottom: 8px; border-bottom: 2px solid transparent; }
+  .ql-tab.active { color: var(--p-text); border-bottom-color: var(--p-primary); }
+  .ql-tools { margin-left: auto; display: flex; gap: 10px; color: var(--p-text-faint); }
+  .q-title { font-size: 16px; font-weight: 600; margin: 4px 0 12px; letter-spacing: -0.2px; }
+  .q-body p { font-size: 13px; line-height: 1.6; color: var(--p-text-muted); margin-bottom: 12px; }
+  .q-body ul { padding-left: 18px; margin-bottom: 12px; }
+  .q-body li { font-size: 13px; line-height: 1.6; color: var(--p-text-muted); margin-bottom: 4px; }
+  .q-body li b, .q-body p b { color: var(--p-text); font-weight: 600; }
+  .q-body h4 { font-size: 13px; font-weight: 600; margin: 18px 0 8px; }
+  .q-body code.inline { font-family: var(--p-mono); font-size: 12px; background: var(--p-surface-2); padding: 1px 5px; border-radius: 4px; }
+  .io-box { background: var(--p-surface-2); border: 1px solid var(--p-border); border-radius: var(--p-radius); padding: 10px 12px; font-family: var(--p-mono); font-size: 12.5px; color: var(--p-text); margin-top: 6px; }
+  .ql-actions { display: flex; gap: 16px; margin-top: 20px; }
+  .ql-actions a { font-size: 12.5px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .ql-actions .edit { color: var(--p-text-muted); }
+  .ql-actions .remove { color: var(--p-error); }
+
+  /* Center editor */
+  .panel-center { background: var(--p-sidebar); overflow: auto; position: relative; }
+  .editor { font-family: var(--p-mono); font-size: 13px; line-height: 1.75; padding: 18px 24px 40px; color: #E4E7EC; }
+  .editor .ln { display: flex; }
+  .editor .num { width: 34px; flex-shrink: 0; text-align: right; padding-right: 16px; color: rgba(228,231,236,0.28); user-select: none; }
+  .editor .code { white-space: pre-wrap; }
+  .editor .c { color: #7E869C; } /* comment */
+  .editor .k { color: var(--p-lime); } /* keyword */
+  .editor .v { color: #FF9E7A; } /* value/type */
+  .editor .hl { background: color-mix(in srgb, var(--p-accent) 16%, transparent); border-left: 2px solid var(--p-accent); margin-left: -24px; padding-left: 22px; }
+  .autocomplete-bar { position: sticky; bottom: 0; background: var(--p-primary); color: #fff; font-size: 12px; font-weight: 500; padding: 8px 20px; display: flex; align-items: center; gap: 8px; }
+
+  /* Right test panel */
+  .panel-right { background: var(--p-surface); overflow-y: auto; padding: 18px 210px 18px 20px; position: relative; }
+  .alert-success { display: flex; align-items: center; gap: 9px; background: var(--p-success-bg); border: 1px solid var(--p-success-border); color: #046652; border-radius: var(--p-radius); padding: 9px 12px; font-size: 12.5px; font-weight: 500; margin-bottom: 18px; }
+  .alert-success .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--p-success); color: #fff; display: grid; place-items: center; font-size: 10px; flex-shrink: 0; }
+  .sr-label { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .sr-io { background: var(--p-surface-2); border: 1px solid var(--p-border); border-radius: var(--p-radius); font-family: var(--p-mono); font-size: 12.5px; color: var(--p-text); overflow: hidden; }
+  .sr-io .row { display: flex; gap: 12px; padding: 6px 12px; border-bottom: 1px solid var(--p-border); }
+  .sr-io .row:last-child { border-bottom: none; }
+  .sr-io .row .n { color: var(--p-text-faint); width: 16px; }
+
+  /* Video tiles — floating overlay, branded initial avatars */
+  .video-tile { position: absolute; right: 20px; width: 190px; border-radius: var(--p-radius-lg); overflow: hidden; box-shadow: var(--p-shadow-lg); border: 1px solid var(--p-border); background: var(--p-surface); }
+  .video-tile.candidate { top: 16px; }
+  .video-tile.interviewer { bottom: 16px; }
+  .video-face { height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #fff; position: relative; }
+  .video-face .initial { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-family: var(--p-mono); font-weight: 600; font-size: 20px; background: rgba(255,255,255,0.14); border: 1.5px solid rgba(255,255,255,0.35); }
+  .video-face .mute { position: absolute; top: 8px; left: 8px; width: 20px; height: 20px; border-radius: 5px; background: rgba(0,0,0,0.4); display: grid; place-items: center; color: #fff; }
+  .video-face .expand { position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 5px; background: rgba(0,0,0,0.4); display: grid; place-items: center; color: #fff; }
+  .video-tile.candidate .video-face { background: linear-gradient(160deg, #13255D, #0A1430); }
+  .video-tile.interviewer .video-face { background: linear-gradient(160deg, #E8480F, #FF5722); }
+  .video-label { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; font-size: 12.5px; font-weight: 500; }
+  .video-label .role { font-family: var(--p-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--p-text-faint); }
+
+  /* ===== Bottom toolbar ===== */
+  .toolbar { background: var(--p-sidebar); display: flex; align-items: center; padding: 0 20px; gap: 6px; }
+  .tool-btn { display: flex; flex-direction: column; align-items: center; gap: 3px; color: rgba(255,255,255,0.72); font-size: 10.5px; padding: 6px 12px; border-radius: var(--p-radius); cursor: pointer; }
+  .tool-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+  .tool-btn .ic { width: 18px; height: 18px; }
+  .sharing-chip { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.85); font-size: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; padding: 5px 12px 5px 8px; margin: 0 10px; }
+  .sharing-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--p-lime); }
+  .toolbar-spacer { flex: 1; }
+  .badge-count { background: var(--p-accent); color: #fff; font-size: 9px; font-weight: 700; border-radius: 100px; width: 14px; height: 14px; display: grid; place-items: center; position: absolute; top: -2px; right: 2px; }
+  .tool-btn-wrap { position: relative; }
+  .timer { font-family: var(--p-mono); font-size: 12.5px; color: rgba(255,255,255,0.75); margin-right: 16px; }
+  .timer strong { color: #fff; }
+  .end-btn { background: var(--p-error); color: #fff; border: none; border-radius: 100px; width: 38px; height: 38px; display: grid; place-items: center; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="tb-brand"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8 17l8-10M8 18h8"/></svg>Diagram board</div>
+    <div class="tb-icon-btn">&lt;/&gt;</div>
+    <div class="tb-avatar">P</div>
+    <div class="tb-tabs">
+      <div class="tb-tab">Q1</div>
+      <div class="tb-tab">Q2</div>
+      <div class="tb-tab active">Q3</div>
+      <div class="tb-add">+</div>
+    </div>
+    <div class="tb-spacer"></div>
+    <div class="tb-panel-tabs">
+      <div class="tb-panel-tab active">Quick test</div>
+      <div class="tb-panel-tab">Test cases</div>
+      <div class="tb-panel-tab">Output</div>
+    </div>
+    <select class="tb-select"><option>C (gcc 5.4.0)</option></select>
+    <div class="tb-avatar" style="background:var(--p-primary)">P</div>
+    <button class="btn btn-primary" style="margin-left:12px;">Run</button>
+  </div>
+
+  <!-- BODY -->
+  <div class="body-row">
+
+    <!-- LEFT: question -->
+    <div class="panel-left">
+      <div class="ql-tabs">
+        <div class="ql-tab active">Question no 3</div>
+        <div class="ql-tab">Hints</div>
+        <div class="ql-tools">🔒 ‹</div>
+      </div>
+      <div class="q-title">String Partitioning Challenge</div>
+      <div class="q-body">
+        <p>You are given a numeric string S of length N, where each character is a digit from 0–9.</p>
+        <p>Partition S into one or more contiguous segments such that:</p>
+        <ul>
+          <li>Each segment's numeric value does not exceed C</li>
+          <li>No segment may have leading zeros <b>unless it overflows to zero while accumulating digits</b> (reflects actual broken check)</li>
+        </ul>
+        <p>Count the total number of valid ways to partition S.</p>
+        <h4>Function Description:</h4>
+        <p>Implement <code class="inline">Count(N, C, K, S)</code> returning total valid partitions as a plain integer (no modulo applied).</p>
+        <ul>
+          <li><b>N</b> — length of string S</li>
+          <li><b>C</b> — upper bound for each partition's value (integer, max ~2×10⁹)</li>
+          <li><b>K</b> — accepted as parameter but <b>unused</b></li>
+          <li><b>S</b> — input numeric string</li>
+        </ul>
+        <h4>Input Format:</h4>
+        <div class="io-box">N C K<br>S</div>
+      </div>
+      <div class="ql-actions">
+        <a class="edit">✎ Edit</a>
+        <a class="remove">🗑 Remove question</a>
+      </div>
+    </div>
+
+    <!-- CENTER: editor -->
+    <div class="panel-center">
+      <div class="editor">
+<div class="ln"><span class="num">1</span><span class="code"><span class="k">#include</span>&lt;stdio.h&gt;</span></div>
+<div class="ln"><span class="num">2</span><span class="code"><span class="k">#include</span>&lt;stdbool.h&gt;</span></div>
+<div class="ln"><span class="num">3</span><span class="code"><span class="k">#include</span>&lt;malloc.h&gt;</span></div>
+<div class="ln"><span class="num">4</span><span class="code"><span class="v">long long</span> Count (<span class="v">int</span> N, <span class="v">int</span> C, <span class="v">int</span> K, <span class="v">char</span>* S) {</span></div>
+<div class="ln"><span class="num">5</span><span class="code">    <span class="c">// Write your code here</span></span></div>
+<div class="ln"><span class="num">6</span><span class="code">    <span class="k">return</span> -1;</span></div>
+<div class="ln"><span class="num">7</span><span class="code">}</span></div>
+<div class="ln"><span class="num">8</span><span class="code"></span></div>
+<div class="ln"><span class="num">9</span><span class="code"><span class="v">int</span> main() {</span></div>
+<div class="ln"><span class="num">10</span><span class="code">    <span class="v">int</span> i_custom_input_1;</span></div>
+<div class="ln"><span class="num">11</span><span class="code">    <span class="v">char</span> **custom_input_1=(<span class="v">char</span> **)malloc(sizeof(<span class="v">char</span>*)*(3));</span></div>
+<div class="ln"><span class="num">12</span><span class="code">    <span class="k">for</span>(i_custom_input_1 = 0; i_custom_input_1 &lt; 3; i_custom_input_1++)</span></div>
+<div class="ln"><span class="num">13</span><span class="code">    {</span></div>
+<div class="ln"><span class="num">14</span><span class="code">        custom_input_1[i_custom_input_1]=(<span class="v">char</span> *)malloc(51200 * sizeof(<span class="v">char</span>));</span></div>
+<div class="ln"><span class="num">15</span><span class="code">        scanf(<span class="v">" %s"</span>, custom_input_1[i_custom_input_1]);</span></div>
+<div class="ln"><span class="num">16</span><span class="code">    }</span></div>
+<div class="ln"><span class="num">17</span><span class="code">    <span class="v">int</span> N = atoi(custom_input_1[0]);</span></div>
+<div class="ln"><span class="num">18</span><span class="code">    <span class="v">int</span> C = atoi(custom_input_1[1]);</span></div>
+<div class="ln"><span class="num">19</span><span class="code">    <span class="v">int</span> K = atoi(custom_input_1[2]);</span></div>
+<div class="ln hl"><span class="num">20</span><span class="code">    <span class="v">char</span>* S = (<span class="v">char</span>*)malloc(200000 * sizeof(<span class="v">char</span>));</span></div>
+<div class="ln"><span class="num">21</span><span class="code">    scanf(<span class="v">"\n%[^\n]s"</span>, S);</span></div>
+<div class="ln"><span class="num">22</span><span class="code"></span></div>
+<div class="ln"><span class="num">23</span><span class="code">    <span class="v">long long</span> out_ = Count(N, C, K, S);</span></div>
+<div class="ln"><span class="num">24</span><span class="code">    printf(<span class="v">"%lld"</span>, out_);</span></div>
+<div class="ln"><span class="num">25</span><span class="code">}</span></div>
+      </div>
+      <div class="autocomplete-bar">✓ Auto-complete</div>
+    </div>
+
+    <!-- RIGHT: test panel + floating video tiles -->
+    <div class="panel-right">
+      <div class="alert-success"><span class="dot">✓</span>Sample test case populated</div>
+      <div class="sr-label">Sample input</div>
+      <div class="sr-io">
+        <div class="row"><span class="n">1</span><span>7 1234567 9</span></div>
+        <div class="row"><span class="n">2</span><span>1234567</span></div>
+      </div>
+
+      <div class="video-tile candidate">
+        <div class="video-face">
+          <span class="expand">⤢</span>
+          <div class="initial">C</div>
+        </div>
+        <div class="video-label"><span>Candidate</span><span class="role">Live</span></div>
+      </div>
+
+      <div class="video-tile interviewer">
+        <div class="video-face">
+          <span class="mute">🎤</span>
+          <span class="expand">⤢</span>
+          <div class="initial">I</div>
+        </div>
+        <div class="video-label"><span>Interviewer (You)</span><span class="role">📶 Stable</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM TOOLBAR -->
+  <div class="toolbar">
+    <div class="tool-btn"><span class="ic">⏺</span>Modes</div>
+    <div class="tool-btn"><span class="ic">🎙</span>Audio</div>
+    <div class="tool-btn"><span class="ic">🎥</span>Video</div>
+    <div class="sharing-chip"><span class="dot"></span>Candidate is sharing</div>
+    <div class="tool-btn"><span class="ic">📋</span>Notes</div>
+    <div class="tool-btn"><span class="ic">★</span>Score</div>
+    <div class="tool-btn"><span class="ic">💬</span>Chats</div>
+    <div class="tool-btn tool-btn-wrap"><span class="ic">👥</span>People<span class="badge-count">2</span></div>
+    <div class="tool-btn"><span class="ic">✉</span>Invite</div>
+    <div class="tool-btn"><span class="ic">⋯</span>More</div>
+    <div class="toolbar-spacer"></div>
+    <div class="timer"><strong>00:22:04</strong> / 02:00:00</div>
+    <button class="end-btn">☎</button>
+  </div>
+
+</div>
+
+</body>
+</html>
