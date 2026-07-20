@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>1st Work Anniversary — Chetan Jain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  @font-face { font-family: 'Bricolage Grotesque'; src: url('fonts/BricolageGrotesque-Medium.ttf') format('truetype'); font-weight: 500; }
+  @font-face { font-family: 'Bricolage Grotesque'; src: url('fonts/BricolageGrotesque-SemiBold.ttf') format('truetype'); font-weight: 600; }
+  @font-face { font-family: 'Bricolage Grotesque'; src: url('fonts/BricolageGrotesque-ExtraBold.ttf') format('truetype'); font-weight: 800; }
+  @font-face { font-family: 'Geist'; src: url('fonts/Geist-Regular.ttf') format('truetype'); font-weight: 400; }
+  @font-face { font-family: 'Geist'; src: url('fonts/Geist-Medium.ttf') format('truetype'); font-weight: 500; }
+  @font-face { font-family: 'Geist'; src: url('fonts/Geist-SemiBold.ttf') format('truetype'); font-weight: 600; }
+
+  :root {
+    --bg: #FBF9F3;
+    --card: #FFFFFF;
+    --text: #020109;
+    --muted: #545459;
+    --faint: #A5A5AD;
+    --border: rgba(2,1,9,0.10);
+    --navy: #13255D;
+    --cta: #FF5722;
+    --lime: #C7F252;
+    --display: 'Bricolage Grotesque', sans-serif;
+    --body: 'Geist', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 1200px;
+    height: 1200px;
+    background: var(--bg);
+    font-family: var(--body);
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ---------- contour backdrop ---------- */
+  .contours { position: absolute; inset: 0; z-index: 0; }
+  .contours .fade {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 30% 38%, var(--bg) 0%, var(--bg) 30%, transparent 78%);
+  }
+  .contour { fill: none; stroke: rgba(19,37,93,0.16); stroke-width: 1; }
+  .contour.major { stroke: rgba(19,37,93,0.24); }
+  .contour.lime { stroke: rgba(199,242,82,0.9); stroke-width: 1.4; }
+
+  /* ---------- confetti ticks (fun, on-brand accent marks) ---------- */
+  .tick { position: absolute; border-radius: 2px; }
+
+  /* ---------- shell ---------- */
+  .shell { position: relative; z-index: 2; width: 100%; height: 100%; padding: 56px 60px; display: flex; flex-direction: column; }
+
+  .topbar { display: flex; align-items: center; justify-content: space-between; }
+  .logo { height: 26px; }
+
+  .badge-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text); background: var(--lime);
+    padding: 8px 16px 8px 12px; border-radius: 100px;
+  }
+  .badge-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--navy); }
+
+  /* ---------- eyebrow ---------- */
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; color: var(--cta); text-transform: uppercase; letter-spacing: 1.6px; margin-top: 54px; }
+  .eyebrow .compass { width: 22px; height: 22px; }
+  .eyebrow .bracket { color: rgba(2,1,9,0.4); }
+  .eyebrow .label { color: var(--navy); font-weight: 500; }
+
+  /* ---------- headline ---------- */
+  .headline {
+    font-family: var(--display); font-weight: 600; font-size: 92px; line-height: 0.96; letter-spacing: -3px;
+    margin-top: 18px; color: var(--text);
+  }
+  .headline em { font-style: normal; color: var(--cta); font-weight: 600; }
+  .headline .ordinal { font-size: 0.5em; vertical-align: super; }
+
+  .subhead {
+    font-family: var(--display); font-weight: 500; font-size: 26px; letter-spacing: -0.5px;
+    color: var(--navy); margin-top: 22px;
+  }
+
+  .body-copy {
+    font-family: var(--body); font-weight: 400; font-size: 16.5px; line-height: 1.62; color: var(--muted);
+    max-width: 480px; margin-top: 18px;
+  }
+
+  /* ---------- main row ---------- */
+  .row { display: flex; align-items: flex-end; justify-content: space-between; margin-top: auto; gap: 32px; }
+
+  .signoff { flex-shrink: 0; }
+  .signoff .name { font-family: var(--display); font-weight: 600; font-size: 24px; letter-spacing: -0.4px; color: var(--text); }
+  .signoff .title { font-family: var(--mono); font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--faint); margin-top: 6px; }
+  .signoff .rule { width: 46px; height: 2px; background: var(--cta); margin-top: 14px; border-radius: 2px; }
+
+  /* ---------- medal / stat badge ---------- */
+  .medal-wrap { position: relative; width: 300px; height: 300px; flex-shrink: 0; }
+
+  .medal-confetti { position: absolute; inset: -34px; z-index: 0; pointer-events: none; }
+  .medal-confetti span { position: absolute; border-radius: 2px; }
+
+  .medal {
+    position: relative; z-index: 1;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: var(--navy);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 24px 48px -12px rgba(19,37,93,0.45);
+  }
+  .medal svg.ring { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .medal .coord { position: absolute; top: 26px; right: 30px; font-family: var(--mono); font-size: 10px; letter-spacing: 1px; color: rgba(255,255,255,0.4); }
+  .medal .num { font-family: var(--display); font-weight: 800; font-size: 96px; line-height: 1; letter-spacing: -3px; color: #FFFFFF; }
+  .medal .num .u { font-size: 0.34em; color: var(--lime); font-weight: 600; letter-spacing: 0; margin-left: 4px; }
+  .medal .cap { font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-top: 10px; }
+
+</style>
+</head>
+<body>
+
+  <div class="contours">
+    <svg viewBox="0 0 1200 1200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <path class="contour" d="M 780 180 Q 920 220 960 360 Q 990 500 900 610 Q 780 700 640 660 Q 540 610 540 480 Q 540 340 660 250 Q 720 200 780 180 Z"/>
+      <path class="contour major" d="M 800 120 Q 990 160 1050 340 Q 1100 520 980 660 Q 830 780 650 720 Q 510 660 500 500 Q 495 320 640 210 Q 720 150 800 120 Z"/>
+      <path class="contour" d="M 830 60 Q 1070 100 1150 320 Q 1220 540 1060 720 Q 870 880 640 800 Q 470 720 460 500 Q 450 280 630 150 Q 730 80 830 60 Z"/>
+      <path class="contour" opacity="0.7" d="M 860 0 Q 1160 40 1260 300 Q 1350 560 1150 780 Q 920 970 640 870 Q 430 780 420 500 Q 410 220 620 70 Q 740 -10 860 0 Z"/>
+      <path class="contour lime" d="M 760 250 Q 850 280 875 380 Q 895 480 820 550 Q 740 610 660 580 Q 600 550 600 470 Q 600 380 680 320 Q 720 280 760 250 Z"/>
+    </svg>
+    <div class="fade"></div>
+  </div>
+
+  <div class="shell">
+
+    <div class="topbar">
+      <img class="logo" src="logos/hackerearth-dark.svg" alt="HackerEarth">
+      <span class="badge-pill"><span class="dot"></span>Milestone unlocked</span>
+    </div>
+
+    <div class="eyebrow">
+      <svg class="compass" viewBox="0 0 22 22">
+        <circle cx="11" cy="11" r="9" fill="none" stroke="rgba(2,1,9,0.32)" stroke-width="0.7"/>
+        <circle cx="11" cy="11" r="5" fill="none" stroke="rgba(2,1,9,0.32)" stroke-width="0.7"/>
+        <line x1="11" y1="2" x2="11" y2="6" stroke="#FF5722" stroke-width="1.2"/>
+        <line x1="20" y1="11" x2="16" y2="11" stroke="rgba(2,1,9,0.45)" stroke-width="0.9"/>
+        <line x1="11" y1="20" x2="11" y2="16" stroke="rgba(2,1,9,0.45)" stroke-width="0.9"/>
+        <line x1="2" y1="11" x2="6" y2="11" stroke="rgba(2,1,9,0.45)" stroke-width="0.9"/>
+        <circle cx="11" cy="11" r="1.2" fill="#FF5722"/>
+      </svg>
+      <span class="bracket">[ 01 ]</span>
+      <span class="label">Team HackerEarth · Anniversary</span>
+    </div>
+
+    <div class="headline">1<span class="ordinal">st</span> Work<br><em>Anniversary</em></div>
+
+    <div class="subhead">One trip around the sun at HackerEarth.</div>
+
+    <div class="body-copy">
+      Congratulations on completing your first year with us. Your curiosity, energy, and willingness to step up haven't gone unnoticed — you've made a real difference to the team. Here's to many more milestones, ships, and celebrations ahead!
+    </div>
+
+    <div class="row">
+      <div class="signoff">
+        <div class="rule"></div>
+        <div class="name">Chetan Jain</div>
+        <div class="title">Senior Software Engineer</div>
+      </div>
+
+      <div class="medal-wrap">
+        <div class="medal-confetti">
+          <span style="left:2px;   top:14px;  width:22px; height:4px; background:var(--cta);   transform:rotate(-18deg);"></span>
+          <span style="left:190px; top:-8px;  width:18px; height:4px; background:var(--navy);  transform:rotate(24deg);"></span>
+          <span style="left:352px; top:70px;  width:20px; height:4px; background:var(--lime);  transform:rotate(70deg);"></span>
+          <span style="left:-14px; top:180px; width:16px; height:4px; background:var(--lime);  transform:rotate(96deg);"></span>
+          <span style="left:340px; top:280px; width:18px; height:4px; background:var(--cta);   transform:rotate(-40deg);"></span>
+          <span style="left:40px;  top:352px; width:16px; height:4px; background:var(--navy);  transform:rotate(-64deg);"></span>
+          <span style="left:230px; top:340px; width:6px;  height:6px; border-radius:50%; background:var(--cta);"></span>
+          <span style="left:364px; top:180px; width:6px;  height:6px; border-radius:50%; background:var(--navy);"></span>
+          <span style="left:-16px; top:70px;  width:6px;  height:6px; border-radius:50%; background:var(--lime);"></span>
+          <span style="left:150px; top:-24px; width:6px;  height:6px; border-radius:50%; background:var(--navy);"></span>
+        </div>
+        <div class="medal">
+          <svg class="ring" viewBox="0 0 300 300">
+            <circle cx="150" cy="150" r="140" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="140" fill="none" stroke="var(--lime)" stroke-width="2" stroke-dasharray="4 10" stroke-linecap="round"/>
+          </svg>
+          <div class="coord">YR·01</div>
+          <div class="num">1<span class="u">YR</span></div>
+          <div class="cap">First anniversary</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
