@@ -51,16 +51,16 @@
     opacity: 0.85;
   }
 
-  /* Radial mask: rings clustered left, fade toward headline on the right
-     (mirror of the documented .fade-left recipe) */
+  /* Linear mask: rings strong on the left, fading out toward the
+     right where the headline sits. */
   .contour-fade {
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-      ellipse 62% 90% at 92% 50%,
-      var(--bg-dark) 0%,
-      var(--bg-dark) 16%,
-      transparent 62%
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 48%,
+      var(--bg-dark) 86%
     );
   }
 
@@ -71,8 +71,9 @@
     height: 380px;
     width: 940px;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
     padding-right: 72px;
   }
 
@@ -86,6 +87,21 @@
 
   .title .line1 { color: #FFFFFF; }
   .title .line2 { color: var(--cta); }
+
+  /* Shrink-to-fit stack so the underline matches the text width exactly */
+  .stack {
+    display: inline-block;
+  }
+
+  /* Neon-green underline (brand lime, the system's on-dark highlight) */
+  .rule {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--lime);
+    box-shadow: 0 0 12px rgba(199,242,82,0.65);
+    margin-top: 20px;
+  }
 </style>
 </head>
 <body>
@@ -424,7 +440,10 @@
     </div>
     <div class="contour-fade"></div>
     <div class="text-wrap">
-      <div class="title"><span class="line1">Hackerearth </span><span class="line2">Bootcamp</span></div>
+      <div class="stack">
+        <div class="title"><span class="line1">Hackerearth </span><span class="line2">Bootcamp</span></div>
+        <div class="rule"></div>
+      </div>
     </div>
   </div>
 </body>
