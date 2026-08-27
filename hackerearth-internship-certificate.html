@@ -90,20 +90,6 @@
   .tick::before { width: 5mm; height: 1.4px; top: -0.7px; left: 0; }
   .tick::after { width: 1.4px; height: 5mm; top: 0; left: -0.7px; }
 
-  /* Contour rings backdrop, brand signature motif */
-  .contours {
-    position: absolute;
-    right: -60mm;
-    top: -40mm;
-    width: 220mm;
-    height: 220mm;
-    opacity: 0.55;
-    pointer-events: none;
-  }
-  .contours .ring { fill: none; stroke: rgba(19,37,93,0.16); stroke-width: 0.6; }
-  .contours .ring.major { stroke: rgba(19,37,93,0.24); stroke-width: 0.8; }
-  .contours .ring.cta { stroke: rgba(255,87,34,0.35); stroke-width: 0.7; }
-
   .content {
     position: relative;
     z-index: 2;
@@ -285,17 +271,6 @@
 <body>
 
 <div class="page">
-  <div class="contours">
-    <svg viewBox="0 0 800 800" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <circle class="ring cta" cx="600" cy="220" r="60"/>
-      <circle class="ring" cx="600" cy="220" r="110"/>
-      <circle class="ring major" cx="600" cy="220" r="170"/>
-      <circle class="ring" cx="600" cy="220" r="240"/>
-      <circle class="ring" cx="600" cy="220" r="320"/>
-      <circle class="ring major" cx="600" cy="220" r="410"/>
-    </svg>
-  </div>
-
   <div class="frame"></div>
   <div class="tick tl"></div>
   <div class="tick tr"></div>
