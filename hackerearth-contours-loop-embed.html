@@ -1,0 +1,14 @@
+<!-- Topographic contours: seamless background loop (12 s, 1920x1280) -->
+<video
+  class="contours-loop"
+  autoplay muted loop playsinline preload="auto"
+  poster="hackerearth-contours-loop-poster.jpg"
+  aria-label="Animated topographic contour lines of Mt Hood, Sandy, Monte Sereno and Washington DC">
+  <source src="hackerearth-contours-loop.webm" type="video/webm">
+  <source src="hackerearth-contours-loop.mp4" type="video/mp4">
+</video>
+
+<style>
+  .contours-loop { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; background: #000; }
+  @media (prefers-reduced-motion: reduce) { .contours-loop { display: none; } }
+</style>
