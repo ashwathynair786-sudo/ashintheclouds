@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HackerEarth Logo Construction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f6f4;
+    --surface: #ffffff;
+    --ink: #020109;
+    --text: #1a1a22;
+    --muted: #6b6b76;
+    --line: #e3e3e0;
+    --grid: rgba(2, 1, 9, 0.07);
+    --grid-strong: rgba(2, 1, 9, 0.16);
+    --guide: #ff4d2e;
+    --guide-soft: rgba(255, 77, 46, 0.10);
+    --guide-2: #2b6cff;
+    --bad: #d92d20;
+    --good: #12805c;
+    --radius: 14px;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b0b10;
+      --surface: #14141b;
+      --ink: #ffffff;
+      --text: #ececf1;
+      --muted: #9a9aa6;
+      --line: #26262f;
+      --grid: rgba(255, 255, 255, 0.07);
+      --grid-strong: rgba(255, 255, 255, 0.16);
+      --guide: #ff7a5c;
+      --guide-soft: rgba(255, 122, 92, 0.12);
+      --guide-2: #6f9bff;
+      --bad: #ff6b5e;
+      --good: #3ccf94;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0b10;
+    --surface: #14141b;
+    --ink: #ffffff;
+    --text: #ececf1;
+    --muted: #9a9aa6;
+    --line: #26262f;
+    --grid: rgba(255, 255, 255, 0.07);
+    --grid-strong: rgba(255, 255, 255, 0.16);
+    --guide: #ff7a5c;
+    --guide-soft: rgba(255, 122, 92, 0.12);
+    --guide-2: #6f9bff;
+    --bad: #ff6b5e;
+    --good: #3ccf94;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.6 "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px 96px; }
+  .mono { font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  header.hero { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font: 500 12px/1 "Geist Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: clamp(32px, 6vw, 56px); line-height: 1.04; letter-spacing: -0.03em; margin: 14px 0 16px; font-weight: 600; }
+  .lede { max-width: 620px; color: var(--muted); font-size: 17px; margin: 0; }
+  .hero-logo { margin-top: 48px; color: var(--ink); }
+  .hero-logo svg { width: min(520px, 100%); height: auto; display: block; }
+
+  nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; }
+  nav.toc a { font: 500 12px/1 "Geist Mono", monospace; color: var(--text); text-decoration: none; border: 1px solid var(--line); background: var(--surface); padding: 8px 12px; border-radius: 999px; }
+  nav.toc a:hover { border-color: var(--guide); color: var(--guide); }
+
+  section { padding: 72px 0 0; }
+  .sec-head { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; margin-bottom: 28px; }
+  .sec-num { font: 500 13px/1.9 "Geist Mono", monospace; color: var(--guide); }
+  h2 { font-size: 26px; letter-spacing: -0.02em; margin: 0; font-weight: 600; line-height: 1.25; }
+  .sec-head p { grid-column: 2; margin: 8px 0 0; color: var(--muted); max-width: 640px; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+  .grid-2 { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; align-items: stretch; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 820px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .sec-head { grid-template-columns: 1fr; }
+    .sec-head p { grid-column: 1; }
+  }
+  .diagram svg { display: block; width: 100%; height: auto; color: var(--ink); overflow: visible; }
+  .caption { font-size: 13px; color: var(--muted); margin: 14px 0 0; }
+
+  /* SVG guide styling */
+  .g-grid { stroke: var(--grid); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .g-grid-strong { stroke: var(--grid-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .g-line { stroke: var(--guide); stroke-width: 1; vector-effect: non-scaling-stroke; fill: none; }
+  .g-dash { stroke: var(--guide); stroke-width: 1; stroke-dasharray: 4 3; vector-effect: non-scaling-stroke; fill: none; }
+  .g-line-2 { stroke: var(--guide-2); stroke-width: 1; vector-effect: non-scaling-stroke; fill: none; }
+  .g-dash-2 { stroke: var(--guide-2); stroke-width: 1; stroke-dasharray: 4 3; vector-effect: non-scaling-stroke; fill: none; }
+  .g-fill { fill: var(--guide-soft); }
+  .g-dot { fill: var(--guide); }
+  .g-txt { fill: var(--guide); font-family: "Geist Mono", ui-monospace, monospace; font-weight: 500; }
+  .g-txt-2 { fill: var(--guide-2); font-family: "Geist Mono", ui-monospace, monospace; font-weight: 500; }
+  .g-txt-m { fill: var(--muted); font-family: "Geist Mono", ui-monospace, monospace; }
+
+  table.spec { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.spec th, table.spec td { text-align: left; padding: 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.spec tr:last-child td, table.spec tr:last-child th { border-bottom: 0; }
+  table.spec th { font-weight: 500; color: var(--text); padding-right: 12px; }
+  table.spec td { font-family: "Geist Mono", monospace; font-size: 13px; color: var(--muted); text-align: right; white-space: nowrap; }
+  .spec-title { font: 500 12px/1 "Geist Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  .key { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 8px; vertical-align: 0; }
+
+  .anat { display: grid; gap: 20px; }
+  .anat .callouts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  .anat .callouts li { border-bottom: 0; padding: 0; grid-template-columns: 1fr; }
+  @media (max-width: 820px) { .anat .callouts { grid-template-columns: 1fr 1fr; } }
+  .callouts { list-style: none; padding: 0; margin: 0; counter-reset: c; }
+  .callouts li { counter-increment: c; display: grid; grid-template-columns: 28px 1fr; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .callouts li:last-child { border-bottom: 0; }
+  .callouts li::before { content: counter(c); width: 22px; height: 22px; border-radius: 50%; background: var(--guide); color: #fff; font: 600 12px/22px "Geist Mono", monospace; text-align: center; }
+  .callouts b { display: block; font-weight: 600; }
+  .callouts span { color: var(--muted); font-size: 14px; }
+
+  .size-row { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; color: var(--ink); }
+  .size-item { display: flex; flex-direction: column; gap: 12px; }
+  .size-item svg { display: block; }
+  .size-item .lbl { font: 12px/1.4 "Geist Mono", monospace; color: var(--muted); }
+  .size-item .lbl b { color: var(--text); font-weight: 500; }
+
+  .swatch { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+  .swatch .chip { height: 140px; display: flex; align-items: flex-end; padding: 16px; }
+  .swatch .meta { padding: 16px; display: grid; gap: 4px; font-size: 13px; }
+  .swatch .meta strong { font-size: 15px; }
+  .swatch .meta .mono { color: var(--muted); }
+
+  .variant { border-radius: var(--radius); border: 1px solid var(--line); overflow: hidden; }
+  .variant .stage { height: 200px; display: grid; place-items: center; padding: 24px; }
+  .variant .stage svg { height: auto; }
+  .variant .meta { padding: 14px 16px; font-size: 13px; background: var(--surface); border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 8px; }
+  .variant .meta span:last-child { color: var(--muted); font-family: "Geist Mono", monospace; font-size: 12px; }
+
+  .misuse .stage { height: 150px; display: grid; place-items: center; background: var(--surface); color: var(--ink); overflow: hidden; position: relative; }
+  .misuse .stage svg { width: 62%; height: auto; overflow: visible; }
+  .misuse .meta { display: flex; gap: 10px; align-items: flex-start; justify-content: flex-start; }
+  .misuse .meta span:last-child { color: var(--text); font-family: inherit; font-size: 13px; }
+  .x { display: inline-block; flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--bad); color: #fff; font: 700 11px/18px "Geist Mono", monospace; text-align: center; margin-top: 1px; }
+  .check { background: var(--good); }
+
+  footer { margin-top: 88px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+  .theme-toggle { font: 500 12px/1 "Geist Mono", monospace; background: var(--surface); color: var(--text); border: 1px solid var(--line); padding: 8px 12px; border-radius: 999px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<!-- Logo source: Logo Dark.svg / Logo-Light.svg (identical geometry, colour swapped). Paths copied verbatim; fills switched to currentColor. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="he-mark" viewBox="0 0 30 30">
+      <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M0.544967 2.73005C0 3.79961 0 5.19974 0 8V22C0 24.8003 0 26.2004 0.544967 27.27C1.02433 28.2108 1.78924 28.9757 2.73005 29.455C3.79961 30 5.19974 30 8 30H22C24.8003 30 26.2004 30 27.27 29.455C28.2108 28.9757 28.9757 28.2108 29.455 27.27C30 26.2004 30 24.8003 30 22V8C30 5.19974 30 3.79961 29.455 2.73005C28.9757 1.78924 28.2108 1.02433 27.27 0.544967C26.2004 0 24.8003 0 22 0H12.15L12.15 9.35354C12.517 8.79804 12.9556 8.34819 13.466 8.004C14.2687 7.444 15.2207 7.164 16.322 7.164C18.002 7.164 19.3087 7.68666 20.242 8.732C21.1753 9.75866 21.642 11.3453 21.642 13.492V21.5H18.506V14.332C18.506 13.212 18.3753 12.3533 18.114 11.756C17.8527 11.14 17.4887 10.7107 17.022 10.468C16.574 10.2253 16.0513 10.104 15.454 10.104C14.39 10.0853 13.5687 10.4307 12.99 11.14C12.43 11.8493 12.15 12.8667 12.15 14.192V21.5H9.01399V0H8C5.19974 0 3.79961 0 2.73005 0.544967C1.78924 1.02433 1.02433 1.78924 0.544967 2.73005ZM8.89999 24H21.7V26.25H8.89999V24Z"/>
+    </symbol>
+    <symbol id="he-word" viewBox="0 0 161 30">
+      <path fill="currentColor" d="M148.164 22.0002L148.137 2.80322H150.702V22.0002H148.164ZM157.506 22.0002V15.0882L160.044 14.2782V22.0002H157.506ZM157.506 15.0882C157.506 13.8642 157.362 12.9372 157.074 12.3072C156.786 11.6592 156.39 11.2092 155.886 10.9572C155.4 10.7052 154.842 10.5702 154.212 10.5522C153.096 10.5522 152.232 10.9392 151.62 11.7132C151.008 12.4872 150.702 13.5762 150.702 14.9802H149.622C149.622 13.5582 149.829 12.3432 150.243 11.3352C150.657 10.3092 151.251 9.52622 152.025 8.98622C152.817 8.44622 153.753 8.17622 154.833 8.17622C156.471 8.17622 157.749 8.68022 158.667 9.68822C159.603 10.6782 160.062 12.2082 160.044 14.2782L157.506 15.0882Z"/>
+      <path fill="currentColor" d="M142.985 22.3241C141.635 22.3241 140.591 21.9821 139.853 21.2981C139.115 20.5961 138.746 19.5971 138.746 18.3011V4.28809H141.311V17.9231C141.311 18.5891 141.473 19.1021 141.797 19.4621C142.139 19.8041 142.625 19.9751 143.255 19.9751C143.435 19.9751 143.633 19.9391 143.849 19.8671C144.065 19.7951 144.326 19.6511 144.632 19.4351L145.604 21.4331C145.136 21.7391 144.686 21.9641 144.254 22.1081C143.84 22.2521 143.417 22.3241 142.985 22.3241ZM136.451 10.7141V8.50009H145.145V10.7141H136.451Z"/>
+      <path fill="currentColor" d="M129.927 14.7373C129.927 13.2793 130.206 12.0913 130.764 11.1733C131.322 10.2553 132.042 9.57129 132.924 9.12129C133.806 8.67129 134.733 8.44629 135.705 8.44629V10.8763C134.895 10.8763 134.121 11.0023 133.383 11.2543C132.663 11.4883 132.069 11.8843 131.601 12.4423C131.151 12.9823 130.926 13.7203 130.926 14.6563L129.927 14.7373ZM128.361 22.0003V8.50029H130.926V22.0003H128.361Z"/>
+      <path fill="currentColor" d="M122.702 22.0003L122.567 19.6513V14.9533C122.567 13.9633 122.45 13.1443 122.216 12.4963C122 11.8303 121.658 11.3263 121.19 10.9843C120.74 10.6423 120.137 10.4713 119.381 10.4713C118.679 10.4713 118.058 10.6153 117.518 10.9033C116.996 11.1913 116.564 11.6413 116.222 12.2533L113.9 11.3893C114.224 10.7773 114.638 10.2283 115.142 9.74227C115.646 9.25627 116.249 8.87827 116.951 8.60827C117.671 8.32027 118.499 8.17627 119.435 8.17627C120.695 8.17627 121.748 8.41927 122.594 8.90527C123.458 9.39127 124.097 10.1203 124.511 11.0923C124.943 12.0463 125.15 13.2343 125.132 14.6563L125.105 22.0003H122.702ZM118.76 22.3243C117.158 22.3243 115.907 21.9643 115.007 21.2443C114.125 20.5063 113.684 19.4893 113.684 18.1933C113.684 16.8073 114.143 15.7543 115.061 15.0343C115.997 14.2963 117.293 13.9273 118.949 13.9273H122.702V15.9523H119.651C118.409 15.9523 117.536 16.1503 117.032 16.5463C116.528 16.9243 116.276 17.4553 116.276 18.1393C116.276 18.7693 116.51 19.2643 116.978 19.6243C117.464 19.9663 118.13 20.1373 118.976 20.1373C119.714 20.1373 120.344 19.9663 120.866 19.6243C121.406 19.2823 121.82 18.8323 122.108 18.2743C122.414 17.6983 122.567 17.0593 122.567 16.3573H123.782C123.782 18.1933 123.359 19.6513 122.513 20.7313C121.667 21.7933 120.416 22.3243 118.76 22.3243Z"/>
+      <path fill="currentColor" d="M105.615 22.3243C104.301 22.3243 103.14 22.0273 102.132 21.4333C101.124 20.8213 100.332 19.9843 99.7556 18.9223C99.1796 17.8603 98.8916 16.6363 98.8916 15.2503C98.8916 13.8643 99.1796 12.6403 99.7556 11.5783C100.332 10.5163 101.124 9.68827 102.132 9.09427C103.158 8.48227 104.328 8.17627 105.642 8.17627C106.866 8.17627 107.946 8.49127 108.882 9.12127C109.836 9.73327 110.574 10.6153 111.096 11.7673C111.636 12.9013 111.906 14.2423 111.906 15.7903H109.341C109.359 14.6383 109.215 13.6663 108.909 12.8743C108.621 12.0823 108.189 11.4883 107.613 11.0923C107.055 10.6783 106.38 10.4713 105.588 10.4713C104.742 10.4713 104.013 10.6693 103.401 11.0653C102.789 11.4433 102.312 11.9923 101.97 12.7123C101.646 13.4143 101.484 14.2783 101.484 15.3043C101.484 16.2583 101.673 17.0863 102.051 17.7883C102.429 18.4723 102.942 19.0123 103.59 19.4083C104.238 19.7863 104.976 19.9753 105.804 19.9753C106.686 19.9753 107.415 19.7683 107.991 19.3543C108.585 18.9403 109.053 18.4093 109.395 17.7613L111.69 18.8143C111.33 19.5163 110.862 20.1373 110.286 20.6773C109.71 21.1993 109.026 21.6043 108.234 21.8923C107.46 22.1803 106.587 22.3243 105.615 22.3243ZM100.566 15.7903L100.593 13.6843H110.475V15.7903H100.566Z"/>
+      <path fill="currentColor" d="M91.8004 14.7373C91.8004 13.2793 92.0794 12.0913 92.6374 11.1733C93.1954 10.2553 93.9154 9.57129 94.7974 9.12129C95.6794 8.67129 96.6064 8.44629 97.5784 8.44629V10.8763C96.7684 10.8763 95.9944 11.0023 95.2564 11.2543C94.5364 11.4883 93.9424 11.8843 93.4744 12.4423C93.0244 12.9823 92.7994 13.7203 92.7994 14.6563L91.8004 14.7373ZM90.2344 22.0003V8.50029H92.7994V22.0003H90.2344Z"/>
+      <path fill="currentColor" d="M81.4095 22.3243C80.0955 22.3243 78.9345 22.0273 77.9265 21.4333C76.9185 20.8213 76.1265 19.9843 75.5505 18.9223C74.9745 17.8603 74.6865 16.6363 74.6865 15.2503C74.6865 13.8643 74.9745 12.6403 75.5505 11.5783C76.1265 10.5163 76.9185 9.68827 77.9265 9.09427C78.9525 8.48227 80.1225 8.17627 81.4365 8.17627C82.6605 8.17627 83.7405 8.49127 84.6765 9.12127C85.6305 9.73327 86.3685 10.6153 86.8905 11.7673C87.4305 12.9013 87.7005 14.2423 87.7005 15.7903H85.1355C85.1535 14.6383 85.0095 13.6663 84.7035 12.8743C84.4155 12.0823 83.9835 11.4883 83.4075 11.0923C82.8495 10.6783 82.1745 10.4713 81.3825 10.4713C80.5365 10.4713 79.8075 10.6693 79.1955 11.0653C78.5835 11.4433 78.1065 11.9923 77.7645 12.7123C77.4405 13.4143 77.2785 14.2783 77.2785 15.3043C77.2785 16.2583 77.4675 17.0863 77.8455 17.7883C78.2235 18.4723 78.7365 19.0123 79.3845 19.4083C80.0325 19.7863 80.7705 19.9753 81.5985 19.9753C82.4805 19.9753 83.2095 19.7683 83.7855 19.3543C84.3795 18.9403 84.8475 18.4093 85.1895 17.7613L87.4845 18.8143C87.1245 19.5163 86.6565 20.1373 86.0805 20.6773C85.5045 21.1993 84.8205 21.6043 84.0285 21.8923C83.2545 22.1803 82.3815 22.3243 81.4095 22.3243ZM76.3605 15.7903L76.3875 13.6843H86.2695V15.7903H76.3605Z"/>
+      <path fill="currentColor" d="M64.8219 17.9231L63.2289 16.1681L70.3299 8.5001H73.4619L64.8219 17.9231ZM62.3379 22.0001V3.1001H64.9029V22.0001H62.3379ZM70.8969 22.0001L65.9289 14.6021L67.6029 12.8201L73.9749 22.0001H70.8969Z"/>
+      <path fill="currentColor" d="M53.8602 22.3243C52.5102 22.3243 51.3132 22.0273 50.2692 21.4333C49.2252 20.8213 48.4062 19.9843 47.8122 18.9223C47.2362 17.8603 46.9482 16.6363 46.9482 15.2503C46.9482 13.8643 47.2362 12.6403 47.8122 11.5783C48.4062 10.5163 49.2162 9.68827 50.2422 9.09427C51.2862 8.48227 52.4742 8.17627 53.8062 8.17627C55.1202 8.17627 56.2992 8.48227 57.3432 9.09427C58.4052 9.70627 59.1972 10.5793 59.7192 11.7133L57.3972 12.6853C57.0552 12.0193 56.5602 11.4973 55.9122 11.1193C55.2822 10.7413 54.5532 10.5523 53.7252 10.5523C52.9152 10.5523 52.1952 10.7503 51.5652 11.1463C50.9352 11.5423 50.4402 12.1003 50.0802 12.8203C49.7202 13.5223 49.5402 14.3323 49.5402 15.2503C49.5402 16.1683 49.7202 16.9783 50.0802 17.6803C50.4402 18.3823 50.9442 18.9403 51.5922 19.3543C52.2402 19.7503 52.9692 19.9483 53.7792 19.9483C54.6072 19.9483 55.3452 19.7413 55.9932 19.3273C56.6412 18.8953 57.1272 18.3193 57.4512 17.5993L59.8002 18.5443C59.2782 19.7323 58.4862 20.6593 57.4242 21.3253C56.3802 21.9913 55.1922 22.3243 53.8602 22.3243Z"/>
+      <path fill="currentColor" d="M42.0444 22.0003L41.9094 19.6513V14.9533C41.9094 13.9633 41.7924 13.1443 41.5584 12.4963C41.3424 11.8303 41.0004 11.3263 40.5324 10.9843C40.0824 10.6423 39.4794 10.4713 38.7234 10.4713C38.0214 10.4713 37.4004 10.6153 36.8604 10.9033C36.3384 11.1913 35.9064 11.6413 35.5644 12.2533L33.2424 11.3893C33.5664 10.7773 33.9804 10.2283 34.4844 9.74227C34.9884 9.25627 35.5914 8.87827 36.2934 8.60827C37.0134 8.32027 37.8414 8.17627 38.7774 8.17627C40.0374 8.17627 41.0904 8.41927 41.9364 8.90527C42.8004 9.39127 43.4394 10.1203 43.8534 11.0923C44.2854 12.0463 44.4924 13.2343 44.4744 14.6563L44.4474 22.0003H42.0444ZM38.1024 22.3243C36.5004 22.3243 35.2494 21.9643 34.3494 21.2443C33.4674 20.5063 33.0264 19.4893 33.0264 18.1933C33.0264 16.8073 33.4854 15.7543 34.4034 15.0343C35.3394 14.2963 36.6354 13.9273 38.2914 13.9273H42.0444V15.9523H38.9934C37.7514 15.9523 36.8784 16.1503 36.3744 16.5463C35.8704 16.9243 35.6184 17.4553 35.6184 18.1393C35.6184 18.7693 35.8524 19.2643 36.3204 19.6243C36.8064 19.9663 37.4724 20.1373 38.3184 20.1373C39.0564 20.1373 39.6864 19.9663 40.2084 19.6243C40.7484 19.2823 41.1624 18.8323 41.4504 18.2743C41.7564 17.6983 41.9094 17.0593 41.9094 16.3573H43.1244C43.1244 18.1933 42.7014 19.6513 41.8554 20.7313C41.0094 21.7933 39.7584 22.3243 38.1024 22.3243Z"/>
+    </symbol>
+    <symbol id="he-lockup" viewBox="0 0 161 30">
+      <use href="#he-mark" x="0" y="0" width="30" height="30"/>
+      <use href="#he-word" x="0" y="0" width="161" height="30"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Brand guidelines · Logo</div>
+    <h1>Logo construction</h1>
+    <p class="lede">How the HackerEarth logo is built: the grid, the proportions and the spacing rules that keep it consistent at every size. All measurements come from the master SVG.</p>
+    <div class="hero-logo" role="img" aria-label="HackerEarth logo">
+      <svg viewBox="0 0 161 30"><use href="#he-lockup"/></svg>
+    </div>
+    <nav class="toc" aria-label="Sections">
+      <a href="#anatomy">01 Anatomy</a>
+      <a href="#mark">02 Monogram grid</a>
+      <a href="#lockup">03 Lockup proportions</a>
+      <a href="#clearspace">04 Clear space</a>
+      <a href="#minsize">05 Minimum size</a>
+      <a href="#colour">06 Colour</a>
+      <a href="#variants">07 Variants</a>
+      <a href="#misuse">08 Misuse</a>
+    </nav>
+  </header>
+
+  <!-- 01 ANATOMY -->
+  <section id="anatomy">
+    <div class="sec-head">
+      <div class="sec-num">01</div>
+      <h2>Anatomy</h2>
+      <p>The logo is a single lockup. The monogram's knocked-out <span class="mono">h</span> is also the first letter of the name, so the full lockup reads <em>hackerearth</em>.</p>
+    </div>
+    <div class="anat">
+      <div class="card diagram">
+        <svg viewBox="-6 -14 173 58" role="img" aria-label="Logo anatomy with numbered callouts">
+          <use href="#he-lockup" width="161" height="30"/>
+          <!-- 1 container -->
+          <rect class="g-dash" x="0" y="0" width="30" height="30" rx="8"/>
+          <line class="g-line" x1="2" y1="-2" x2="2" y2="-8"/>
+          <circle cx="2" cy="-10" r="2.8" class="g-dot"/><text x="2" y="-8.9" font-size="3.2" text-anchor="middle" fill="#fff" font-family="Geist Mono, monospace" font-weight="600">1</text>
+          <!-- 2 h glyph -->
+          <line class="g-line" x1="10.6" y1="-0.5" x2="10.6" y2="-8"/>
+          <circle cx="10.6" cy="-10" r="2.8" class="g-dot"/><text x="10.6" y="-8.9" font-size="3.2" text-anchor="middle" fill="#fff" font-family="Geist Mono, monospace" font-weight="600">2</text>
+          <!-- 3 cursor -->
+          <line class="g-line" x1="15.3" y1="26.8" x2="15.3" y2="36"/>
+          <circle cx="15.3" cy="38" r="2.8" class="g-dot"/><text x="15.3" y="39.1" font-size="3.2" text-anchor="middle" fill="#fff" font-family="Geist Mono, monospace" font-weight="600">3</text>
+          <!-- 4 wordmark -->
+          <path class="g-line" d="M33 25.5 V27.5 H160 V25.5"/>
+          <line class="g-line" x1="96.5" y1="27.5" x2="96.5" y2="36"/>
+          <circle cx="96.5" cy="38" r="2.8" class="g-dot"/><text x="96.5" y="39.1" font-size="3.2" text-anchor="middle" fill="#fff" font-family="Geist Mono, monospace" font-weight="600">4</text>
+          <!-- 5 spacing -->
+          <rect class="g-fill" x="30" y="0" width="3.03" height="30"/>
+          <line class="g-line" x1="31.5" y1="0" x2="31.5" y2="-8"/>
+          <circle cx="31.5" cy="-10" r="2.8" class="g-dot"/><text x="31.5" y="-8.9" font-size="3.2" text-anchor="middle" fill="#fff" font-family="Geist Mono, monospace" font-weight="600">5</text>
+        </svg>
+      </div>
+      <div class="card">
+        <ol class="callouts">
+          <li><div><b>Container</b><span>A 30u square with 8u continuous (smoothed) corners.</span></div></li>
+          <li><div><b>The h</b><span>Knocked out of the container. Its stem runs off the top edge.</span></div></li>
+          <li><div><b>Cursor</b><span>An underscore under the h, like a terminal prompt (<span class="mono">h_</span>). It's the code reference in the mark.</span></div></li>
+          <li><div><b>Wordmark</b><span>"ackerearth", lowercase. The monogram supplies the opening h.</span></div></li>
+          <li><div><b>Joint</b><span>A fixed 3u gap between the mark and the wordmark. Never change it.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 MONOGRAM GRID -->
+  <section id="mark">
+    <div class="sec-head">
+      <div class="sec-num">02</div>
+      <h2>Monogram construction grid</h2>
+      <p>The monogram sits on a 30 × 30 unit grid. One unit (<span class="mono">u</span>) = 1/30 of the mark height (<span class="mono">X</span>). Every value scales with it.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card diagram">
+        <svg viewBox="-9 -7 50 46" role="img" aria-label="Monogram on a 30 by 30 unit construction grid with measurements">
+          <use href="#he-mark" width="30" height="30" opacity="0.14"/>
+          <g id="grid30"></g>
+          <!-- outer + corner radius -->
+          <rect class="g-line" x="0" y="0" width="30" height="30"/>
+          <circle class="g-dash" cx="8" cy="8" r="8"/>
+          <circle class="g-dash" cx="22" cy="22" r="8"/>
+          <line class="g-line" x1="8" y1="8" x2="2.34" y2="2.34"/>
+          <text class="g-txt" x="1.2" y="-0.8" font-size="1.4">r 8</text>
+          <!-- vertical axis -->
+          <line class="g-dash-2" x1="15" y1="-3" x2="15" y2="33"/>
+          <text class="g-txt-2" x="15" y="-4" font-size="1.4" text-anchor="middle">axis 15</text>
+          <!-- stems -->
+          <line class="g-line" x1="9.014" y1="-1" x2="9.014" y2="31"/>
+          <line class="g-line" x1="12.15" y1="-1" x2="12.15" y2="31"/>
+          <line class="g-line" x1="18.506" y1="5" x2="18.506" y2="31"/>
+          <line class="g-line" x1="21.642" y1="5" x2="21.642" y2="31"/>
+          <!-- horizontals -->
+          <line class="g-line" x1="-3" y1="7.164" x2="33" y2="7.164"/>
+          <line class="g-line" x1="-3" y1="21.5" x2="33" y2="21.5"/>
+          <line class="g-line" x1="-3" y1="24" x2="33" y2="24"/>
+          <line class="g-line" x1="-3" y1="26.25" x2="33" y2="26.25"/>
+          <!-- right-side labels -->
+          <text class="g-txt" x="33.6" y="7.6" font-size="1.4">7.16 bowl top</text>
+          <text class="g-txt" x="33.6" y="21.6" font-size="1.4">21.5 baseline</text>
+          <text class="g-txt" x="33.6" y="24.2" font-size="1.4">24.0 cursor</text>
+          <text class="g-txt" x="33.6" y="26.9" font-size="1.4">26.25</text>
+          <!-- bottom dims: stem widths -->
+          <path class="g-line" d="M9.014 32.5 H12.15 M18.506 32.5 H21.642"/>
+          <text class="g-txt" x="10.58" y="34.6" font-size="1.3" text-anchor="middle">3.14</text>
+          <text class="g-txt" x="20.07" y="34.6" font-size="1.3" text-anchor="middle">3.14</text>
+          <!-- left dims: margins -->
+          <path class="g-line" d="M0 36.5 H8.9 M21.7 36.5 H30"/>
+          <path class="g-line" d="M8.9 35.6 V37.4 M21.7 35.6 V37.4 M0 35.6 V37.4 M30 35.6 V37.4"/>
+          <text class="g-txt" x="4.45" y="38.6" font-size="1.3" text-anchor="middle">8.9</text>
+          <text class="g-txt" x="25.85" y="38.6" font-size="1.3" text-anchor="middle">8.3</text>
+          <text class="g-txt" x="15.3" y="38.6" font-size="1.3" text-anchor="middle">12.8</text>
+          <!-- side dim X -->
+          <path class="g-line" d="M-5 0 V30 M-5.9 0 H-4.1 M-5.9 30 H-4.1"/>
+          <text class="g-txt" x="-6.2" y="15.5" font-size="1.6" text-anchor="end">X</text>
+          <text class="g-txt-m" x="-6.2" y="17.4" font-size="1.1" text-anchor="end">30u</text>
+        </svg>
+        <p class="caption">Mark shown as a tint so the grid reads across it. Light lines are 1u, darker lines every 5u. Orange: construction. Blue: geometric centre.</p>
+      </div>
+      <div class="card">
+        <p class="spec-title">Monogram specs</p>
+        <table class="spec">
+          <tr><th>Container</th><td>30 × 30u</td></tr>
+          <tr><th>Corner radius</th><td>8u · 0.267X</td></tr>
+          <tr><th>Corner style</th><td>continuous</td></tr>
+          <tr><th>h stem / leg width</th><td>3.14u</td></tr>
+          <tr><th>h counter width</th><td>6.36u</td></tr>
+          <tr><th>Bowl top</th><td>7.16u</td></tr>
+          <tr><th>h baseline</th><td>21.5u</td></tr>
+          <tr><th>h → cursor gap</th><td>2.5u</td></tr>
+          <tr><th>Cursor</th><td>12.8 × 2.25u</td></tr>
+          <tr><th>Cursor → bottom edge</th><td>3.75u</td></tr>
+          <tr><th>Stem overrun</th><td>bleeds off top</td></tr>
+        </table>
+        <p class="caption">The h and cursor sit about 0.3u right of the geometric centre to balance the open right side of the bowl. Keep this offset when redrawing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 LOCKUP -->
+  <section id="lockup">
+    <div class="sec-head">
+      <div class="sec-num">03</div>
+      <h2>Lockup proportions</h2>
+      <p>The wordmark's x-height band is vertically centred on the monogram, so the lowercase letters sit level with the knocked-out h.</p>
+    </div>
+    <div class="card diagram">
+      <svg viewBox="-12 -9 222 53" role="img" aria-label="Horizontal lockup with alignment lines and proportions">
+        <!-- horizontal guide lines -->
+        <g>
+          <line class="g-dash" x1="-3" y1="0" x2="166" y2="0"/>
+          <line class="g-line-2" x1="-3" y1="2.8" x2="166" y2="2.8"/>
+          <line class="g-line" x1="-3" y1="8.18" x2="166" y2="8.18"/>
+          <line class="g-dash-2" x1="-3" y1="15" x2="166" y2="15"/>
+          <line class="g-line" x1="-3" y1="22" x2="166" y2="22"/>
+          <line class="g-dash" x1="-3" y1="30" x2="166" y2="30"/>
+        </g>
+        <rect class="g-fill" x="30" y="-3" width="3.03" height="36"/>
+        <use href="#he-lockup" width="161" height="30"/>
+        <!-- labels -->
+        <text class="g-txt" x="168" y="0.6" font-size="2.6">mark top · 0</text>
+        <text class="g-txt-2" x="168" y="3.6" font-size="2.6">ascender · 2.8</text>
+        <text class="g-txt" x="168" y="8.9" font-size="2.6">x-height · 8.2</text>
+        <text class="g-txt-2" x="168" y="15.7" font-size="2.6">axis · 15</text>
+        <text class="g-txt" x="168" y="22.7" font-size="2.6">baseline · 22</text>
+        <text class="g-txt" x="168" y="30.7" font-size="2.6">mark base · 30</text>
+        <!-- dims -->
+        <path class="g-line" d="M-6 0 V30 M-7 0 H-5 M-7 30 H-5"/>
+        <text class="g-txt" x="-7.6" y="16" font-size="2.6" text-anchor="end">X</text>
+        <path class="g-line" d="M30 -4.5 H33.03 M30 -5.5 V-3.5 M33.03 -5.5 V-3.5"/>
+        <text class="g-txt" x="31.5" y="-6.5" font-size="2" text-anchor="middle">0.1X</text>
+        <path class="g-line" d="M0 36 H160 M0 35 V37 M160 35 V37"/>
+        <text class="g-txt" x="80" y="40.6" font-size="2.4" text-anchor="middle">5.33X (160u)</text>
+        <path class="g-line" d="M33.03 33 H160 M33.03 32 V34 M160 32 V34"/>
+      </svg>
+      <p class="caption">All values in u (1u = X/30). The wordmark's x-height band (8.2–22u) centres on the mark's axis at 15u. Ascenders (h, k) reach 2.8u, below the mark's top edge.</p>
+    </div>
+    <div class="grid-3" style="margin-top:20px">
+      <div class="card">
+        <p class="spec-title">Gap</p>
+        <div style="font-size:28px;font-weight:600;letter-spacing:-.02em">0.1X</div>
+        <p class="caption" style="margin-top:6px">3u from the container edge to the bowl of the "a".</p>
+      </div>
+      <div class="card">
+        <p class="spec-title">Ratio</p>
+        <div style="font-size:28px;font-weight:600;letter-spacing:-.02em">5.33 : 1</div>
+        <p class="caption" style="margin-top:6px">Full lockup width : height. Master artboard is 161 × 30.</p>
+      </div>
+      <div class="card">
+        <p class="spec-title">Weight</p>
+        <div style="font-size:28px;font-weight:600;letter-spacing:-.02em">1.22×</div>
+        <p class="caption" style="margin-top:6px">The monogram stem (3.14u) is heavier than the wordmark stem (2.57u), so the knockout holds at small sizes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 CLEAR SPACE -->
+  <section id="clearspace">
+    <div class="sec-head">
+      <div class="sec-num">04</div>
+      <h2>Clear space</h2>
+      <p>Leave at least ½X (half the monogram height) on every side. Keep text, edges and other graphics out of this zone.</p>
+    </div>
+    <div class="grid-2" style="grid-template-columns:2fr 1fr;align-items:start">
+      <div class="card diagram">
+        <svg viewBox="-22 -22 205 74" role="img" aria-label="Clear space zone of half the mark height around the lockup">
+          <path class="g-fill" fill-rule="evenodd" d="M-15 -15H175V45H-15Z"/>
+          <rect class="g-dash" x="-15" y="-15" width="190" height="60"/>
+          <rect class="g-line" x="0" y="0" width="160" height="30" opacity=".5"/>
+          <use href="#he-lockup" width="161" height="30"/>
+          <!-- half-mark tokens -->
+          <g opacity=".35">
+            <use href="#he-mark" x="-15" y="-15" width="15" height="15"/>
+            <use href="#he-mark" x="160" y="-15" width="15" height="15"/>
+            <use href="#he-mark" x="-15" y="30" width="15" height="15"/>
+            <use href="#he-mark" x="160" y="30" width="15" height="15"/>
+          </g>
+          <text class="g-txt" x="80" y="-5" font-size="4.2" text-anchor="middle">½X</text>
+          <text class="g-txt" x="80" y="40" font-size="4.2" text-anchor="middle">½X</text>
+          <text class="g-txt" x="-7.5" y="16.5" font-size="4.2" text-anchor="middle">½X</text>
+          <text class="g-txt" x="167.5" y="16.5" font-size="4.2" text-anchor="middle">½X</text>
+        </svg>
+        <p class="caption">The faded corner tiles are the monogram at half size. Use one to measure the clear space.</p>
+      </div>
+      <div class="card diagram">
+        <svg viewBox="-12 -12 54 54" role="img" aria-label="Clear space for the monogram alone">
+          <path class="g-fill" fill-rule="evenodd" d="M-7.5 -7.5H37.5V37.5H-7.5Z"/>
+          <rect class="g-dash" x="-7.5" y="-7.5" width="45" height="45"/>
+          <use href="#he-mark" width="30" height="30"/>
+          <text class="g-txt" x="15" y="-2.2" font-size="2.8" text-anchor="middle">¼X</text>
+          <text class="g-txt" x="-3.75" y="15.7" font-size="2.8" text-anchor="middle">¼X</text>
+        </svg>
+        <p class="caption">Monogram on its own (avatars, favicons, app icons): ¼X minimum on every side.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 MIN SIZE -->
+  <section id="minsize">
+    <div class="sec-head">
+      <div class="sec-num">05</div>
+      <h2>Minimum size</h2>
+      <p>Below these sizes the cursor and the h counter fill in. Use the monogram on its own when space is tighter.</p>
+    </div>
+    <div class="card">
+      <div class="size-row">
+        <div class="size-item">
+          <svg viewBox="0 0 161 30" width="96" height="17.9"><use href="#he-lockup"/></svg>
+          <div class="lbl"><b>Lockup · digital</b><br>96 px wide (X = 18 px)</div>
+        </div>
+        <div class="size-item">
+          <svg viewBox="0 0 161 30" width="134" height="25"><use href="#he-lockup"/></svg>
+          <div class="lbl"><b>Lockup · print</b><br>25 mm wide (X ≈ 4.7 mm)</div>
+        </div>
+        <div class="size-item">
+          <svg viewBox="0 0 30 30" width="16" height="16"><use href="#he-mark"/></svg>
+          <div class="lbl"><b>Monogram · digital</b><br>16 px</div>
+        </div>
+        <div class="size-item">
+          <svg viewBox="0 0 30 30" width="24" height="24"><use href="#he-mark"/></svg>
+          <div class="lbl"><b>Monogram · print</b><br>6 mm</div>
+        </div>
+      </div>
+      <p class="caption" style="margin-top:24px">Examples are drawn at the minimum digital sizes. Print sizes are shown approximately.</p>
+    </div>
+  </section>
+
+  <!-- 06 COLOUR -->
+  <section id="colour">
+    <div class="sec-head">
+      <div class="sec-num">06</div>
+      <h2>Colour</h2>
+      <p>The logo uses one colour: Ink or White. The h and cursor are cut out of the container, so they always show the background.</p>
+    </div>
+    <div class="grid-3">
+      <div class="swatch">
+        <div class="chip" style="background:#020109;color:#fff"><svg viewBox="0 0 30 30" width="40" height="40"><use href="#he-mark"/></svg></div>
+        <div class="meta"><strong>Ink</strong><span class="mono">HEX #020109</span><span class="mono">RGB 2 · 1 · 9</span><span class="mono">Primary on light</span></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#ffffff;color:#020109;box-shadow:inset 0 -1px 0 #e3e3e0"><svg viewBox="0 0 30 30" width="40" height="40"><use href="#he-mark"/></svg></div>
+        <div class="meta"><strong>White</strong><span class="mono">HEX #FFFFFF</span><span class="mono">RGB 255 · 255 · 255</span><span class="mono">Primary on dark</span></div>
+      </div>
+      <div class="card">
+        <p class="spec-title">Source files</p>
+        <table class="spec">
+          <tr><th>Ink on light</th><td>Logo Dark.svg</td></tr>
+          <tr><th>White on dark</th><td>Logo-Light.svg</td></tr>
+          <tr><th>Raster @2x</th><td>Logo Dark@2x.png</td></tr>
+          <tr><th>Raster @3x</th><td>Logo-Light@3x.png</td></tr>
+          <tr><th>Monogram</th><td>h monogram blacksvg.svg</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 VARIANTS -->
+  <section id="variants">
+    <div class="sec-head">
+      <div class="sec-num">07</div>
+      <h2>Approved variants</h2>
+      <p>Use the horizontal lockup wherever possible. Use the monogram on its own only when the brand name is already visible nearby or space is square.</p>
+    </div>
+    <div class="grid-2" style="grid-template-columns:1fr 1fr">
+      <div class="variant">
+        <div class="stage" style="background:#ffffff;color:#020109"><svg viewBox="0 0 161 30" style="width:min(280px,90%)"><use href="#he-lockup"/></svg></div>
+        <div class="meta"><span><span class="x check">✓</span> Lockup · Ink</span><span>default</span></div>
+      </div>
+      <div class="variant">
+        <div class="stage" style="background:#020109;color:#ffffff"><svg viewBox="0 0 161 30" style="width:min(280px,90%)"><use href="#he-lockup"/></svg></div>
+        <div class="meta"><span><span class="x check">✓</span> Lockup · White</span><span>dark surfaces</span></div>
+      </div>
+      <div class="variant">
+        <div class="stage" style="background:#ffffff;color:#020109"><svg viewBox="0 0 30 30" style="width:88px"><use href="#he-mark"/></svg></div>
+        <div class="meta"><span><span class="x check">✓</span> Monogram · Ink</span><span>avatars, favicon</span></div>
+      </div>
+      <div class="variant">
+        <div class="stage" style="background:#020109;color:#ffffff"><svg viewBox="0 0 30 30" style="width:88px"><use href="#he-mark"/></svg></div>
+        <div class="meta"><span><span class="x check">✓</span> Monogram · White</span><span>app icon, social</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 MISUSE -->
+  <section id="misuse">
+    <div class="sec-head">
+      <div class="sec-num">08</div>
+      <h2>Misuse</h2>
+      <p>Don't redraw, rearrange or decorate the logo. Always start from the master files.</p>
+    </div>
+    <div class="grid-3">
+      <div class="variant misuse">
+        <div class="stage"><svg viewBox="0 0 161 30"><g transform="translate(80.5 15) scale(1.35 0.75) translate(-80.5 -15)"><use href="#he-lockup" width="161" height="30"/></g></svg></div>
+        <div class="meta"><span class="x">✕</span><span>Don't stretch or squash it</span></div>
+      </div>
+      <div class="variant misuse">
+        <div class="stage"><svg viewBox="0 0 161 30"><g transform="rotate(-12 80.5 15)"><use href="#he-lockup" width="161" height="30"/></g></svg></div>
+        <div class="meta"><span class="x">✕</span><span>Don't rotate or tilt it</span></div>
+      </div>
+      <div class="variant misuse">
+        <div class="stage"><svg viewBox="0 0 161 30"><defs><linearGradient id="bad-grad" x1="0" x2="1"><stop offset="0" stop-color="#7b5cff"/><stop offset="1" stop-color="#ff4d8d"/></linearGradient></defs><g style="color:#7b5cff"><use href="#he-mark" width="30" height="30"/></g><g style="color:#ff4d8d"><use href="#he-word" width="161" height="30"/></g></svg></div>
+        <div class="meta"><span class="x">✕</span><span>Don't recolour it or use more than one colour</span></div>
+      </div>
+      <div class="variant misuse">
+        <div class="stage"><svg viewBox="0 0 161 30"><use href="#he-mark" width="30" height="30"/><use href="#he-word" x="14" width="161" height="30"/></svg></div>
+        <div class="meta"><span class="x">✕</span><span>Don't change the 0.1X gap</span></div>
+      </div>
+      <div class="variant misuse">
+        <div class="stage"><svg viewBox="0 0 161 30"><use href="#he-word" x="-33" width="161" height="30"/><use href="#he-mark" x="98" width="30" height="30"/></svg></div>
+        <div class="meta"><span class="x">✕</span><span>Don't rearrange the mark and wordmark</span></div>
+      </div>
+      <div class="variant misuse">
+        <div class="stage"><svg viewBox="0 0 161 30"><g style="color:transparent" stroke="var(--ink)" stroke-width="0.5"><use href="#he-lockup" width="161" height="30"/></g></svg></div>
+        <div class="meta"><span class="x">✕</span><span>Don't outline it or add strokes</span></div>
+      </div>
+      <div class="variant misuse">
+        <div class="stage"><svg viewBox="0 0 161 30" style="filter:drop-shadow(3px 4px 3px rgba(0,0,0,.45))"><use href="#he-lockup" width="161" height="30"/></svg></div>
+        <div class="meta"><span class="x">✕</span><span>Don't add shadows, glows or effects</span></div>
+      </div>
+      <div class="variant misuse">
+        <div class="stage"><svg viewBox="0 0 161 30"><g transform="translate(0 0)"><path fill="currentColor" fill-rule="evenodd" d="M8 0H22C26.4 0 30 3.6 30 8V22C30 26.4 26.4 30 22 30H8C3.6 30 0 26.4 0 22V8C0 3.6 3.6 0 8 0Z"/></g><use href="#he-word" width="161" height="30"/></svg></div>
+        <div class="meta"><span class="x">✕</span><span>Don't fill in the h or the cursor</span></div>
+      </div>
+      <div class="variant misuse">
+        <div class="stage" style="background:linear-gradient(135deg,#7f8fa6,#c8a27a 60%,#e8d9c4)"><svg viewBox="0 0 161 30" style="color:#020109"><use href="#he-lockup" width="161" height="30"/></svg></div>
+        <div class="meta"><span class="x">✕</span><span>Don't place it on busy or low-contrast backgrounds</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>HackerEarth · Logo construction guide · Geometry measured from <span class="mono">Logo Dark.svg</span> (161 × 30)</span>
+    <button class="theme-toggle" type="button" id="themeToggle">Toggle theme</button>
+  </footer>
+</div>
+
+<script>
+  // Build the 30×30 unit grid behind the monogram construction drawing
+  (function () {
+    var g = document.getElementById('grid30');
+    var ns = 'http://www.w3.org/2000/svg';
+    for (var i = 0; i <= 30; i++) {
+      var cls = i % 5 === 0 ? 'g-grid-strong' : 'g-grid';
+      var v = document.createElementNS(ns, 'line');
+      v.setAttribute('x1', i); v.setAttribute('x2', i); v.setAttribute('y1', 0); v.setAttribute('y2', 30); v.setAttribute('class', cls);
+      var h = document.createElementNS(ns, 'line');
+      h.setAttribute('y1', i); h.setAttribute('y2', i); h.setAttribute('x1', 0); h.setAttribute('x2', 30); h.setAttribute('class', cls);
+      g.appendChild(v); g.appendChild(h);
+    }
+  })();
+
+  // Theme toggle (remembered per viewer when storage is available)
+  (function () {
+    var root = document.documentElement;
+    try { var saved = localStorage.getItem('he-guide-theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+    document.getElementById('themeToggle').addEventListener('click', function () {
+      var cur = root.getAttribute('data-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('he-guide-theme', next); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>
