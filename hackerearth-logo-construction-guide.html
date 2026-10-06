@@ -123,7 +123,7 @@
 
   .anat { display: grid; gap: 20px; }
   .anat .callouts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
-  .anat .callouts li { border-bottom: 0; padding: 0; grid-template-columns: 1fr; }
+  .anat .callouts li { border-bottom: 0; padding: 0; grid-template-columns: 1fr; align-content: start; }
   @media (max-width: 820px) { .anat .callouts { grid-template-columns: 1fr 1fr; } }
   .callouts { list-style: none; padding: 0; margin: 0; counter-reset: c; }
   .callouts li { counter-increment: c; display: grid; grid-template-columns: 28px 1fr; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -159,6 +159,35 @@
 
   footer { margin-top: 88px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
   .theme-toggle { font: 500 12px/1 "Geist Mono", monospace; background: var(--surface); color: var(--text); border: 1px solid var(--line); padding: 8px 12px; border-radius: 999px; cursor: pointer; }
+
+  @media print {
+    @page { size: A4 landscape; margin: 12mm 14mm; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { background: #fff; font-size: 13px; }
+    .wrap { max-width: none; padding: 0; }
+    header.hero { min-height: 180mm; padding: 0; display: flex; flex-direction: column; justify-content: center; border-bottom: 0; }
+    .hero-logo svg { width: 640px; }
+    h1 { font-size: 64px; }
+    nav.toc, .theme-toggle { display: none; }
+    section { padding-top: 0; break-before: page; }
+    .sec-head { break-after: avoid; margin-bottom: 20px; }
+    .card, .variant, .swatch, .grid-3 > *, .anat .callouts li { break-inside: avoid; }
+    .grid-2 { grid-template-columns: 1.35fr 1fr; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .card { padding: 18px; }
+    .variant .stage { height: 150px; }
+    .misuse .stage { height: 120px; }
+    footer { margin-top: 24px; break-inside: avoid; }
+    #mark .diagram svg { max-height: 108mm; }
+    #anatomy .diagram svg { max-height: 78mm; }
+    #anatomy .callouts li { grid-template-columns: 1fr; }
+    .anat .callouts { grid-template-columns: repeat(5, 1fr); }
+    .sec-head { grid-template-columns: 56px 1fr; }
+    .sec-head p { grid-column: 2; }
+    table.spec th, table.spec td { padding: 6px 0; }
+    footer { display: none; }
+    #clearspace .grid-2 { align-items: stretch; }
+  }
 </style>
 </head>
 <body>
