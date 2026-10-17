@@ -2,6 +2,8 @@
 
 Built from `abh hackathon branding.pdf`: Aeonik Fono (Regular headlines at -3% tracking / 110% leading, Bold CTA),
 Airwallex Orange `#FA4402` on black, the ABH logos, and the brand nebula imagery with the pixel-notch motif.
+All sets share one layout; only the imagery and copy change. Each image panel uses the exact square cut the brand
+guide applies to that image (orange: top-right, cyan: top-left, violet: bottom-left).
 
 Each set has the same four formats:
 
@@ -15,8 +17,8 @@ Each set has the same four formats:
 | Set | Look | Copy |
 | --- | --- | --- |
 | `exports/set-1-black` | Black canvas, orange imagery panel | Banking needs a new playbook. / Will you write it? / Bring your boldest ideas to the Agentic Banking Hackathon. |
-| `exports/set-2-cyan` | Full-bleed cyan/orange imagery, black ink | Everyone talks about the future of finance. / Few actually build it. / Be one of them. Join the Agentic Banking Hackathon. |
-| `exports/set-3-violet` | Full-bleed violet/orange imagery, black ink | (same as set 2) |
+| `exports/set-2-cyan` | Black canvas, cyan/orange imagery panel | Everyone talks about the future of finance. / Few actually build it. / Be one of them. Join the Agentic Banking Hackathon. |
+| `exports/set-3-violet` | Black canvas, violet/orange imagery panel | (same as set 2) |
 
 Sets 2 and 3 use the full-resolution versions (from the brand PDF) of the supplied
 `DTS_Misc_1_(Nick_Fancher)…ID5049-horizontal-3` and `…ID15129-vertical-6` backgrounds, which were too small to use directly.
