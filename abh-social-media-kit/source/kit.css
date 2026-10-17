@@ -39,3 +39,21 @@ body { font-family: "Aeonik Fono", monospace; color: var(--white); -webkit-font-
 .tex.bl .px { left: calc(var(--c) * var(--u)); bottom: calc(var(--r) * var(--u)); }
 
 .logo { position: absolute; display: block; }
+
+/* Sets 2 & 3 — full-bleed brand imagery, black ink */
+.canvas.bleed { background-size: cover; color: var(--black); }
+.bleed .frame { border-color: var(--black); }
+.bleed .rule { background: var(--black); }
+.bleed .logo { filter: brightness(0); }
+.stack { position: absolute; display: flex; flex-direction: column; align-items: flex-start; }
+.hl {
+  display: inline; background: var(--black); color: var(--orange);
+  white-space: nowrap; padding: 0 0.14em; -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.hl-line { display: block; margin-top: 0.14em; margin-left: -0.14em; }
+.cta.dark { position: static; background: var(--black); color: var(--white); }
+.cta.dark::before { background: var(--orange); }
+.notch { position: absolute; width: calc(4 * var(--u)); height: calc(3 * var(--u)); }
+.notch .px { position: absolute; width: var(--u); height: var(--u); background: var(--black); }
+.notch.tr .px { right: calc(var(--c) * var(--u)); top: calc(var(--r) * var(--u)); }
+.notch.br .px { right: calc(var(--c) * var(--u)); bottom: calc(var(--r) * var(--u)); }
