@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Look Beyond the Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     HackerEarth carousel — "Look beyond the resume"
+     Tokens from HackerEarth Design System v1 (marketing).
+     Canvas: 1080 × 1350 (4:5) per slide.
+     ============================================================ */
+  :root {
+    --bg: #FBF9F3;
+    --bg-card: #FFFFFF;
+    --bg-dark: #020109;
+    --text: #020109;
+    --text-muted: #545459;
+    --text-faint: color-mix(in srgb, #545459 70%, #FBF9F3);
+    --border: rgba(2,1,9,0.10);
+    --accent: #13255D;
+    --cta: #FF5722;
+    --lime: #C7F252;
+    --eyebrow-on-dark: #A5A5AD;
+    --state-success: #059669;
+    --state-success-bg: #D1FAE5;
+
+    --display: 'Bricolage Grotesque', 'Geist', sans-serif;
+    --body: 'Geist', 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    --slide-w: 1080px;
+    --slide-h: 1350px;
+    --pad: 88px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #E9E6DD; }
+  body { font-family: var(--body); color: var(--text); -webkit-font-smoothing: antialiased; }
+  em { font-style: normal; font-weight: inherit; color: var(--cta); }
+
+  /* ---------- Preview shell (screen only) ---------- */
+  .viewer { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 24px; padding: 32px 0; }
+  .viewer-head { display: flex; justify-content: space-between; align-items: center; padding: 0 32px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); gap: 16px; flex-wrap: wrap; }
+  .viewer-head strong { color: var(--text); font-weight: 500; }
+  .viewer-nav { display: flex; gap: 8px; }
+  .viewer-nav button { font-family: var(--mono); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; background: var(--bg-card); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; cursor: pointer; }
+  .viewer-nav button:hover { border-color: var(--accent); }
+  .track { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 32px 16px; scroll-padding: 0 32px; scrollbar-width: thin; }
+  .frame { flex: 0 0 auto; width: calc(var(--slide-w) * var(--s, 0.5)); height: calc(var(--slide-h) * var(--s, 0.5)); scroll-snap-align: start; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(2,1,9,0.06), 0 12px 32px rgba(2,1,9,0.10); }
+  .frame > .slide { transform: scale(var(--s, 0.5)); transform-origin: 0 0; }
+
+  /* ---------- Export mode (?export) & print ---------- */
+  html.export, html.export body { background: transparent; }
+  html.export .viewer { display: block; padding: 0; min-height: 0; }
+  html.export .viewer-head { display: none; }
+  html.export .track { display: block; padding: 0; overflow: visible; }
+  html.export .frame { width: var(--slide-w); height: var(--slide-h); border-radius: 0; box-shadow: none; }
+  html.export .frame > .slide { transform: none; }
+  @page { size: 1080px 1350px; margin: 0; }
+  @media print { .frame { break-after: page; } }
+
+  /* ---------- Slide base ---------- */
+  .slide { position: relative; width: var(--slide-w); height: var(--slide-h); overflow: hidden; background: var(--bg); color: var(--text); padding: var(--pad); display: flex; flex-direction: column; }
+  .slide.dark { background: var(--bg-dark); color: #fff; }
+
+  .chrome-top { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: center; height: 40px; }
+  .chrome-top .logo { height: 34px; display: block; }
+  .chrome-top .logo-light { display: none; }
+  .slide.dark .logo-dark { display: none; }
+  .slide.dark .logo-light { display: block; }
+  .topic { font-family: var(--mono); font-size: 18px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+  .slide.dark .topic { color: var(--eyebrow-on-dark); }
+
+  .body { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; padding-top: 72px; }
+
+  /* Eyebrow: compass + bracket + label */
+  .ds-eyebrow { display: inline-flex; align-items: center; gap: 18px; font-family: var(--mono); font-size: 20px; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 2.6px; margin-bottom: 36px; }
+  .slide.dark .ds-eyebrow { color: var(--eyebrow-on-dark); }
+  .ds-eyebrow .compass { width: 38px; height: 38px; flex-shrink: 0; }
+  .ds-eyebrow .compass svg { width: 100%; height: 100%; display: block; }
+  .ds-eyebrow .c-ring { fill: none; stroke: rgba(2,1,9,0.32); stroke-width: 0.7; }
+  .ds-eyebrow .c-tick { stroke: rgba(2,1,9,0.45); stroke-width: 0.9; }
+  .ds-eyebrow .c-n { stroke: var(--cta); stroke-width: 1.2; }
+  .ds-eyebrow .c-dot { fill: var(--cta); }
+  .ds-eyebrow .bracket { color: rgba(2,1,9,0.4); }
+  .slide.dark .ds-eyebrow .c-ring { stroke: rgba(255,255,255,0.42); }
+  .slide.dark .ds-eyebrow .c-tick { stroke: rgba(255,255,255,0.55); }
+  .slide.dark .ds-eyebrow .c-n { stroke: var(--lime); }
+  .slide.dark .ds-eyebrow .c-dot { fill: var(--lime); }
+  .slide.dark .ds-eyebrow .bracket { color: rgba(255,255,255,0.45); }
+
+  /* Display type */
+  .h1 { font-family: var(--display); font-weight: 500; font-variation-settings: 'opsz' 96; font-size: 100px; line-height: 0.98; letter-spacing: -2.8px; max-width: 904px; }
+  .h1.md { font-size: 92px; letter-spacing: -2.6px; }
+  .h1.xl { font-size: 116px; letter-spacing: -3.4px; }
+  .lead { font-family: var(--body); font-weight: 400; font-size: 32px; line-height: 1.4; color: var(--text-muted); max-width: 880px; margin-top: 32px; margin-bottom: 40px; }
+  .slide.dark .lead { color: rgba(255,255,255,0.68); }
+  .push { margin-top: auto; }
+
+  /* ---------- Footer: cartographic tick progress ---------- */
+  .chrome-bottom { position: relative; z-index: 3; display: flex; align-items: flex-end; gap: 40px; padding-top: 56px; }
+  .ticks { position: relative; flex: 1; height: 28px; }
+  .ticks::before { content: ''; position: absolute; left: 0; right: 0; top: 10px; height: 1px; background: rgba(2,1,9,0.22); }
+  .ticks::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; border-bottom: 1px dashed rgba(2,1,9,0.12); }
+  .ticks .marks { position: absolute; left: 0; right: 0; top: 4px; display: flex; justify-content: space-between; }
+  .ticks .marks span { width: 2px; height: 13px; background: rgba(2,1,9,0.3); }
+  .ticks .marks span.on { background: var(--cta); width: 3px; }
+  .slide.dark .ticks::before { background: rgba(255,255,255,0.22); }
+  .slide.dark .ticks::after { border-bottom-color: rgba(255,255,255,0.12); }
+  .slide.dark .ticks .marks span { background: rgba(255,255,255,0.3); }
+  .slide.dark .ticks .marks span.on { background: var(--lime); }
+  .pager { font-family: var(--mono); font-size: 18px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); white-space: nowrap; line-height: 1; }
+  .pager b { color: var(--text); font-weight: 500; }
+  .slide.dark .pager { color: var(--eyebrow-on-dark); }
+  .slide.dark .pager b { color: #fff; }
+
+  /* ---------- Contours ---------- */
+  .topo { position: absolute; z-index: 1; pointer-events: none; }
+  .topo svg { width: 100%; height: 100%; display: block; }
+  .topo .contour { fill: none; stroke-width: 0.9; stroke: rgba(19,37,93,0.22); }
+  .topo .contour.major { stroke: rgba(19,37,93,0.36); stroke-width: 1.1; }
+  .topo .contour.peak { stroke: rgba(255,87,34,0.45); }
+  .slide.dark .topo .contour { stroke: rgba(255,255,255,0.18); }
+  .slide.dark .topo .contour.major { stroke: rgba(255,255,255,0.28); }
+  .slide.dark .topo .contour.peak { stroke: color-mix(in srgb, var(--lime) 55%, transparent); }
+
+  /* ============ SLIDE 1 — Hook ============ */
+  .s1 .topo { width: 1500px; height: 1200px; right: -560px; top: -330px; opacity: 0.5;
+    -webkit-mask-image: radial-gradient(ellipse 60% 60% at 62% 52%, #000 25%, transparent 72%);
+            mask-image: radial-gradient(ellipse 60% 60% at 62% 52%, #000 25%, transparent 72%); }
+  .checklist { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 4px 40px; }
+  .check-row { display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 16px; padding: 26px 0; border-bottom: 1px dashed var(--border); }
+  .check-row:last-child { border-bottom: none; }
+  .check-row .idx { font-family: var(--mono); font-size: 18px; color: var(--text-muted); letter-spacing: 1.5px; }
+  .check-row .what { font-family: var(--display); font-weight: 500; font-size: 40px; letter-spacing: -0.8px; line-height: 1.1; }
+  .pill { font-family: var(--mono); font-size: 18px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.6px; padding: 10px 20px; border-radius: 100px; display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; }
+  .pill.pass { background: var(--state-success-bg); color: var(--state-success); }
+  .pill.pass::before { content: ''; width: 18px; height: 10px; border-left: 3px solid currentColor; border-bottom: 3px solid currentColor; transform: rotate(-45deg) translate(2px, -2px); }
+  .pill.unknown { background: var(--lime); color: var(--text); }
+
+  /* ============ SLIDE 2 — Problem ============ */
+  .resume-wrap { position: relative; }
+  .resume { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 30px 40px; display: grid; gap: 22px; }
+  .resume-head { display: flex; align-items: center; gap: 24px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+  .avatar { width: 64px; height: 64px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 14%, transparent); flex-shrink: 0; position: relative; overflow: hidden; }
+  .avatar::before { content: ''; position: absolute; width: 26px; height: 26px; border-radius: 50%; left: 19px; top: 11px; background: color-mix(in srgb, var(--accent) 30%, transparent); }
+  .avatar::after { content: ''; position: absolute; width: 48px; height: 34px; border-radius: 50%; left: 8px; top: 42px; background: color-mix(in srgb, var(--accent) 30%, transparent); }
+  .bar { height: 14px; border-radius: 100px; background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  .bar.strong { height: 20px; background: color-mix(in srgb, var(--accent) 22%, transparent); }
+  .stack-bars { display: grid; gap: 12px; flex: 1; }
+  .resume-sec { display: grid; grid-template-columns: 250px 1fr; gap: 24px; align-items: start; }
+  .resume-sec .label { font-family: var(--mono); font-size: 18px; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; padding-top: 2px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chips span { height: 30px; border-radius: 100px; background: color-mix(in srgb, var(--accent) 8%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 14%, transparent); }
+  .unseen { margin-top: 16px; border: 2px dashed rgba(2,1,9,0.18); border-radius: 24px; padding: 22px 40px; display: grid; grid-template-columns: 250px 1fr; gap: 24px; align-items: start; }
+  .unseen .label { font-family: var(--mono); font-size: 18px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; line-height: 1.5; }
+  .unseen ul { list-style: none; display: grid; gap: 8px; }
+  .unseen li { font-family: var(--body); font-size: 27px; line-height: 1.25; color: var(--text-muted); display: flex; gap: 14px; align-items: baseline; }
+  .unseen li::before { content: '?'; font-family: var(--mono); font-size: 20px; color: var(--text-muted); opacity: 0.7; width: 22px; flex-shrink: 0; }
+
+  /* ============ SLIDE 3 — Reveal (dark) ============ */
+  .s3 .topo { width: 1700px; height: 1400px; right: -760px; bottom: -560px; opacity: 0.42;
+    -webkit-mask-image: radial-gradient(ellipse 55% 55% at 55% 45%, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse 55% 55% at 55% 45%, #000 30%, transparent 75%); }
+  .lenses { display: grid; gap: 14px; }
+  .lens { position: relative; padding: 26px 0 18px; }
+  .lens::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(255,255,255,0.2); }
+  .lens::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; border-bottom: 1px dashed rgba(255,255,255,0.12); }
+  .lens .marks { position: absolute; top: -5px; left: 0; right: 0; height: 11px; display: flex; justify-content: space-between; }
+  .lens .marks span { width: 2px; height: 11px; background: rgba(255,255,255,0.3); }
+  .lens .marks span:first-child { background: var(--lime); }
+  .lens .coord { position: absolute; top: 18px; right: 0; font-family: var(--mono); font-size: 16px; letter-spacing: 1.4px; color: rgba(255,255,255,0.35); }
+  .lens .name { font-family: var(--display); font-weight: 500; font-size: 44px; line-height: 1.05; letter-spacing: -1px; color: #fff; margin-bottom: 10px; }
+  .lens .what { font-family: var(--mono); font-size: 17px; text-transform: uppercase; letter-spacing: 1.8px; color: rgba(255,255,255,0.55); }
+
+  /* ============ SLIDE 4 — Value ============ */
+  .evidence { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 18px; display: grid; gap: 8px; }
+  .layer { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 12px; padding: 17px 26px; border-radius: 12px; }
+  .layer .idx { font-family: var(--mono); font-size: 17px; letter-spacing: 1.5px; color: var(--text-muted); }
+  .layer .name { font-family: var(--body); font-size: 28px; font-weight: 500; color: var(--text); letter-spacing: -0.2px; }
+  .layer .tag { font-family: var(--mono); font-size: 16px; text-transform: uppercase; letter-spacing: 1.6px; color: var(--text-muted); }
+  .layer.l4 { background: color-mix(in srgb, var(--accent) 4%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent); }
+  .layer.l3 { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+  .layer.l2 { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+  .layer.l1 { background: color-mix(in srgb, var(--accent) 22%, transparent); }
+  .layer .badge { font-family: var(--mono); font-size: 15px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.4px; background: var(--lime); color: var(--text); padding: 8px 16px; border-radius: 100px; }
+  .outcome { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 26px 6px; border-top: 1px dashed var(--border); margin-top: 6px; }
+  .outcome .label { font-family: var(--mono); font-size: 17px; text-transform: uppercase; letter-spacing: 1.8px; color: var(--accent); font-weight: 500; }
+  .outcome .result { font-family: var(--display); font-weight: 500; font-size: 34px; letter-spacing: -0.8px; color: var(--text); }
+
+  /* ============ SLIDE 5 — CTA (dark) ============ */
+  .s5 .topo { width: 1900px; height: 1500px; right: -820px; top: -260px; opacity: 0.45;
+    -webkit-mask-image: radial-gradient(ellipse 58% 58% at 52% 48%, #000 30%, transparent 76%);
+            mask-image: radial-gradient(ellipse 58% 58% at 52% 48%, #000 30%, transparent 76%); }
+  .s5 .body { justify-content: center; padding-top: 0; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 18px; align-self: flex-start; margin-top: 64px; background: var(--cta); color: #fff; font-family: var(--body); font-weight: 500; font-size: 34px; letter-spacing: -0.2px; padding: 30px 44px; border-radius: 16px; text-decoration: none; }
+  .btn-primary .arrow { font-family: var(--body); font-size: 36px; line-height: 1; }
+  .cta-note { margin-top: 32px; font-family: var(--mono); font-size: 18px; text-transform: uppercase; letter-spacing: 2px; color: var(--eyebrow-on-dark); }
+</style>
+</head>
+<body>
+
+<!-- Reusable bits, cloned in by the script below -->
+<template id="tpl-compass">
+  <span class="compass" aria-hidden="true"><svg viewBox="0 0 22 22">
+    <circle cx="11" cy="11" r="9" class="c-ring"/>
+    <circle cx="11" cy="11" r="5" class="c-ring"/>
+    <line x1="11" y1="2" x2="11" y2="6" class="c-n"/>
+    <line x1="20" y1="11" x2="16" y2="11" class="c-tick"/>
+    <line x1="11" y1="20" x2="11" y2="16" class="c-tick"/>
+    <line x1="2" y1="11" x2="6" y2="11" class="c-tick"/>
+    <circle cx="11" cy="11" r="1.2" class="c-dot"/>
+  </svg></span>
+</template>
+
+<template id="tpl-topo">
+  <svg viewBox="-60 -120 1000 860" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <path class="contour peak" d="M 380 280 Q 460 260 520 300 Q 540 360 480 390 Q 400 400 360 360 Q 340 310 380 280 Z"/>
+    <path class="contour" d="M 330 220 Q 450 190 570 240 Q 610 310 560 390 Q 460 440 360 420 Q 280 360 300 280 Z"/>
+    <path class="contour major" d="M 260 160 Q 440 120 620 180 Q 690 280 620 410 Q 460 480 290 450 Q 200 370 220 260 Z"/>
+    <path class="contour" d="M 180 100 Q 420 60 670 120 Q 770 250 690 410 Q 480 520 250 480 Q 110 380 140 220 Z"/>
+    <path class="contour" d="M 100 30 Q 390 0 730 70 Q 860 220 770 440 Q 510 580 200 520 Q 20 390 60 190 Z"/>
+    <path class="contour major" d="M 0 -40 Q 360 -70 810 10 Q 970 190 870 480 Q 560 650 130 580 Q -80 430 -30 160 Z"/>
+    <path class="contour" opacity="0.7" d="M -60 -110 Q 340 -150 880 -50 Q 1060 170 950 530 Q 600 730 60 650 Q -170 470 -110 130 Z"/>
+  </svg>
+</template>
+
+<div class="viewer">
+  <div class="viewer-head">
+    <span><strong>Look beyond the resume</strong> · LinkedIn carousel · 5 slides · 1080 × 1350</span>
+    <span class="viewer-nav"><button type="button" data-dir="-1" aria-label="Previous slide">← Prev</button><button type="button" data-dir="1" aria-label="Next slide">Next →</button></span>
+  </div>
+
+  <div class="track" id="track">
+
+    <!-- ================= SLIDE 1 · THE HOOK ================= -->
+    <div class="frame"><section class="slide s1" data-n="1">
+      <div class="topo" data-topo></div>
+      <header class="chrome-top">
+        <img class="logo logo-dark" src="../Logo%20Dark.svg" alt="HackerEarth">
+        <img class="logo logo-light" src="../Logo-Light.svg" alt="HackerEarth">
+        <span class="topic">Psychometric assessments</span>
+      </header>
+      <div class="body">
+        <span class="ds-eyebrow" data-compass><span class="bracket">[ 01 ]</span><span>The hook</span></span>
+        <h1 class="h1">A great resume.<br>A great interview.<br>But can they<br><em>do the job?</em></h1>
+        <p class="lead">There is more to a candidate than what meets the eye.</p>
+        <div class="checklist push">
+          <div class="check-row"><span class="idx">01</span><span class="what">The resume</span><span class="pill pass">Impressive</span></div>
+          <div class="check-row"><span class="idx">02</span><span class="what">The interview</span><span class="pill pass">Went well</span></div>
+          <div class="check-row"><span class="idx">03</span><span class="what">On the job</span><span class="pill unknown">Unknown</span></div>
+        </div>
+      </div>
+      <footer class="chrome-bottom" data-ticks></footer>
+    </section></div>
+
+    <!-- ================= SLIDE 2 · THE PROBLEM ================= -->
+    <div class="frame"><section class="slide s2" data-n="2">
+      <header class="chrome-top">
+        <img class="logo logo-dark" src="../Logo%20Dark.svg" alt="HackerEarth">
+        <img class="logo logo-light" src="../Logo-Light.svg" alt="HackerEarth">
+        <span class="topic">Psychometric assessments</span>
+      </header>
+      <div class="body">
+        <span class="ds-eyebrow" data-compass><span class="bracket">[ 02 ]</span><span>The problem</span></span>
+        <h1 class="h1">A resume shows the <em>highlights.</em></h1>
+        <p class="lead">Experience, qualifications and skills are important. But they do not always reveal how someone thinks, behaves or responds to challenges.</p>
+        <div class="resume-wrap push">
+          <div class="resume">
+            <div class="resume-head">
+              <span class="avatar" aria-hidden="true"></span>
+              <div class="stack-bars"><span class="bar strong" style="width: 46%"></span><span class="bar" style="width: 30%"></span></div>
+            </div>
+            <div class="resume-sec"><span class="label">Experience</span><div class="stack-bars"><span class="bar" style="width: 92%"></span><span class="bar" style="width: 74%"></span></div></div>
+            <div class="resume-sec"><span class="label">Qualifications</span><div class="stack-bars"><span class="bar" style="width: 66%"></span></div></div>
+            <div class="resume-sec"><span class="label">Skills</span><div class="chips"><span style="width: 120px"></span><span style="width: 92px"></span><span style="width: 140px"></span><span style="width: 104px"></span></div></div>
+          </div>
+          <div class="unseen">
+            <span class="label">Not on<br>the page</span>
+            <ul>
+              <li>How they think</li>
+              <li>How they behave</li>
+              <li>How they respond to challenges</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="chrome-bottom" data-ticks></footer>
+    </section></div>
+
+    <!-- ================= SLIDE 3 · THE REVEAL ================= -->
+    <div class="frame"><section class="slide dark s3" data-n="3">
+      <div class="topo" data-topo></div>
+      <header class="chrome-top">
+        <img class="logo logo-dark" src="../Logo%20Dark.svg" alt="HackerEarth">
+        <img class="logo logo-light" src="../Logo-Light.svg" alt="HackerEarth">
+        <span class="topic">Psychometric assessments</span>
+      </header>
+      <div class="body">
+        <span class="ds-eyebrow" data-compass><span class="bracket">[ 03 ]</span><span>The reveal</span></span>
+        <h1 class="h1 xl">Look <em>beyond</em> the resume.</h1>
+        <p class="lead">Psychometric assessments help uncover cognitive abilities, personality traits and behavioral tendencies relevant to a role.</p>
+        <div class="lenses push">
+          <div class="lens"><div class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><span class="coord">01</span><div class="name">Cognitive abilities</div><div class="what">How they think</div></div>
+          <div class="lens"><div class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><span class="coord">02</span><div class="name">Personality traits</div><div class="what">How they behave</div></div>
+          <div class="lens"><div class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><span class="coord">03</span><div class="name">Behavioral tendencies</div><div class="what">How they respond to challenges</div></div>
+        </div>
+      </div>
+      <footer class="chrome-bottom" data-ticks></footer>
+    </section></div>
+
+    <!-- ================= SLIDE 4 · THE VALUE ================= -->
+    <div class="frame"><section class="slide s4" data-n="4">
+      <header class="chrome-top">
+        <img class="logo logo-dark" src="../Logo%20Dark.svg" alt="HackerEarth">
+        <img class="logo logo-light" src="../Logo-Light.svg" alt="HackerEarth">
+        <span class="topic">Psychometric assessments</span>
+      </header>
+      <div class="body">
+        <span class="ds-eyebrow" data-compass><span class="bracket">[ 04 ]</span><span>The value</span></span>
+        <h1 class="h1 md">Make every hiring decision <em>more informed.</em></h1>
+        <p class="lead">Use standardized insights alongside interviews and other hiring evidence to understand candidates more objectively.</p>
+        <div class="evidence push">
+          <div class="layer l4"><span class="idx">04</span><span class="name">Resume</span><span class="tag">Background</span></div>
+          <div class="layer l3"><span class="idx">03</span><span class="name">Interviews</span><span class="tag">Conversation</span></div>
+          <div class="layer l2"><span class="idx">02</span><span class="name">Other hiring evidence</span><span class="tag">Context</span></div>
+          <div class="layer l1"><span class="idx">01</span><span class="name">Psychometric insights</span><span class="badge">Standardized</span></div>
+          <div class="outcome"><span class="label">Together</span><span class="result">A more objective view</span></div>
+        </div>
+      </div>
+      <footer class="chrome-bottom" data-ticks></footer>
+    </section></div>
+
+    <!-- ================= SLIDE 5 · THE CTA ================= -->
+    <div class="frame"><section class="slide dark s5" data-n="5">
+      <div class="topo" data-topo></div>
+      <header class="chrome-top">
+        <img class="logo logo-dark" src="../Logo%20Dark.svg" alt="HackerEarth">
+        <img class="logo logo-light" src="../Logo-Light.svg" alt="HackerEarth">
+        <span class="topic">Psychometric assessments</span>
+      </header>
+      <div class="body">
+        <span class="ds-eyebrow" data-compass><span class="bracket">[ 05 ]</span><span>Next step</span></span>
+        <h1 class="h1 xl">Ready to look <em>beyond the resume?</em></h1>
+        <p class="lead">Explore psychometric assessments with HackerEarth.</p>
+        <a class="btn-primary" href="#">Discover a smarter way to assess talent <span class="arrow">→</span></a>
+      </div>
+      <footer class="chrome-bottom" data-ticks></footer>
+    </section></div>
+
+  </div>
+</div>
+
+<script>
+  const TOTAL = 5;
+  if (new URLSearchParams(location.search).has('export')) document.documentElement.classList.add('export');
+
+  const compass = document.getElementById('tpl-compass').content;
+  document.querySelectorAll('[data-compass]').forEach(el => el.prepend(compass.cloneNode(true)));
+
+  const topo = document.getElementById('tpl-topo').content;
+  document.querySelectorAll('[data-topo]').forEach(el => el.append(topo.cloneNode(true)));
+
+  // Footer: tick-scale progress + pager
+  document.querySelectorAll('.slide').forEach(slide => {
+    const n = +slide.dataset.n;
+    const marks = Array.from({ length: TOTAL }, (_, i) => `<span class="${i + 1 === n ? 'on' : ''}"></span>`).join('');
+    const label = n < TOTAL ? 'Swipe →' : 'HackerEarth';
+    slide.querySelector('[data-ticks]').innerHTML =
+      `<div class="ticks" aria-hidden="true"><div class="marks">${marks}</div></div>` +
+      `<span class="pager"><b>${String(n).padStart(2, '0')}</b> / ${String(TOTAL).padStart(2, '0')} · ${label}</span>`;
+  });
+
+  // Preview: fit slides to viewport height, step with buttons / arrow keys
+  const track = document.getElementById('track');
+  function fit() {
+    if (document.documentElement.classList.contains('export')) return;
+    const byH = (window.innerHeight - 150) / 1350;
+    const byW = (window.innerWidth - 64) / 1080;
+    document.documentElement.style.setProperty('--s', Math.max(0.2, Math.min(byH, byW, 0.62)).toFixed(3));
+  }
+  function step(dir) {
+    const w = track.querySelector('.frame').getBoundingClientRect().width + 24;
+    track.scrollBy({ left: dir * w, behavior: 'smooth' });
+  }
+  document.querySelectorAll('.viewer-nav button').forEach(b => b.addEventListener('click', () => step(+b.dataset.dir)));
+  document.addEventListener('keydown', e => { if (e.key === 'ArrowRight') step(1); if (e.key === 'ArrowLeft') step(-1); });
+  window.addEventListener('resize', fit);
+  fit();
+</script>
+</body>
+</html>
