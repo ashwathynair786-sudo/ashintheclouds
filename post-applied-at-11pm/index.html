@@ -55,7 +55,7 @@
   .live-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 5px color-mix(in srgb, var(--lime) 25%, transparent); }
 
   /* Contours — on-dark tokens, masked toward the headline */
-  .topo { position: absolute; z-index: 1; pointer-events: none; width: 1700px; height: 1400px; right: -800px; top: -460px; opacity: 0.4;
+  .topo { position: absolute; z-index: 1; pointer-events: none; width: 1500px; height: 1200px; right: -760px; top: -520px; opacity: 0.36;
     -webkit-mask-image: radial-gradient(ellipse 55% 55% at 55% 50%, #000 30%, transparent 75%);
             mask-image: radial-gradient(ellipse 55% 55% at 55% 50%, #000 30%, transparent 75%); }
   .topo svg { width: 100%; height: 100%; display: block; }
@@ -67,37 +67,12 @@
   .h1 { font-family: var(--display); font-weight: 500; font-variation-settings: 'opsz' 96; font-size: 106px; line-height: 0.98; letter-spacing: -3.2px; }
   .sub { margin-top: 40px; font-family: var(--body); font-size: 34px; line-height: 1.35; color: rgba(255,255,255,0.68); }
 
-  /* ---------- Weekend timeline ---------- */
-  .timeline { margin-top: auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 30px 36px 34px; }
-  .tl-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
-  .tl-head .label { font-family: var(--mono); font-size: 17px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; color: var(--eyebrow-on-dark); }
-  .tl-head .n { font-family: var(--mono); font-size: 15px; letter-spacing: 1.4px; color: rgba(255,255,255,0.35); }
-
-  .days { display: grid; grid-template-columns: repeat(4, 1fr); font-family: var(--mono); font-size: 16px; letter-spacing: 1.8px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
-  .days span { padding-left: 10px; border-left: 1px dashed rgba(255,255,255,0.14); padding-bottom: 12px; }
-
-  .lane { position: relative; height: 200px; }
-  .lane .grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); pointer-events: none; }
-  .lane .grid span { border-left: 1px dashed rgba(255,255,255,0.14); }
-  .office { position: absolute; top: 0; bottom: 0; left: 81.25%; width: 9.375%; background: rgba(255,255,255,0.07); border-left: 2px solid rgba(255,255,255,0.4); }
-  .track { position: absolute; left: 0; right: 0; top: 64px; height: 1px; background: rgba(255,255,255,0.22); }
-  .track .marks { position: absolute; left: 0; right: 0; top: -5px; display: flex; justify-content: space-between; }
-  .track .marks span { width: 1px; height: 11px; background: rgba(255,255,255,0.3); }
-
-  .ev { position: absolute; top: 64px; }
-  .ev .dot { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; border-radius: 50%; background: var(--bg-dark); border: 2px solid #fff; }
-  .ev .stem { position: absolute; left: 0; top: 9px; width: 1px; height: 30px; background: rgba(255,255,255,0.3); }
-  .ev .tag { position: absolute; top: 48px; left: -14px; white-space: nowrap; }
-  .ev .time { font-family: var(--display); font-weight: 500; font-size: 40px; letter-spacing: -1px; line-height: 1; color: #fff; }
-  .ev .what { margin-top: 10px; font-family: var(--mono); font-size: 16px; text-transform: uppercase; letter-spacing: 1.6px; color: rgba(255,255,255,0.6); }
-  .ev.hit .dot { background: var(--lime); border-color: var(--lime); box-shadow: 0 0 0 6px color-mix(in srgb, var(--lime) 22%, transparent); }
-  .ev.hit .what { color: var(--lime); }
-  .ev.open { top: 0; }
-  .ev.open .tag { top: 108px; left: 14px; }
-  .ev.open .time { font-size: 26px; letter-spacing: -0.4px; color: rgba(255,255,255,0.75); }
-  .ev.open .what { margin-top: 6px; color: rgba(255,255,255,0.5); }
-  .ev.open .dot { display: none; }
-  .ev.open .stem { display: none; }
+  /* ---------- Background photo ---------- */
+  /* Landscape photo sits full-bleed in the lower part and fades up into brand black behind the headline */
+  .photo { position: absolute; z-index: 1; left: -40px; right: -40px; bottom: 0; height: 790px;
+    background: url('../Midnight%20Focus%20at%20the%20Desk.png') 42% 40% / cover no-repeat; }
+  .photo::after { content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, var(--bg-dark) 0%, color-mix(in srgb, var(--bg-dark) 55%, transparent) 22%, transparent 45%, transparent 82%, color-mix(in srgb, var(--bg-dark) 50%, transparent) 100%); }
 </style>
 </head>
 <body>
@@ -116,6 +91,8 @@
       </svg>
     </div>
 
+    <div class="photo" role="img" aria-label="A woman working on her laptop late at night at a dimly lit desk"></div>
+
     <header class="chrome-top">
       <img class="logo" src="../Logo-Light.svg" alt="HackerEarth">
       <span class="topic"><span class="live-dot" aria-hidden="true"></span>Live 24/7</span>
@@ -124,23 +101,6 @@
     <div class="body">
       <h1 class="h1">She applied at 11 PM. She was interviewed <em>before Monday.</em></h1>
       <p class="sub">OnScreen — AI interviews, around the clock.</p>
-
-      <div class="timeline" aria-hidden="true">
-        <div class="tl-head"><span class="label">One weekend</span><span class="n">FRI → MON</span></div>
-        <div class="days"><span>Fri</span><span>Sat</span><span>Sun</span><span>Mon</span></div>
-        <div class="lane">
-          <div class="grid"><span></span><span></span><span></span><span></span></div>
-          <div class="office"></div>
-          <div class="track"><div class="marks">
-            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-          </div></div>
-          <!-- Positions: hours since Fri 00:00 / 96h -->
-          <div class="ev" style="left: 24.0%"><span class="dot"></span><span class="stem"></span><div class="tag"><div class="time">11:04 PM</div><div class="what">Applied</div></div></div>
-          <div class="ev hit" style="left: 60.7%"><span class="dot"></span><span class="stem"></span><div class="tag"><div class="time">10:15 AM</div><div class="what">Interviewed</div></div></div>
-          <div class="ev open" style="left: 81.25%"><div class="tag"><div class="time">9:00 AM</div><div class="what">Office opens</div></div></div>
-        </div>
-      </div>
     </div>
   </section></div>
 </div>
