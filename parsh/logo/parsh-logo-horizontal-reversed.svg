@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" width="720" height="200">
+  <title>PARSH horizontal lockup, reversed</title>
+  <!-- Live text: outline the wordmark in Illustrator (Type > Create Outlines) before sending to print. -->
+  <rect width="720" height="200" fill="#292721"/>
+  <g transform="translate(70 58) scale(0.7)">
+    <path d="M50 4 C63 17 77 33 78 57 C79 84 66 103 50 116 C34 103 21 84 22 57 C23 33 37 17 50 4 Z" fill="none" stroke="#E9E0D0" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M50 116 L50 76" fill="none" stroke="#E9E0D0" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="50" cy="62" r="7" fill="#C4AE8D"/>
+  </g>
+  <rect x="178" y="68" width="1" height="64" fill="#C4AE8D"/>
+  <text x="220" y="124" font-family="Cormorant Garamond, Garamond, serif" font-weight="500" font-size="68" letter-spacing="23" fill="#E9E0D0">PARSH</text>
+</svg>

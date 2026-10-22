@@ -1,0 +1,26 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-10-22T12:50:00Z"},
+  "title": "PARSH Catalogue — Opening Spreads",
+  "launch": {"view": "canvas"},
+  "pages": [
+    {"id": "identity", "name": "Logo"},
+    {"id": "catalogue", "name": "Catalogue opening"}
+  ],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1588, "h": 1123, "title": "PARSH — Logo & identity", "page": "identity"},
+    "Cover.dc.html": {"x": 0, "y": 0, "w": 794, "h": 1123, "title": "p.1 — Cover", "page": "catalogue"},
+    "Philosophy.dc.html": {"x": 874, "y": 0, "w": 1588, "h": 1123, "title": "pp.2–3 — The Meaning of Light", "page": "catalogue"},
+    "Materials.dc.html": {"x": 2542, "y": 0, "w": 1588, "h": 1123, "title": "pp.4–5 — Nature as Material", "page": "catalogue"},
+    "Making.dc.html": {"x": 0, "y": 1243, "w": 1588, "h": 1123, "title": "pp.6–7 — The Art of Making", "page": "catalogue"},
+    "Collection.dc.html": {"x": 1668, "y": 1243, "w": 1588, "h": 1123, "title": "pp.8–9 — Sculptures of Light", "page": "catalogue"},
+    "Family.dc.html": {"x": 3336, "y": 1243, "w": 1588, "h": 1123, "title": "pp.10–11 — Lighting family opener", "page": "catalogue"}
+  },
+  "order": ["Main.dc.html", "Cover.dc.html", "Philosophy.dc.html", "Materials.dc.html", "Making.dc.html", "Collection.dc.html", "Family.dc.html"],
+  "notes": {
+    "cattitle": {"x": 0, "y": -300, "text": "PARSH — Catalogue opening, pages 1–11", "kind": "title1", "maxW": 4130, "page": "catalogue"},
+    "printnote": {"x": 4210, "y": 0, "w": 380, "fill": "orange", "page": "catalogue", "text": "Cover finish: PARSH logotype blind-embossed into uncoated Raw Cotton stock, or a discreet tone-on-tone foil. The point of light in the symbol can take a Red Earth foil as the only colour on the cover. Hero image: one signature fixture, lit, cropped close and sculptural, with plenty of empty space around it."},
+    "photonote": {"x": 4210, "y": 600, "w": 380, "fill": "teal", "page": "catalogue", "text": "Every dark panel is a photograph placeholder, labelled with its brief. The Art of Making spread must use real PARSH production photos (workshop, hands, process). For material close-ups, shoot macro in raking light, then backlit, so the texture and translucency both show."}
+  },
+  "designSystems": []
+}

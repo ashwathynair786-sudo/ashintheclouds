@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PARSH catalogue cover</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Jost:wght@300;400;500&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 794px; height: 1123px; box-sizing: border-box; padding: 88px 72px 80px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; background: #E9E0D0; color: #292721; font-family: 'Jost', 'Futura', 'Helvetica Neue', sans-serif; overflow: hidden">
+
+  <sc-if value="{{isEmboss}}" hint-placeholder-val="{{ true }}">
+    <div style="font-family: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif; font-weight: 500; font-size: 58px; line-height: 1; letter-spacing: 0.36em; padding-left: 0.36em; color: #E4DACA; text-shadow: -1px -1px 0 rgba(255, 252, 244, 0.9), 1px 1px 1px rgba(41, 39, 33, 0.38), 2px 2px 3px rgba(41, 39, 33, 0.12)">PARSH</div>
+  </sc-if>
+  <sc-if value="{{isFoil}}" hint-placeholder-val="{{ false }}">
+    <div style="font-family: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif; font-weight: 500; font-size: 58px; line-height: 1; letter-spacing: 0.36em; padding-left: 0.36em; color: #A55E42">PARSH</div>
+  </sc-if>
+  <sc-if value="{{isInk}}" hint-placeholder-val="{{ false }}">
+    <div style="font-family: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif; font-weight: 500; font-size: 58px; line-height: 1; letter-spacing: 0.36em; padding-left: 0.36em; color: #292721">PARSH</div>
+  </sc-if>
+
+  <div style="position: relative; width: 520px; height: 680px; background: #292721; overflow: hidden">
+    <div style="position: absolute; left: 50%; top: 44%; width: 560px; height: 560px; transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(233, 196, 140, 0.55) 0%, rgba(165, 94, 66, 0.22) 32%, rgba(41, 39, 33, 0) 66%)"></div>
+    <div style="position: absolute; left: 28px; right: 28px; bottom: 24px; font-size: 12px; line-height: 1.5; letter-spacing: 0.16em; text-transform: uppercase; color: #C4AE8D">Photograph — one signature fixture, lit. Close, sculptural crop on a deep ground.</div>
+  </div>
+
+  <div style="font-family: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif; font-style: italic; font-weight: 400; font-size: 30px; line-height: 1.2; color: #292721">Light, in Its Natural Form.</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"logoFinish":{"editor":"enum","options":["emboss","foil","ink"],"default":"emboss"},"$preview":{"width":794,"height":1123}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const finish = this.props.logoFinish ?? 'emboss';
+    return {
+      isEmboss: finish === 'emboss',
+      isFoil: finish === 'foil',
+      isInk: finish === 'ink'
+    };
+  }
+}
+</script>
+</body>
+</html>
