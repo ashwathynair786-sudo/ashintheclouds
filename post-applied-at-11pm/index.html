@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applied at 11 PM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     HackerEarth static post — "She applied at 11 PM." (OnScreen)
+     Tokens from HackerEarth Design System v1 (marketing).
+     Canvas: 1080 × 1350 (4:5).
+     ============================================================ */
+  :root {
+    --bg-dark: #020109;
+    --text-muted: #545459;
+    --accent: #13255D;
+    --cta: #FF5722;
+    --lime: #C7F252;
+    --eyebrow-on-dark: #A5A5AD;
+
+    --display: 'Bricolage Grotesque', 'Geist', sans-serif;
+    --body: 'Geist', 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    --post-w: 1080px;
+    --post-h: 1350px;
+    --pad: 88px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #E9E6DD; }
+  body { font-family: var(--body); -webkit-font-smoothing: antialiased; }
+  em { font-style: normal; font-weight: inherit; color: var(--cta); }
+
+  /* ---------- Preview shell (screen only) ---------- */
+  .viewer { min-height: 100vh; display: grid; place-items: center; padding: 32px 16px; }
+  .frame { width: calc(var(--post-w) * var(--s, 0.5)); height: calc(var(--post-h) * var(--s, 0.5)); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(2,1,9,0.06), 0 12px 32px rgba(2,1,9,0.10); }
+  .frame > .post { transform: scale(var(--s, 0.5)); transform-origin: 0 0; }
+
+  /* ---------- Export mode (?export) ---------- */
+  html.export, html.export body { background: transparent; }
+  html.export .viewer { display: block; padding: 0; min-height: 0; }
+  html.export .frame { width: var(--post-w); height: var(--post-h); border-radius: 0; box-shadow: none; }
+  html.export .frame > .post { transform: none; }
+
+  /* ---------- Post ---------- */
+  .post { position: relative; width: var(--post-w); height: var(--post-h); overflow: hidden; background: var(--bg-dark); color: #fff; padding: var(--pad); display: flex; flex-direction: column; }
+
+  .chrome-top { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: center; height: 40px; }
+  .chrome-top .logo { height: 34px; display: block; }
+  .topic { font-family: var(--mono); font-size: 18px; font-weight: 500; color: var(--eyebrow-on-dark); text-transform: uppercase; letter-spacing: 2px; display: inline-flex; align-items: center; gap: 12px; }
+  .live-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 5px color-mix(in srgb, var(--lime) 25%, transparent); }
+
+  /* Contours — on-dark tokens, masked toward the headline */
+  .topo { position: absolute; z-index: 1; pointer-events: none; width: 1700px; height: 1400px; right: -800px; top: -460px; opacity: 0.4;
+    -webkit-mask-image: radial-gradient(ellipse 55% 55% at 55% 50%, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse 55% 55% at 55% 50%, #000 30%, transparent 75%); }
+  .topo svg { width: 100%; height: 100%; display: block; }
+  .topo .contour { fill: none; stroke-width: 0.9; stroke: rgba(255,255,255,0.18); }
+  .topo .contour.major { stroke: rgba(255,255,255,0.28); stroke-width: 1.1; }
+  .topo .contour.peak { stroke: color-mix(in srgb, var(--lime) 55%, transparent); }
+
+  .body { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; padding-top: 96px; }
+  .h1 { font-family: var(--display); font-weight: 500; font-variation-settings: 'opsz' 96; font-size: 106px; line-height: 0.98; letter-spacing: -3.2px; }
+  .sub { margin-top: 40px; font-family: var(--body); font-size: 34px; line-height: 1.35; color: rgba(255,255,255,0.68); }
+
+  /* ---------- Weekend timeline ---------- */
+  .timeline { margin-top: auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 30px 36px 34px; }
+  .tl-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+  .tl-head .label { font-family: var(--mono); font-size: 17px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; color: var(--eyebrow-on-dark); }
+  .tl-head .n { font-family: var(--mono); font-size: 15px; letter-spacing: 1.4px; color: rgba(255,255,255,0.35); }
+
+  .days { display: grid; grid-template-columns: repeat(4, 1fr); font-family: var(--mono); font-size: 16px; letter-spacing: 1.8px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+  .days span { padding-left: 10px; border-left: 1px dashed rgba(255,255,255,0.14); padding-bottom: 12px; }
+
+  .lane { position: relative; height: 200px; }
+  .lane .grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); pointer-events: none; }
+  .lane .grid span { border-left: 1px dashed rgba(255,255,255,0.14); }
+  .office { position: absolute; top: 0; bottom: 0; left: 81.25%; width: 9.375%; background: rgba(255,255,255,0.07); border-left: 2px solid rgba(255,255,255,0.4); }
+  .track { position: absolute; left: 0; right: 0; top: 64px; height: 1px; background: rgba(255,255,255,0.22); }
+  .track .marks { position: absolute; left: 0; right: 0; top: -5px; display: flex; justify-content: space-between; }
+  .track .marks span { width: 1px; height: 11px; background: rgba(255,255,255,0.3); }
+
+  .ev { position: absolute; top: 64px; }
+  .ev .dot { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; border-radius: 50%; background: var(--bg-dark); border: 2px solid #fff; }
+  .ev .stem { position: absolute; left: 0; top: 9px; width: 1px; height: 30px; background: rgba(255,255,255,0.3); }
+  .ev .tag { position: absolute; top: 48px; left: -14px; white-space: nowrap; }
+  .ev .time { font-family: var(--display); font-weight: 500; font-size: 40px; letter-spacing: -1px; line-height: 1; color: #fff; }
+  .ev .what { margin-top: 10px; font-family: var(--mono); font-size: 16px; text-transform: uppercase; letter-spacing: 1.6px; color: rgba(255,255,255,0.6); }
+  .ev.hit .dot { background: var(--lime); border-color: var(--lime); box-shadow: 0 0 0 6px color-mix(in srgb, var(--lime) 22%, transparent); }
+  .ev.hit .what { color: var(--lime); }
+  .ev.open { top: 0; }
+  .ev.open .tag { top: 108px; left: 14px; }
+  .ev.open .time { font-size: 26px; letter-spacing: -0.4px; color: rgba(255,255,255,0.75); }
+  .ev.open .what { margin-top: 6px; color: rgba(255,255,255,0.5); }
+  .ev.open .dot { display: none; }
+  .ev.open .stem { display: none; }
+</style>
+</head>
+<body>
+
+<div class="viewer">
+  <div class="frame"><section class="post">
+    <div class="topo" aria-hidden="true">
+      <svg viewBox="-60 -120 1000 860" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <path class="contour peak" d="M 380 280 Q 460 260 520 300 Q 540 360 480 390 Q 400 400 360 360 Q 340 310 380 280 Z"/>
+        <path class="contour" d="M 330 220 Q 450 190 570 240 Q 610 310 560 390 Q 460 440 360 420 Q 280 360 300 280 Z"/>
+        <path class="contour major" d="M 260 160 Q 440 120 620 180 Q 690 280 620 410 Q 460 480 290 450 Q 200 370 220 260 Z"/>
+        <path class="contour" d="M 180 100 Q 420 60 670 120 Q 770 250 690 410 Q 480 520 250 480 Q 110 380 140 220 Z"/>
+        <path class="contour" d="M 100 30 Q 390 0 730 70 Q 860 220 770 440 Q 510 580 200 520 Q 20 390 60 190 Z"/>
+        <path class="contour major" d="M 0 -40 Q 360 -70 810 10 Q 970 190 870 480 Q 560 650 130 580 Q -80 430 -30 160 Z"/>
+        <path class="contour" opacity="0.7" d="M -60 -110 Q 340 -150 880 -50 Q 1060 170 950 530 Q 600 730 60 650 Q -170 470 -110 130 Z"/>
+      </svg>
+    </div>
+
+    <header class="chrome-top">
+      <img class="logo" src="../Logo-Light.svg" alt="HackerEarth">
+      <span class="topic"><span class="live-dot" aria-hidden="true"></span>Live 24/7</span>
+    </header>
+
+    <div class="body">
+      <h1 class="h1">She applied at 11 PM. She was interviewed <em>before Monday.</em></h1>
+      <p class="sub">OnScreen — AI interviews, around the clock.</p>
+
+      <div class="timeline" aria-hidden="true">
+        <div class="tl-head"><span class="label">One weekend</span><span class="n">FRI → MON</span></div>
+        <div class="days"><span>Fri</span><span>Sat</span><span>Sun</span><span>Mon</span></div>
+        <div class="lane">
+          <div class="grid"><span></span><span></span><span></span><span></span></div>
+          <div class="office"></div>
+          <div class="track"><div class="marks">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div></div>
+          <!-- Positions: hours since Fri 00:00 / 96h -->
+          <div class="ev" style="left: 24.0%"><span class="dot"></span><span class="stem"></span><div class="tag"><div class="time">11:04 PM</div><div class="what">Applied</div></div></div>
+          <div class="ev hit" style="left: 60.7%"><span class="dot"></span><span class="stem"></span><div class="tag"><div class="time">10:15 AM</div><div class="what">Interviewed</div></div></div>
+          <div class="ev open" style="left: 81.25%"><div class="tag"><div class="time">9:00 AM</div><div class="what">Office opens</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section></div>
+</div>
+
+<script>
+  if (new URLSearchParams(location.search).has('export')) document.documentElement.classList.add('export');
+  function fit() {
+    if (document.documentElement.classList.contains('export')) return;
+    const s = Math.min((innerHeight - 64) / 1350, (innerWidth - 32) / 1080, 0.7);
+    document.documentElement.style.setProperty('--s', Math.max(0.2, s).toFixed(3));
+  }
+  addEventListener('resize', fit);
+  fit();
+</script>
+</body>
+</html>
