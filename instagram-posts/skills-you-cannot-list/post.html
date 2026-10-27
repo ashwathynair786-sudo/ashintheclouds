@@ -26,63 +26,89 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #E7E4DB; font-family: var(--body); -webkit-font-smoothing: antialiased; padding: 60px 0; display: flex; justify-content: center; }
+  body { background: #E7E4DB; font-family: var(--body); -webkit-font-smoothing: antialiased; padding: 60px 0; }
+  .deck { display: flex; flex-direction: column; align-items: center; gap: 60px; }
   body.export { padding: 0; background: transparent; }
+  body.export .deck { gap: 0; }
 
-  /* ===== Post frame — Instagram portrait 4:5 ===== */
-  .post { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: var(--black); color: #fff; padding: 72px var(--pad) 80px; display: flex; flex-direction: column; }
-  .post > * { position: relative; z-index: 2; }
+  /* ===== Slide frame — Instagram portrait 4:5 ===== */
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: var(--black); color: #fff; padding: 80px var(--pad) 88px; display: flex; flex-direction: column; }
+  .slide > * { position: relative; z-index: 2; }
 
-  /* Background photo — resume framed in the upper half, fading into black */
-  .photo { position: absolute; z-index: 0; width: 1500px; height: auto; left: -360px; top: -190px; }
+  /* ----- Slide 1 · Cover: photo + title only ----- */
+  .photo { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 68% 30%; }
   .wash { position: absolute; inset: 0; z-index: 1;
-    background:
-      linear-gradient(180deg, rgba(2,1,9,0.25) 0px, rgba(2,1,9,0.35) 360px, rgba(2,1,9,0.88) 540px, var(--black) 660px);
+    background: linear-gradient(180deg, rgba(2,1,9,0.15) 0%, rgba(2,1,9,0.25) 35%, rgba(2,1,9,0.85) 58%, var(--black) 72%);
   }
-
-
-  .content { margin-top: auto; }
-  h1 { font-family: var(--display); font-weight: 500; font-optical-sizing: auto; font-size: 76px; line-height: 1.02; letter-spacing: -2.2px; }
+  h1 { margin-top: auto; font-family: var(--display); font-weight: 500; font-optical-sizing: auto; font-size: 104px; line-height: 0.98; letter-spacing: -3.2px; }
   h1 em { font-style: normal; color: var(--cta); }
-  h1 .lead-in { display: block; color: rgba(255,255,255,0.72); font-size: 52px; letter-spacing: -1.2px; margin-bottom: 14px; }
+  h1 .lead-in { display: block; color: rgba(255,255,255,0.72); font-size: 60px; line-height: 1.05; letter-spacing: -1.6px; margin-bottom: 24px; }
 
-  /* The unlistable skills */
-  .traits { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
-  .trait { display: flex; align-items: center; gap: 20px; font-size: 32px; font-weight: 500; line-height: 1.25; letter-spacing: -0.3px; }
-  .trait::before { content: ''; width: 12px; height: 12px; border-radius: 3px; background: var(--lime); flex-shrink: 0; }
-  .support { margin-top: 28px; font-size: 28px; line-height: 1.4; color: rgba(255,255,255,0.72); }
+  /* ----- Slide 2 · Copy + CTA ----- */
+  .copy { margin: auto 0; }
+  .traits { display: flex; flex-direction: column; gap: 28px; }
+  .trait { display: flex; align-items: baseline; gap: 26px; font-size: 50px; font-weight: 600; line-height: 1.12; letter-spacing: -1.1px; }
+  .trait::before { content: ''; width: 16px; height: 16px; border-radius: 4px; background: var(--lime); flex-shrink: 0; transform: translateY(-8px); }
+  .support { margin-top: 56px; font-size: 34px; line-height: 1.4; color: rgba(255,255,255,0.72); max-width: 860px; }
 
-  .signoff { margin-top: 44px; padding-top: 36px; border-top: 1px dashed rgba(255,255,255,0.22); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .beyond { font-size: 32px; font-weight: 600; letter-spacing: -0.4px; }
-  .signoff img { height: 44px; display: block; }
+  .cta { padding-top: 44px; border-top: 1px dashed rgba(255,255,255,0.22); }
+  .beyond { font-size: 40px; font-weight: 600; letter-spacing: -0.6px; }
+  .btn-cta { margin-top: 32px; display: flex; align-items: center; justify-content: space-between; background: var(--cta); color: #fff; font-weight: 500; font-size: 34px; border-radius: 20px; padding: 30px 40px; }
+  .btn-cta svg { width: 40px; height: 16px; }
+  .with { margin-top: 28px; display: flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+  .with img { height: 36px; }
+
+  /* Contour backdrop (DS signature motif, on-dark tokens) */
+  .topo { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.42; }
+  .topo svg { position: absolute; width: 1500px; height: 1100px; right: -640px; top: -260px; }
+  .topo .contour { fill: none; stroke: rgba(255,255,255,0.18); stroke-width: 0.9; }
+  .topo .contour.major { stroke: rgba(255,255,255,0.28); stroke-width: 1.1; }
+  .topo .contour.peak { stroke: color-mix(in srgb, var(--lime) 55%, transparent); }
+  .topo::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 65% 55% at 25% 50%, var(--black) 0%, var(--black) 35%, transparent 80%); }
 </style>
 </head>
 <body>
+<main class="deck">
 
-  <section class="post" id="post">
+  <!-- ================================================= SLIDE 1 · COVER -->
+  <section class="slide s1" id="slide-1">
     <img class="photo" src="../../shutterstock_1799890306.jpg" alt="">
     <div class="wash" aria-hidden="true"></div>
+    <h1><span class="lead-in">Your resume has a skills section.</span>But what about the skills you <em>cannot list?</em></h1>
+  </section>
 
+  <!-- ================================================= SLIDE 2 · COPY + CTA -->
+  <section class="slide s2" id="slide-2">
+    <div class="topo" aria-hidden="true">
+      <svg viewBox="-100 -100 1100 800" preserveAspectRatio="xMidYMid meet">
+        <path class="contour peak" d="M 380 280 Q 460 260 520 300 Q 540 360 480 390 Q 400 400 360 360 Q 340 310 380 280 Z"/>
+        <path class="contour" d="M 330 220 Q 450 190 570 240 Q 610 310 560 390 Q 460 440 360 420 Q 280 360 300 280 Z"/>
+        <path class="contour major" d="M 260 160 Q 440 120 620 180 Q 690 280 620 410 Q 460 480 290 450 Q 200 370 220 260 Z"/>
+        <path class="contour" d="M 180 100 Q 420 60 670 120 Q 770 250 690 410 Q 480 520 250 480 Q 110 380 140 220 Z"/>
+        <path class="contour" d="M 100 30 Q 390 0 730 70 Q 860 220 770 440 Q 510 580 200 520 Q 20 390 60 190 Z"/>
+        <path class="contour major" opacity="0.55" d="M 0 -40 Q 360 -70 810 10 Q 970 190 870 480 Q 560 650 130 580 Q -80 430 -30 160 Z"/>
+      </svg>
+    </div>
 
-    <div class="content">
-      <h1><span class="lead-in">Your resume has a skills section.</span>But what about the skills you <em>cannot list?</em></h1>
+    <div class="copy">
+    <div class="traits">
+      <span class="trait">How you think.</span>
+      <span class="trait">How you approach challenges.</span>
+      <span class="trait">How you respond to different situations.</span>
+    </div>
+    <p class="support">These qualities can matter just as much when understanding role fit.</p>
+    </div>
 
-      <div class="traits">
-        <span class="trait">How you think.</span>
-        <span class="trait">How you approach challenges.</span>
-        <span class="trait">How you respond to different situations.</span>
-      </div>
-      <p class="support">These qualities can matter just as much when understanding role fit.</p>
-
-      <div class="signoff">
-        <span class="beyond">Look beyond the obvious.</span>
-        <img src="../../Logo-Light.svg" alt="HackerEarth">
-      </div>
+    <div class="cta">
+      <div class="beyond">Look beyond the obvious.</div>
+      <div class="btn-cta">Explore psychometric assessments <svg viewBox="0 0 40 16"><path d="M0 8 H37 M30 1 L38 8 L30 15" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+      <div class="with">with <img src="../../Logo-Light.svg" alt="HackerEarth"></div>
     </div>
   </section>
 
+</main>
 <script>
-  // ?export renders the post edge-to-edge for PNG capture
+  // ?export renders slides edge-to-edge for PNG capture
   if (new URLSearchParams(location.search).has('export')) document.body.classList.add('export');
 </script>
 </body>
