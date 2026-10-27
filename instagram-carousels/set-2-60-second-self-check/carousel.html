@@ -75,22 +75,6 @@
   .dark .progress-labels { color: rgba(255,255,255,0.35); }
   .dark .progress-labels .now { color: #fff; }
 
-  /* ===== Eyebrow with compass (DS component) ===== */
-  .ds-eyebrow { display: inline-flex; align-items: center; gap: 18px; font-family: var(--mono); font-size: 22px; color: var(--accent); text-transform: uppercase; letter-spacing: 3px; }
-  .dark .ds-eyebrow { color: var(--eyebrow-on-dark); }
-  .ds-eyebrow .compass { width: 44px; height: 44px; flex-shrink: 0; }
-  .ds-eyebrow .compass svg { width: 100%; height: 100%; display: block; }
-  .compass .c-ring { fill: none; stroke: rgba(2,1,9,0.32); stroke-width: 0.7; }
-  .compass .c-tick { stroke: rgba(2,1,9,0.45); stroke-width: 0.9; }
-  .compass .c-n { stroke: var(--cta); stroke-width: 1.2; }
-  .compass .c-dot { fill: var(--cta); }
-  .dark .compass .c-ring { stroke: rgba(255,255,255,0.42); }
-  .dark .compass .c-tick { stroke: rgba(255,255,255,0.55); }
-  .dark .compass .c-n { stroke: var(--lime); }
-  .dark .compass .c-dot { fill: var(--lime); }
-  .ds-eyebrow .bracket { color: rgba(2,1,9,0.4); }
-  .dark .ds-eyebrow .bracket { color: rgba(255,255,255,0.45); }
-
   /* ===== Headlines — Bricolage 500, one orange pop phrase ===== */
   h1, h2 { font-family: var(--display); font-weight: 500; font-optical-sizing: auto; }
   h1 em, h2 em { font-style: normal; color: var(--cta); }
@@ -100,8 +84,7 @@
   .dark .lead { color: rgba(255,255,255,0.68); }
 
   .body { flex: 1; display: flex; flex-direction: column; }
-  .body .ds-eyebrow { margin-top: 64px; }
-  .body h2 { margin-top: 32px; }
+  .body h2 { margin-top: 72px; }
 
   /* ===== Answer options (quiz cards) ===== */
   .answers-head { display: flex; justify-content: space-between; align-items: baseline; margin-top: auto; padding-bottom: 18px; font-family: var(--mono); font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-faint); }
@@ -142,7 +125,7 @@
   /* ----- Slide 1 · Hook ----- */
   .s1 .topo svg { right: -560px; top: 120px; transform: scaleX(-1); }
   .s1 .topo::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 22% 58%, var(--bg-dark) 0%, var(--bg-dark) 30%, transparent 78%); }
-  .s1 .h-hero { margin-top: 32px; }
+  .s1 .h-hero { margin-top: 88px; }
   .s1 .lead { margin-top: 32px; max-width: 760px; }
   .start-card { margin-top: auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 34px 36px 36px; }
   .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
@@ -217,7 +200,6 @@
     </div>
 
     <div class="body">
-      <span class="ds-eyebrow"><span class="compass" aria-hidden="true"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" class="c-ring"/><circle cx="11" cy="11" r="5" class="c-ring"/><line x1="11" y1="2" x2="11" y2="6" class="c-n"/><line x1="20" y1="11" x2="16" y2="11" class="c-tick"/><line x1="11" y1="20" x2="11" y2="16" class="c-tick"/><line x1="2" y1="11" x2="6" y2="11" class="c-tick"/><circle cx="11" cy="11" r="1.2" class="c-dot"/></svg></span><span class="bracket">[ 01 ]</span><span>The 60-second self-check</span></span>
       <h1 class="h-hero">How do you <em>really show up</em> at work?</h1>
       <p class="lead">Take this quick self-check. No overthinking.</p>
 
@@ -246,7 +228,6 @@
     </div>
 
     <div class="body">
-      <span class="ds-eyebrow"><span class="compass" aria-hidden="true"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" class="c-ring"/><circle cx="11" cy="11" r="5" class="c-ring"/><line x1="11" y1="2" x2="11" y2="6" class="c-n"/><line x1="20" y1="11" x2="16" y2="11" class="c-tick"/><line x1="11" y1="20" x2="11" y2="16" class="c-tick"/><line x1="2" y1="11" x2="6" y2="11" class="c-tick"/><circle cx="11" cy="11" r="1.2" class="c-dot"/></svg></span><span class="bracket">[ 02 ]</span><span>Question 1 of 2</span></span>
       <h2 class="h-q">Your team is stuck on a problem. <em>What do you do?</em></h2>
 
       <div class="answers-head"><span>Pick one</span><span>Remember your letter</span></div>
@@ -273,7 +254,6 @@
     </div>
 
     <div class="body">
-      <span class="ds-eyebrow"><span class="compass" aria-hidden="true"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" class="c-ring"/><circle cx="11" cy="11" r="5" class="c-ring"/><line x1="11" y1="2" x2="11" y2="6" class="c-n"/><line x1="20" y1="11" x2="16" y2="11" class="c-tick"/><line x1="11" y1="20" x2="11" y2="16" class="c-tick"/><line x1="2" y1="11" x2="6" y2="11" class="c-tick"/><circle cx="11" cy="11" r="1.2" class="c-dot"/></svg></span><span class="bracket">[ 03 ]</span><span>Question 2 of 2</span></span>
       <h2 class="h-q">You get unexpected feedback. <em>Your first move?</em></h2>
 
       <div class="answers-head"><span>Pick one</span><span>Remember your letter</span></div>
@@ -300,7 +280,6 @@
     </div>
 
     <div class="body">
-      <span class="ds-eyebrow"><span class="compass" aria-hidden="true"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" class="c-ring"/><circle cx="11" cy="11" r="5" class="c-ring"/><line x1="11" y1="2" x2="11" y2="6" class="c-n"/><line x1="20" y1="11" x2="16" y2="11" class="c-tick"/><line x1="11" y1="20" x2="11" y2="16" class="c-tick"/><line x1="2" y1="11" x2="6" y2="11" class="c-tick"/><circle cx="11" cy="11" r="1.2" class="c-dot"/></svg></span><span class="bracket">[ 04 ]</span><span>The reveal</span></span>
       <h2 class="h-q">What your answers <em>might reflect</em></h2>
 
       <div class="result-grid">
@@ -327,7 +306,6 @@
     </div>
 
     <div class="body">
-      <span class="ds-eyebrow"><span class="compass" aria-hidden="true"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" class="c-ring"/><circle cx="11" cy="11" r="5" class="c-ring"/><line x1="11" y1="2" x2="11" y2="6" class="c-n"/><line x1="20" y1="11" x2="16" y2="11" class="c-tick"/><line x1="11" y1="20" x2="11" y2="16" class="c-tick"/><line x1="2" y1="11" x2="6" y2="11" class="c-tick"/><circle cx="11" cy="11" r="1.2" class="c-dot"/></svg></span><span class="bracket">[ 05 ]</span><span>Your turn</span></span>
       <h2 class="h-q">Did we get your <em>work style</em> right?</h2>
 
       <p class="ask">Drop your most common letter in the comments.</p>
