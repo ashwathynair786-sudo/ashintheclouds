@@ -161,32 +161,23 @@
 
   /* ----- Slide 4 · Reveal ----- */
   .result-grid { margin-top: auto; display: flex; flex-direction: column; gap: 14px; }
-  .result { display: grid; grid-template-columns: 80px 1fr auto; gap: 30px; align-items: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 22px; padding: 18px 32px 18px 18px; }
-  .result .letter { width: 80px; height: 80px; border-radius: 16px; display: grid; place-items: center; border: 1.5px solid rgba(255,255,255,0.22); font-family: var(--display); font-weight: 500; font-size: 46px; color: #fff; }
-  .result .mostly { display: block; font-family: var(--mono); font-size: 17px; letter-spacing: 2px; text-transform: uppercase; color: var(--eyebrow-on-dark); }
-  .result .style { display: block; margin-top: 6px; font-family: var(--display); font-weight: 500; font-size: 40px; line-height: 1.05; letter-spacing: -1px; color: #fff; }
-  .result .coord { align-self: start; padding-top: 10px; font-family: var(--mono); font-size: 16px; letter-spacing: 1.4px; color: rgba(255,255,255,0.35); }
-  .note { margin-top: 20px; display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start; border: 1px dashed rgba(255,255,255,0.2); border-radius: 18px; padding: 24px 28px; }
-  .note .tag { font-family: var(--mono); font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: var(--eyebrow-on-dark); padding-top: 5px; }
-  .note p { font-size: 26px; line-height: 1.4; color: rgba(255,255,255,0.68); }
+  .result { display: grid; grid-template-columns: 80px 1fr auto; gap: 30px; align-items: center; background: var(--bg-card); border: 1.5px solid var(--border); border-radius: 22px; padding: 18px 32px 18px 18px; }
+  .result .letter { width: 80px; height: 80px; border-radius: 16px; display: grid; place-items: center; font-family: var(--mono); font-weight: 500; font-size: 34px; color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, white); border: 1.5px solid color-mix(in srgb, var(--accent) 22%, transparent); }
+  .result .mostly { display: block; font-family: var(--mono); font-size: 17px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+  .result .style { display: block; margin-top: 6px; font-family: var(--display); font-weight: 500; font-size: 40px; line-height: 1.05; letter-spacing: -1px; color: var(--text); }
+  .result .coord { align-self: start; padding-top: 10px; font-family: var(--mono); font-size: 16px; letter-spacing: 1.4px; color: var(--text-faint); }
+  .note { margin-top: 20px; display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start; border: 1.5px dashed rgba(2,1,9,0.18); border-radius: 18px; padding: 24px 28px; }
+  .note .tag { font-family: var(--mono); font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); padding-top: 5px; }
+  .note p { font-size: 26px; line-height: 1.4; color: var(--text-muted); }
 
   /* ----- Slide 5 · CTA ----- */
-  .s5 .topo svg { right: -820px; top: 300px; }
-  .s5 .topo::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 75% 55% at 22% 26%, var(--bg) 0%, var(--bg) 40%, transparent 82%); }
-  .comment { margin-top: 36px; margin-bottom: 28px; background: var(--bg-card); border: 1.5px solid var(--border); border-radius: 24px; padding: 30px 32px; }
-  .comment-row { display: grid; grid-template-columns: 64px 1fr 52px; gap: 22px; align-items: center; }
-  .avatar { width: 64px; height: 64px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 10%, white); border: 1.5px solid color-mix(in srgb, var(--accent) 22%, transparent); display: grid; place-items: center; }
-  .avatar svg { width: 30px; height: 30px; }
-  .comment-input { font-size: 30px; line-height: 1.3; color: var(--text); font-weight: 500; }
-  .send { width: 52px; height: 52px; display: grid; place-items: center; }
-  .send svg { width: 34px; height: 34px; }
-  .chips { display: flex; gap: 14px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); padding-left: 86px; }
-  .chip { width: 72px; height: 58px; border-radius: 100px; display: grid; place-items: center; font-family: var(--mono); font-weight: 500; font-size: 28px; color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, white); border: 1.5px solid color-mix(in srgb, var(--accent) 22%, transparent); }
-  .promo { margin-top: auto; background: var(--accent); color: #fff; border-radius: 24px; padding: 34px 40px 32px; }
-  .promo .tagline { font-family: var(--mono); font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
-  .promo h3 { margin-top: 16px; font-family: var(--display); font-weight: 500; font-size: 44px; line-height: 1.08; letter-spacing: -1.2px; }
-  .promo .btn-cta { margin-top: 28px; width: 100%; justify-content: space-between; }
-  .promo .with { margin-top: 22px; display: flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+  .s5 .ask { margin-top: 40px; font-size: 34px; line-height: 1.35; color: var(--text-muted); }
+  .chips { display: flex; gap: 16px; margin-top: 28px; }
+  .chip { width: 96px; height: 80px; border-radius: 18px; display: grid; place-items: center; font-family: var(--mono); font-weight: 500; font-size: 34px; color: var(--accent); background: var(--bg-card); border: 1.5px solid color-mix(in srgb, var(--accent) 22%, transparent); }
+  .promo { margin-top: auto; background: var(--accent); color: #fff; border-radius: 24px; padding: 48px 44px 44px; }
+  .promo h3 { font-family: var(--display); font-weight: 500; font-size: 48px; line-height: 1.08; letter-spacing: -1.2px; }
+  .promo .btn-cta { margin-top: 36px; width: 100%; justify-content: space-between; }
+  .promo .with { margin-top: 28px; display: flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
   .promo .with img { height: 34px; }
 </style>
 </head>
@@ -298,9 +289,9 @@
   </section>
 
   <!-- ================================================= SLIDE 4 · THE REVEAL -->
-  <section class="slide dark s4" id="slide-4">
+  <section class="slide s4" id="slide-4">
     <header class="topbar">
-      <img src="../../Logo-Light.svg" alt="HackerEarth">
+      <img src="../../Logo%20Dark.svg" alt="HackerEarth">
       <span class="counter">Self-check · <strong>04</strong> / 05</span>
     </header>
     <div class="progress">
@@ -326,17 +317,6 @@
 
   <!-- ================================================= SLIDE 5 · THE CTA -->
   <section class="slide s5" id="slide-5">
-    <div class="topo" aria-hidden="true">
-      <svg viewBox="-100 -100 1100 800" preserveAspectRatio="xMidYMid meet">
-        <path class="contour peak" d="M 380 280 Q 460 260 520 300 Q 540 360 480 390 Q 400 400 360 360 Q 340 310 380 280 Z"/>
-        <path class="contour" d="M 330 220 Q 450 190 570 240 Q 610 310 560 390 Q 460 440 360 420 Q 280 360 300 280 Z"/>
-        <path class="contour major" d="M 260 160 Q 440 120 620 180 Q 690 280 620 410 Q 460 480 290 450 Q 200 370 220 260 Z"/>
-        <path class="contour" d="M 180 100 Q 420 60 670 120 Q 770 250 690 410 Q 480 520 250 480 Q 110 380 140 220 Z"/>
-        <path class="contour" d="M 100 30 Q 390 0 730 70 Q 860 220 770 440 Q 510 580 200 520 Q 20 390 60 190 Z"/>
-        <path class="contour major" opacity="0.55" d="M 0 -40 Q 360 -70 810 10 Q 970 190 870 480 Q 560 650 130 580 Q -80 430 -30 160 Z"/>
-      </svg>
-    </div>
-
     <header class="topbar">
       <img src="../../Logo%20Dark.svg" alt="HackerEarth">
       <span class="counter">Self-check · <strong>05</strong> / 05</span>
@@ -350,17 +330,10 @@
       <span class="ds-eyebrow"><span class="compass" aria-hidden="true"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" class="c-ring"/><circle cx="11" cy="11" r="5" class="c-ring"/><line x1="11" y1="2" x2="11" y2="6" class="c-n"/><line x1="20" y1="11" x2="16" y2="11" class="c-tick"/><line x1="11" y1="20" x2="11" y2="16" class="c-tick"/><line x1="2" y1="11" x2="6" y2="11" class="c-tick"/><circle cx="11" cy="11" r="1.2" class="c-dot"/></svg></span><span class="bracket">[ 05 ]</span><span>Your turn</span></span>
       <h2 class="h-q">Did we get your <em>work style</em> right?</h2>
 
-      <div class="comment">
-        <div class="comment-row">
-          <span class="avatar"><svg viewBox="0 0 24 24" fill="none" stroke="#13255D" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span>
-          <span class="comment-input">Drop your most common letter in the comments.</span>
-          <span class="send"><svg viewBox="0 0 24 24" fill="none" stroke="#FF5722" stroke-width="1.8" stroke-linejoin="round"><path d="M3 11.5 21 3l-8.5 18-2-7.5z"/><path d="m10.5 13.5 4-4"/></svg></span>
-        </div>
-        <div class="chips"><span class="chip">A</span><span class="chip">B</span><span class="chip">C</span><span class="chip">D</span></div>
-      </div>
+      <p class="ask">Drop your most common letter in the comments.</p>
+      <div class="chips"><span class="chip">A</span><span class="chip">B</span><span class="chip">C</span><span class="chip">D</span></div>
 
       <div class="promo">
-        <div class="tagline">Beyond the quiz</div>
         <h3>Want to explore how structured assessments work in real hiring?</h3>
         <div class="btn-cta">Discover psychometric assessments <svg width="40" height="16"><use href="#arrow"/></svg></div>
         <div class="with">with <img src="../../Logo-Light.svg" alt="HackerEarth"></div>
