@@ -60,12 +60,13 @@
   .ico svg { width: 30px; height: 30px; fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
   /* ----- Slide 1 · Hook (photo cover) ----- */
-  .photo { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 41% 40%; }
+  .photo { position: absolute; z-index: 0; top: 0; left: 0; width: 100%; height: 760px; object-fit: cover; object-position: 41% 30%; }
   .wash { position: absolute; inset: 0; z-index: 1; background:
     linear-gradient(180deg, rgba(2,1,9,0.55) 0px, rgba(2,1,9,0) 220px),
-    linear-gradient(180deg, rgba(2,1,9,0) 40%, rgba(2,1,9,0.82) 60%, var(--black) 74%); }
-  .s1 h1 { margin-top: auto; font-size: 104px; line-height: 0.98; letter-spacing: -3.2px; }
-  .s1 .lead { margin-top: 28px; font-size: 38px; }
+    linear-gradient(180deg, rgba(2,1,9,0) 620px, var(--black) 760px); }
+  .s1 h1 { margin-top: auto; font-size: 92px; line-height: 1; letter-spacing: -2.8px; }
+  .s1 .lead { margin-top: 24px; font-size: 36px; }
+  .s1 .foot { margin-top: 0; padding-top: 56px; }
 
   /* ----- Slide 2 · Two candidates ----- */
   .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
