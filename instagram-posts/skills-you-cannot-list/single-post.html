@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills You Cannot List · Instagram Post</title>
+<!-- Brand guideline: ../../Design System (3).html (HackerEarth Design System v1) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Local brand fonts from the repo root (Google Fonts above is the fallback) */
+  @font-face { font-family: 'Bricolage Grotesque'; src: url('../../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype'); font-weight: 200 800; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-Regular.ttf') format('truetype'); font-weight: 400; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-Medium.ttf') format('truetype'); font-weight: 500; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-SemiBold.ttf') format('truetype'); font-weight: 600; }
+
+  :root {
+    --black: #020109;      /* brand black */
+    --cta: #FF5722;
+    --lime: #C7F252;
+    --display: 'Bricolage Grotesque', 'Geist', sans-serif;
+    --body: 'Geist', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --pad: 88px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #E7E4DB; font-family: var(--body); -webkit-font-smoothing: antialiased; padding: 60px 0; display: flex; justify-content: center; }
+  body.export { padding: 0; background: transparent; }
+
+  /* ===== Post frame — Instagram portrait 4:5 ===== */
+  .post { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: var(--black); color: #fff; padding: 72px var(--pad) 80px; display: flex; flex-direction: column; }
+  .post > * { position: relative; z-index: 2; }
+
+  /* Background photo — resume framed in the upper half, fading into black */
+  .photo { position: absolute; z-index: 0; width: 1500px; height: auto; left: -360px; top: -190px; }
+  .wash { position: absolute; inset: 0; z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(2,1,9,0.25) 0px, rgba(2,1,9,0.35) 360px, rgba(2,1,9,0.88) 540px, var(--black) 660px);
+  }
+
+
+  .content { margin-top: auto; }
+  h1 { font-family: var(--display); font-weight: 500; font-optical-sizing: auto; font-size: 76px; line-height: 1.02; letter-spacing: -2.2px; }
+  h1 em { font-style: normal; color: var(--cta); }
+  h1 .lead-in { display: block; color: rgba(255,255,255,0.72); font-size: 52px; letter-spacing: -1.2px; margin-bottom: 14px; }
+
+  /* The unlistable skills */
+  .traits { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+  .trait { display: flex; align-items: center; gap: 20px; font-size: 32px; font-weight: 500; line-height: 1.25; letter-spacing: -0.3px; }
+  .trait::before { content: ''; width: 12px; height: 12px; border-radius: 3px; background: var(--lime); flex-shrink: 0; }
+  .support { margin-top: 28px; font-size: 28px; line-height: 1.4; color: rgba(255,255,255,0.72); }
+
+  .signoff { margin-top: 44px; padding-top: 36px; border-top: 1px dashed rgba(255,255,255,0.22); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .beyond { font-size: 32px; font-weight: 600; letter-spacing: -0.4px; }
+  .signoff img { height: 30px; display: block; }
+</style>
+</head>
+<body>
+
+  <section class="post" id="post">
+    <img class="photo" src="../../shutterstock_1799890306.jpg" alt="">
+    <div class="wash" aria-hidden="true"></div>
+
+
+    <div class="content">
+      <h1><span class="lead-in">Your resume has a skills section.</span>But what about the skills you <em>cannot list?</em></h1>
+
+      <div class="traits">
+        <span class="trait">How you think.</span>
+        <span class="trait">How you approach challenges.</span>
+        <span class="trait">How you respond to different situations.</span>
+      </div>
+      <p class="support">These qualities can matter just as much when understanding role fit.</p>
+
+      <div class="signoff">
+        <span class="beyond">Look beyond the obvious.</span>
+        <img src="../../Logo-Light.svg" alt="HackerEarth">
+      </div>
+    </div>
+  </section>
+
+<script>
+  // ?export renders the post edge-to-edge for PNG capture
+  if (new URLSearchParams(location.search).has('export')) document.body.classList.add('export');
+</script>
+</body>
+</html>
