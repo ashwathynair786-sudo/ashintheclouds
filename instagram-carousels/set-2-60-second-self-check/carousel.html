@@ -26,6 +26,7 @@
     --border: rgba(2,1,9,0.10);
     --border-strong: rgba(2,1,9,0.18);
     --accent: #13255D;      /* deep navy */
+    --bg-navy: #13255D;     /* slide background */
     --cta: #FF5722;         /* orange */
     --lime: #C7F252;
     --eyebrow-on-dark: #A5A5AD;
@@ -50,7 +51,7 @@
     padding: 72px var(--pad) 76px;
     display: flex; flex-direction: column;
   }
-  .slide.dark { background: var(--bg-dark); color: #fff; }
+  .slide.dark { background: var(--bg-navy); color: #fff; }
   .slide > * { position: relative; z-index: 2; }
 
   /* ===== Quiz chrome: top bar ===== */
@@ -124,7 +125,7 @@
 
   /* ----- Slide 1 · Hook ----- */
   .s1 .topo svg { right: -560px; top: 120px; transform: scaleX(-1); }
-  .s1 .topo::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 22% 58%, var(--bg-dark) 0%, var(--bg-dark) 30%, transparent 78%); }
+  .s1 .topo::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 22% 58%, var(--bg-navy) 0%, var(--bg-navy) 30%, transparent 78%); }
   .s1 .h-hero { margin-top: 88px; }
   .s1 .lead { margin-top: 32px; max-width: 760px; }
   .start-card { margin-top: auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 34px 36px 36px; }
@@ -162,6 +163,25 @@
   .promo .btn-cta { margin-top: 36px; width: 100%; justify-content: space-between; }
   .promo .with { margin-top: 28px; display: flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 18px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
   .promo .with img { height: 34px; }
+
+  /* ===== Navy theme — component overrides on blue slides ===== */
+  .dark .progress-track span { background: rgba(255,255,255,0.18); }
+  .dark .progress-labels { color: rgba(255,255,255,0.45); }
+  .dark .answers-head { color: rgba(255,255,255,0.55); }
+  .dark .option { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); }
+  .dark .option .key, .dark .result .letter, .dark .chip { color: #fff; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.24); }
+  .dark .option .txt { color: #fff; }
+  .dark .option .radio { border-color: rgba(255,255,255,0.35); }
+  .dark .result { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); }
+  .dark .result .mostly { color: rgba(255,255,255,0.6); }
+  .dark .result .style { color: #fff; }
+  .dark .result .coord { color: rgba(255,255,255,0.4); }
+  .dark .note { border-color: rgba(255,255,255,0.25); }
+  .dark .note .tag { color: var(--lime); }
+  .dark .note p, .dark.s5 .ask { color: rgba(255,255,255,0.72); }
+  .dark .start-card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
+  .dark .promo { background: var(--bg-card); color: var(--text); }
+  .dark .promo .with { color: var(--text-muted); }
 </style>
 </head>
 <body>
@@ -217,9 +237,9 @@
   </section>
 
   <!-- ================================================= SLIDE 2 · QUESTION 1 -->
-  <section class="slide s2" id="slide-2">
+  <section class="slide dark s2" id="slide-2">
     <header class="topbar">
-      <img src="../../Logo%20Dark.svg" alt="HackerEarth">
+      <img src="../../Logo-Light.svg" alt="HackerEarth">
       <span class="counter">Self-check · <strong>02</strong> / 05</span>
     </header>
     <div class="progress">
@@ -243,9 +263,9 @@
   </section>
 
   <!-- ================================================= SLIDE 3 · QUESTION 2 -->
-  <section class="slide s3" id="slide-3">
+  <section class="slide dark s3" id="slide-3">
     <header class="topbar">
-      <img src="../../Logo%20Dark.svg" alt="HackerEarth">
+      <img src="../../Logo-Light.svg" alt="HackerEarth">
       <span class="counter">Self-check · <strong>03</strong> / 05</span>
     </header>
     <div class="progress">
@@ -269,9 +289,9 @@
   </section>
 
   <!-- ================================================= SLIDE 4 · THE REVEAL -->
-  <section class="slide s4" id="slide-4">
+  <section class="slide dark s4" id="slide-4">
     <header class="topbar">
-      <img src="../../Logo%20Dark.svg" alt="HackerEarth">
+      <img src="../../Logo-Light.svg" alt="HackerEarth">
       <span class="counter">Self-check · <strong>04</strong> / 05</span>
     </header>
     <div class="progress">
@@ -295,9 +315,9 @@
   </section>
 
   <!-- ================================================= SLIDE 5 · THE CTA -->
-  <section class="slide s5" id="slide-5">
+  <section class="slide dark s5" id="slide-5">
     <header class="topbar">
-      <img src="../../Logo%20Dark.svg" alt="HackerEarth">
+      <img src="../../Logo-Light.svg" alt="HackerEarth">
       <span class="counter">Self-check · <strong>05</strong> / 05</span>
     </header>
     <div class="progress">
@@ -314,7 +334,7 @@
       <div class="promo">
         <h3>Want to explore how structured assessments work in real hiring?</h3>
         <div class="btn-cta">Discover psychometric assessments <svg width="40" height="16"><use href="#arrow"/></svg></div>
-        <div class="with">with <img src="../../Logo-Light.svg" alt="HackerEarth"></div>
+        <div class="with">with <img src="../../Logo%20Dark.svg" alt="HackerEarth"></div>
       </div>
     </div>
 
