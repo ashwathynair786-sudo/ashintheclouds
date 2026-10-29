@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Cheating in Interviews · X Post</title>
+<!-- Brand guideline: ../../Design System (3).html (HackerEarth Design System v1) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Local brand fonts from the repo root (Google Fonts above is the fallback) */
+  @font-face { font-family: 'Bricolage Grotesque'; src: url('../../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype'); font-weight: 200 800; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-Regular.ttf') format('truetype'); font-weight: 400; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-Medium.ttf') format('truetype'); font-weight: 500; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-SemiBold.ttf') format('truetype'); font-weight: 600; }
+
+  :root {
+    --black: #020109;      /* brand black */
+    --cta: #FF5722;        /* orange */
+    --lime: #C7F252;
+    --muted: rgba(255,255,255,0.68);
+    --faint: rgba(255,255,255,0.42);
+    --card: rgba(255,255,255,0.04);
+    --line: rgba(255,255,255,0.10);
+    --display: 'Bricolage Grotesque', 'Geist', sans-serif;
+    --body: 'Geist', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #E7E4DB; font-family: var(--body); -webkit-font-smoothing: antialiased; padding: 60px; display: flex; justify-content: center; }
+  body.export { padding: 0; background: transparent; }
+
+  /* ===== X / Twitter in-feed image, 16:9 ===== */
+  .post { position: relative; width: 1600px; height: 900px; overflow: hidden; background: var(--black); color: #fff; padding: 64px 80px 68px; display: flex; flex-direction: column; }
+  .post > * { position: relative; z-index: 2; }
+
+  .topbar { display: flex; align-items: center; justify-content: space-between; }
+  .topbar img { height: 30px; display: block; }
+  .source { font-family: var(--mono); font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: var(--faint); }
+
+  .main { flex: 1; display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
+
+  /* Hero number */
+  .hero-num { font-family: var(--body); font-weight: 500; font-size: 220px; line-height: 0.9; letter-spacing: -8px; }
+  .hero-num .u { font-size: 0.5em; font-weight: 400; letter-spacing: -2px; color: rgba(255,255,255,0.45); margin-left: 6px; }
+  .hero-label { margin-top: 24px; font-size: 32px; font-weight: 500; line-height: 1.3; letter-spacing: -0.3px; }
+  .hero-sub { margin-top: 14px; font-size: 24px; line-height: 1.4; color: var(--muted); }
+
+  /* Bar chart — single series, direct-labelled, role row highlighted */
+  .chart { padding: 40px 40px 36px; background: var(--card); border: 1px solid var(--line); border-radius: 24px; }
+  .chart-title { font-family: var(--mono); font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: var(--faint); }
+  .rows { margin-top: 30px; display: flex; flex-direction: column; gap: 30px; }
+  .row-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 26px; font-weight: 500; }
+  .row-head .val { font-size: 34px; font-weight: 600; letter-spacing: -0.6px; }
+  .track { margin-top: 12px; height: 18px; border-radius: 4px; background: rgba(255,255,255,0.07); }
+  .bar { height: 100%; border-radius: 0 4px 4px 0; background: rgba(255,255,255,0.55); }
+  .row.hl .bar { background: var(--lime); }
+  .axis { margin-top: 18px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 14px; letter-spacing: 1px; color: var(--faint); }
+
+  /* Closing line — the only Bricolage on the card */
+  .closer { margin-top: 8px; padding-top: 30px; border-top: 1px dashed rgba(255,255,255,0.18); font-family: var(--display); font-weight: 500; font-optical-sizing: auto; font-size: 52px; line-height: 1.05; letter-spacing: -1.4px; }
+  .closer em { font-style: normal; color: var(--cta); }
+</style>
+</head>
+<body>
+
+  <section class="post" id="post">
+    <header class="topbar">
+      <img src="../../Logo-Light.svg" alt="HackerEarth">
+      <span class="source">Source: Fabric · 2026 analysis</span>
+    </header>
+
+    <div class="main">
+      <div>
+        <div class="hero-num">38.5<span class="u">%</span></div>
+        <p class="hero-label">of candidates flagged for AI-cheating behaviour</p>
+        <p class="hero-sub">across 19,368 AI-led interviews</p>
+      </div>
+
+      <div class="chart" role="img" aria-label="Share of candidates flagged for AI-cheating behaviour: all candidates 38.5%, software engineering 48%, sales 12%">
+        <div class="chart-title">Flagged for AI-cheating behaviour</div>
+        <div class="rows">
+          <div class="row">
+            <div class="row-head"><span>All candidates</span><span class="val">38.5%</span></div>
+            <div class="track"><div class="bar" style="width:38.5%"></div></div>
+          </div>
+          <div class="row hl">
+            <div class="row-head"><span>Software engineering</span><span class="val">48%</span></div>
+            <div class="track"><div class="bar" style="width:48%"></div></div>
+          </div>
+          <div class="row">
+            <div class="row-head"><span>Sales</span><span class="val">12%</span></div>
+            <div class="track"><div class="bar" style="width:12%"></div></div>
+          </div>
+        </div>
+        <div class="axis"><span>0%</span><span>50%</span><span>100%</span></div>
+      </div>
+    </div>
+
+    <p class="closer">Remote hiring needs integrity <em>built in, not bolted on.</em></p>
+  </section>
+
+<script>
+  // ?export renders the post edge-to-edge for PNG capture
+  if (new URLSearchParams(location.search).has('export')) document.body.classList.add('export');
+</script>
+</body>
+</html>

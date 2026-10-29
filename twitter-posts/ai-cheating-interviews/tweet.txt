@@ -1,0 +1,6 @@
+A 2026 analysis of 19,368 AI-led interviews flagged 38.5% of candidates for AI-cheating behaviour (Fabric).
+
+Software engineering: 48%.
+Sales: 12%.
+
+Remote hiring needs integrity built in, not bolted on.
