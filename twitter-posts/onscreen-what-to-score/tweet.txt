@@ -1,0 +1,9 @@
+Things an AI interviewer should never score:
+❌ Facial expressions
+❌ Accent
+❌ Tone of voice
+❌ Background
+Things it should:
+✅ What you said
+✅ What you built
+That's how OnScreen works.

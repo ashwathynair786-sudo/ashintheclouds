@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OnScreen Scoring · X Post</title>
+<!-- Brand guideline: ../../Design System (3).html (HackerEarth Design System v1) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Local brand fonts from the repo root (Google Fonts above is the fallback) */
+  @font-face { font-family: 'Bricolage Grotesque'; src: url('../../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype'); font-weight: 200 800; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-Regular.ttf') format('truetype'); font-weight: 400; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-Medium.ttf') format('truetype'); font-weight: 500; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-SemiBold.ttf') format('truetype'); font-weight: 600; }
+
+  :root {
+    --black: #020109;      /* brand black */
+    --cta: #FF5722;        /* orange */
+    --lime: #C7F252;
+    --muted: rgba(255,255,255,0.62);
+    --faint: rgba(255,255,255,0.42);
+    --card: rgba(255,255,255,0.04);
+    --line: rgba(255,255,255,0.10);
+    --display: 'Bricolage Grotesque', 'Geist', sans-serif;
+    --body: 'Geist', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #E7E4DB; font-family: var(--body); -webkit-font-smoothing: antialiased; padding: 60px; display: flex; justify-content: center; }
+  body.export { padding: 0; background: transparent; }
+
+  /* ===== X / Twitter in-feed image, 16:9 ===== */
+  .post { position: relative; width: 1600px; height: 900px; overflow: hidden; background: var(--black); color: #fff; padding: 64px 80px 68px; display: flex; flex-direction: column; }
+
+  .topbar img { height: 30px; display: block; }
+
+  .lists { margin: auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .list { border-radius: 24px; padding: 40px 44px; }
+  .list.never { background: var(--card); border: 1px solid var(--line); }
+  .list.should { display: flex; flex-direction: column; background: color-mix(in srgb, var(--lime) 6%, transparent); border: 1px solid color-mix(in srgb, var(--lime) 45%, transparent); }
+
+  h2 { font-family: var(--display); font-weight: 500; font-optical-sizing: auto; font-size: 46px; line-height: 1.05; letter-spacing: -1.2px; }
+  h2 em { font-style: normal; color: var(--cta); }
+
+  ul { list-style: none; margin-top: 34px; display: flex; flex-direction: column; gap: 22px; }
+  li { display: flex; align-items: center; gap: 20px; font-size: 32px; font-weight: 500; letter-spacing: -0.4px; }
+  .mark { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; }
+  .mark svg { width: 20px; height: 20px; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .never li { color: var(--muted); }
+  .never .mark { border: 1.5px solid rgba(255,255,255,0.3); }
+  .never .mark svg { stroke: rgba(255,255,255,0.7); }
+  .should ul { flex: 1; justify-content: center; gap: 30px; margin-top: 24px; }
+  .should li { font-size: 48px; font-weight: 600; letter-spacing: -0.8px; }
+  .should .mark { width: 60px; height: 60px; background: var(--lime); }
+  .should .mark svg { width: 24px; height: 24px; stroke: var(--black); stroke-width: 2.8; }
+
+  .closer { margin-top: 0; font-family: var(--display); font-weight: 500; font-optical-sizing: auto; font-size: 56px; line-height: 1.05; letter-spacing: -1.6px; }
+  .closer em { font-style: normal; color: var(--cta); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="x" viewBox="0 0 20 20"><path d="M5 5 L15 15 M15 5 L5 15"/></symbol>
+    <symbol id="check" viewBox="0 0 20 20"><path d="M4 10.5 L8.5 15 L16 6"/></symbol>
+  </defs>
+</svg>
+
+  <section class="post" id="post">
+    <header class="topbar"><img src="../../Logo-Light.svg" alt="HackerEarth"></header>
+
+    <div class="lists">
+      <div class="list never">
+        <h2>Things an AI interviewer should <em>never</em> score:</h2>
+        <ul>
+          <li><span class="mark"><svg><use href="#x"/></svg></span>Facial expressions</li>
+          <li><span class="mark"><svg><use href="#x"/></svg></span>Accent</li>
+          <li><span class="mark"><svg><use href="#x"/></svg></span>Tone of voice</li>
+          <li><span class="mark"><svg><use href="#x"/></svg></span>Background</li>
+        </ul>
+      </div>
+      <div class="list should">
+        <h2>Things it should:</h2>
+        <ul>
+          <li><span class="mark"><svg><use href="#check"/></svg></span>What you said</li>
+          <li><span class="mark"><svg><use href="#check"/></svg></span>What you built</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="closer">That's how <em>OnScreen</em> works.</p>
+  </section>
+
+<script>
+  // ?export renders the post edge-to-edge for PNG capture
+  if (new URLSearchParams(location.search).has('export')) document.body.classList.add('export');
+</script>
+</body>
+</html>
