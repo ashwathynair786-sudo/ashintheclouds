@@ -4,33 +4,70 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Technical Assessments Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* Fonts — Geist, loaded from the repo's local files (Product Design System: Geist runs the whole interface) */
+  /* Geist from the repo's local files — Product Design System: Geist runs the interface, JetBrains Mono carries code/data */
   @font-face { font-family: 'Geist'; src: url('Geist-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
   @font-face { font-family: 'Geist'; src: url('Geist-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
   @font-face { font-family: 'Geist'; src: url('Geist-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
 
-  /* Tokens — HackerEarth Product Design System */
+  /* ===== Tokens — HackerEarth Product Design System ===== */
   :root {
     --p-bg: #FBFBFC;
     --p-surface: #FFFFFF;
     --p-surface-2: #F4F5F7;
+    --p-sidebar: #060C1C;
+    --p-sidebar-950: #0A1430;
     --p-text: #14151A;
     --p-text-muted: #5B5E6B;
+    --p-text-faint: #8A8D99;
     --p-border: #E5E7EB;
     --p-border-strong: #D1D5DB;
     --p-primary: #13255D;
-    --p-primary-hover: #0F1D4B;
     --p-ring: #13255D;
+    --p-lime: #C7F252;
+    --p-success: #059669;
+    --p-success-bg: #D1FAE5;
     --p-font: 'Geist', system-ui, sans-serif;
+    --p-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --p-radius-sm: 4px;
+    --p-radius-md: 8px;
     --p-radius-lg: 12px;
     --p-shadow-sm: 0 1px 2px rgba(20,21,26,0.05);
+    --p-shadow-md: 0 4px 12px -2px rgba(20,21,26,0.10), 0 2px 6px -2px rgba(20,21,26,0.06);
+    --p-shadow-lg: 0 12px 28px -8px rgba(20,21,26,0.16);
 
-    /* Derived for this card */
-    --sel-bg: color-mix(in srgb, var(--p-primary) 5%, var(--p-surface));
-    --sel-ring: color-mix(in srgb, var(--p-primary) 10%, transparent);
-    --motif-on: color-mix(in srgb, var(--p-primary) 11%, transparent);
-    --motif-off: color-mix(in srgb, var(--p-text) 7%, transparent);
+    --sel-ring: color-mix(in srgb, var(--p-primary) 12%, transparent);
+  }
+
+  /* Editor themes — light (idle) and navy (selected, brand secondary palette for syntax) */
+  .type-card {
+    --ed-bg: var(--p-surface-2);
+    --ed-bar: #ECEEF2;
+    --ed-line: var(--p-border);
+    --ed-file: var(--p-text-muted);
+    --ed-meta: var(--p-text-faint);
+    --syn-kw: color-mix(in srgb, var(--p-primary) 60%, var(--p-surface-2));
+    --syn-fn: var(--p-text-muted);
+    --syn-num: var(--p-text-muted);
+    --syn-txt: var(--p-text-faint);
+    --syn-dim: #C4C7CF;
+    --hl-bg: rgba(19,37,93,0.04);
+  }
+  .type-card[aria-checked="true"] {
+    --ed-bg: var(--p-sidebar);
+    --ed-bar: var(--p-sidebar-950);
+    --ed-line: rgba(255,255,255,0.06);
+    --ed-file: rgba(255,255,255,0.72);
+    --ed-meta: rgba(255,255,255,0.45);
+    --syn-kw: #9FB1FE;
+    --syn-fn: #C7B4F8;
+    --syn-num: #C7F252;
+    --syn-txt: rgba(255,255,255,0.82);
+    --syn-dim: rgba(255,255,255,0.28);
+    --hl-bg: rgba(159,177,254,0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,16 +83,13 @@
     padding: 16px;
   }
 
-  /* ===== Assessment type card · 580 × 240 ===== */
+  /* ===== Card · 580 × 240 ===== */
   .type-card {
     position: relative;
     width: 580px;
     height: 240px;
     max-width: 100%;
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 28px;
     background: var(--p-surface);
     border: 1.5px solid var(--p-border);
     border-radius: var(--p-radius-lg);
@@ -65,103 +99,226 @@
     text-align: left;
     font: inherit;
     color: inherit;
-    transition: border-color .15s, background-color .15s, box-shadow .15s;
+    transition: border-color .18s, box-shadow .18s;
   }
-  .type-card:hover { border-color: var(--p-border-strong); }
+  .type-card::before {            /* faint dot grid behind the editor */
+    content: '';
+    position: absolute;
+    inset: 0 0 0 46%;
+    background-image: radial-gradient(color-mix(in srgb, var(--p-primary) 14%, transparent) 1px, transparent 1px);
+    background-size: 14px 14px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 40%);
+            mask-image: linear-gradient(90deg, transparent, #000 40%);
+    opacity: .7;
+    pointer-events: none;
+  }
+  .type-card:hover { border-color: var(--p-border-strong); box-shadow: var(--p-shadow-md); }
   .type-card:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--p-ring) 15%, transparent); }
+  .type-card[aria-checked="true"] { border-color: var(--p-primary); box-shadow: 0 0 0 3px var(--sel-ring), var(--p-shadow-md); }
 
-  .type-card[aria-checked="true"] {
-    background: var(--sel-bg);
-    border-color: var(--p-primary);
-    box-shadow: 0 0 0 3px var(--sel-ring);
+  /* ===== Left column ===== */
+  .content {
+    position: relative;
+    z-index: 2;
+    width: 268px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* Icon tile */
   .tile {
-    position: relative;
-    z-index: 1;
-    width: 64px;
-    height: 64px;
-    border-radius: var(--p-radius-lg);
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
     display: grid;
     place-items: center;
     background: var(--p-surface-2);
     color: var(--p-primary);
-    transition: background-color .15s, color .15s;
+    transition: background-color .18s, color .18s;
   }
-  .type-card[aria-checked="true"] .tile { background: var(--p-primary); color: #FFFFFF; }
-  .tile svg { width: 30px; height: 30px; }
+  .tile svg { width: 22px; height: 22px; }
+  .type-card[aria-checked="true"] .tile { background: var(--p-primary); color: #fff; }
 
-  /* Radio / check indicator */
+  .title {
+    margin-top: 20px;
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+  .desc {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--p-text-muted);
+  }
+
+  .tags { margin-top: auto; display: flex; gap: 6px; }
+  .tag {
+    font-family: var(--p-mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: var(--p-text-muted);
+    padding: 4px 8px;
+    border: 1px solid var(--p-border);
+    border-radius: var(--p-radius-sm);
+    background: var(--p-surface);
+    transition: color .18s, border-color .18s, background-color .18s;
+  }
+  .type-card[aria-checked="true"] .tag {
+    color: var(--p-primary);
+    border-color: color-mix(in srgb, var(--p-primary) 18%, transparent);
+    background: color-mix(in srgb, var(--p-primary) 4%, var(--p-surface));
+  }
+
+  /* ===== Selection indicator ===== */
   .indicator {
     position: absolute;
-    top: 28px;
-    right: 28px;
-    width: 26px;
-    height: 26px;
+    z-index: 3;
+    top: 20px;
+    right: 20px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     border: 1.5px solid var(--p-border-strong);
     background: var(--p-surface);
     display: grid;
     place-items: center;
-    transition: background-color .15s, border-color .15s;
+    transition: background-color .18s, border-color .18s, box-shadow .18s;
   }
-  .indicator svg { width: 14px; height: 14px; opacity: 0; transition: opacity .15s; }
+  .indicator svg { width: 12px; height: 12px; opacity: 0; transform: scale(.6); transition: opacity .18s, transform .18s; }
   .type-card[aria-checked="true"] .indicator { background: var(--p-primary); border-color: var(--p-primary); box-shadow: 0 0 0 3px var(--sel-ring); }
-  .type-card[aria-checked="true"] .indicator svg { opacity: 1; }
+  .type-card[aria-checked="true"] .indicator svg { opacity: 1; transform: none; }
 
-  /* Title */
-  .title {
-    position: relative;
-    z-index: 1;
-    font-size: 22px;
-    line-height: 1.25;
-    font-weight: 600;
-    letter-spacing: -0.3px;
-    color: var(--p-text);
-  }
-
-  /* Background motif — oversized code chevrons bleeding off the bottom-right */
-  .motif {
+  /* ===== Editor preview (bleeds off the bottom-right) ===== */
+  .editor {
     position: absolute;
-    right: -28px;
-    bottom: -36px;
-    width: 224px;
-    height: 161px;
-    color: var(--motif-off);
-    pointer-events: none;
-    transition: color .15s;
+    z-index: 1;
+    left: 322px;
+    top: 56px;
+    width: 290px;
+    height: 220px;
+    border-radius: 10px 0 0 0;
+    background: var(--ed-bg);
+    border: 1px solid var(--ed-line);
+    border-right: 0;
+    border-bottom: 0;
+    box-shadow: var(--p-shadow-sm);
+    overflow: hidden;
+    font-family: var(--p-mono);
+    transition: background-color .25s, box-shadow .25s, transform .25s;
   }
-  .type-card[aria-checked="true"] .motif { color: var(--motif-on); }
+  .type-card[aria-checked="true"] .editor { box-shadow: var(--p-shadow-lg); }
+  .editor * { transition: color .25s, background-color .25s, border-color .25s; }
+  .type-card:hover .editor { transform: translateY(-4px); }
+
+  .ed-bar {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    background: var(--ed-bar);
+    border-bottom: 1px solid var(--ed-line);
+    font-size: 10.5px;
+    color: var(--ed-file);
+  }
+  .ed-bar .file { display: flex; align-items: center; gap: 6px; }
+  .ed-bar .file::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--syn-kw); }
+  .ed-bar .lang {
+    margin-left: auto;
+    font-size: 9.5px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    color: var(--ed-meta);
+    margin-right: 26px;
+  }
+
+  .code { padding: 10px 0; font-size: 11px; line-height: 19px; color: var(--syn-txt); white-space: pre; }
+  .code .ln { display: inline-block; width: 30px; padding-right: 12px; text-align: right; color: var(--syn-dim); }
+  .code .hl { display: block; background: var(--hl-bg); box-shadow: inset 2px 0 0 var(--syn-kw); }
+  .kw { color: var(--syn-kw); }
+  .fn { color: var(--syn-fn); }
+  .nu { color: var(--syn-num); }
+  .cursor { display: inline-block; width: 6px; height: 13px; vertical-align: -2px; background: var(--syn-kw); animation: blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* Floating test result chip */
+  .result {
+    position: absolute;
+    z-index: 2;
+    left: 300px;
+    bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 11px 7px 8px;
+    background: var(--p-surface);
+    border: 1px solid var(--p-border);
+    border-radius: var(--p-radius-md);
+    box-shadow: var(--p-shadow-md);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--p-text);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .25s .05s, transform .25s .05s;
+  }
+  .type-card[aria-checked="true"] .result { opacity: 1; transform: none; }
+  .result .ok { width: 18px; height: 18px; border-radius: 50%; background: var(--p-success); display: grid; place-items: center; }
+  .result .ok svg { width: 10px; height: 10px; }
+  .result .num { font-family: var(--p-mono); font-weight: 600; color: var(--p-success); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor { animation: none; }
+    .type-card *, .type-card { transition: none !important; }
+  }
 </style>
 </head>
 <body>
 
   <button class="type-card" type="button" role="radio" aria-checked="true" aria-label="Technical Assessments">
-    <span class="tile" aria-hidden="true">
-      <!-- code-simple, Phosphor regular geometry -->
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="11,8 3,16 11,24"/>
-        <polyline points="21,8 29,16 21,24"/>
-      </svg>
+    <span class="content">
+      <span class="tile" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="11,8 3,16 11,24"/>
+          <polyline points="21,8 29,16 21,24"/>
+        </svg>
+      </span>
+      <span class="title">Technical Assessments</span>
+      <span class="desc">Auto-graded coding, MCQ and project-based tests that screen developers at scale.</span>
+      <span class="tags">
+        <span class="tag">Coding</span>
+        <span class="tag">MCQ</span>
+        <span class="tag">Projects</span>
+      </span>
     </span>
 
     <span class="indicator" aria-hidden="true">
-      <svg viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="3.5,8.5 6.5,11.5 12.5,4.5"/>
-      </svg>
+      <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5,8.5 6.5,11.5 12.5,4.5"/></svg>
     </span>
 
-    <span class="title">Technical Assessments</span>
+    <span class="editor" aria-hidden="true">
+      <span class="ed-bar"><span class="file">solution.py</span><span class="lang">Python 3</span></span>
+<span class="code"><span class="ln">1</span><span class="kw">def</span> <span class="fn">two_sum</span>(nums, target):
+<span class="ln">2</span>    seen = {}
+<span class="ln">3</span>    <span class="kw">for</span> i, n <span class="kw">in</span> <span class="fn">enumerate</span>(nums):
+<span class="hl"><span class="ln">4</span>        <span class="kw">if</span> target - n <span class="kw">in</span> seen:</span><span class="ln">5</span>            <span class="kw">return</span> [seen[target - n], i]
+<span class="ln">6</span>        seen[n] = i<span class="cursor"></span>
+<span class="ln">7</span>    <span class="kw">return</span> [<span class="nu">-1</span>, <span class="nu">-1</span>]</span>
+    </span>
 
-    <svg class="motif" viewBox="0 0 250 180" fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <polyline points="78,20 14,90 78,160"/>
-      <polyline points="172,20 236,90 172,160"/>
-    </svg>
+    <span class="result" aria-hidden="true">
+      <span class="ok"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5,8.5 6.5,11.5 12.5,4.5"/></svg></span>
+      <span><span class="num">12/12</span> test cases passed</span>
+    </span>
   </button>
 
   <script>
-    // Click / Space / Enter toggles the selected state so both states can be previewed.
+    // Click / Space / Enter toggles selection so both states can be previewed.
     document.querySelectorAll('.type-card').forEach(function (card) {
       card.addEventListener('click', function () {
         card.setAttribute('aria-checked', card.getAttribute('aria-checked') === 'true' ? 'false' : 'true');
