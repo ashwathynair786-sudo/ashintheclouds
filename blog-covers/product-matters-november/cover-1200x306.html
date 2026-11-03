@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Matters · November Edition (1200×306)</title>
+<!-- Brand guideline: ../../Design System (3).html (HackerEarth Design System v1) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Local brand fonts from the repo root (Google Fonts above is the fallback) */
+  @font-face { font-family: 'Bricolage Grotesque'; src: url('../../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype'); font-weight: 200 800; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-Regular.ttf') format('truetype'); font-weight: 400; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-Medium.ttf') format('truetype'); font-weight: 500; }
+  @font-face { font-family: 'Geist'; src: url('../../Geist-SemiBold.ttf') format('truetype'); font-weight: 600; }
+
+  :root {
+    --black: #020109;      /* brand black */
+    --cta: #FF5722;        /* orange */
+    --lime: #C7F252;
+    --muted: rgba(255,255,255,0.68);
+    --faint: rgba(255,255,255,0.42);
+    --display: 'Bricolage Grotesque', 'Geist', sans-serif;
+    --body: 'Geist', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #E7E4DB; font-family: var(--body); -webkit-font-smoothing: antialiased; padding: 60px; display: flex; justify-content: center; }
+  body.export { padding: 0; background: transparent; }
+
+  /* ===== Blog banner, 1200 × 306 ===== */
+  .cover { position: relative; width: 1200px; height: 306px; overflow: hidden; background: var(--black); color: #fff; }
+
+  /* Contour backdrop (DS signature motif, on-dark tokens), centred behind the graphic */
+  .topo { position: absolute; inset: 0; z-index: 0; opacity: 0.4; }
+  .topo svg { position: absolute; width: 760px; height: 560px; right: -170px; top: -130px; }
+  .topo .contour { fill: none; stroke: rgba(255,255,255,0.18); stroke-width: 0.9; }
+  .topo .contour.major { stroke: rgba(255,255,255,0.28); stroke-width: 1.1; }
+  .topo .contour.peak { stroke: color-mix(in srgb, var(--lime) 55%, transparent); }
+  .topo::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 45% 95% at 22% 50%, var(--black) 0%, var(--black) 45%, transparent 85%); }
+
+  /* ----- Left: title ----- */
+  .copy { position: absolute; z-index: 2; left: 64px; top: 0; bottom: 0; width: 720px; display: flex; flex-direction: column; justify-content: center; padding-top: 34px; }
+  .logo { position: absolute; z-index: 2; left: 64px; top: 40px; height: 22px; }
+  h1 { font-family: var(--display); font-weight: 500; font-optical-sizing: auto; font-size: 92px; line-height: 1; letter-spacing: -3px; white-space: nowrap; }
+  h1 em { font-style: normal; color: var(--cta); }
+  .edition { margin-top: 20px; padding-top: 18px; border-top: 1px dashed rgba(255,255,255,0.22); display: flex; align-items: center; gap: 12px; font-size: 28px; font-weight: 500; letter-spacing: -0.5px; color: var(--muted); }
+  .edition::before { content: ''; width: 10px; height: 10px; border-radius: 2px; background: var(--lime); flex-shrink: 0; }
+
+  /* ----- Right: layered product-UI graphic ----- */
+  .art { position: absolute; z-index: 1; right: 56px; top: 50%; width: 760px; height: 720px; transform: translateY(-50%) scale(0.36); transform-origin: right center; }
+  .panel { position: absolute; border-radius: 24px; background: #0D0C14; border: 3px solid rgba(255,255,255,0.30); box-shadow: 0 40px 80px -30px rgba(0,0,0,0.8); }
+
+  /* Main window — product dashboard */
+  .window { left: 80px; top: 70px; width: 640px; height: 440px; padding: 0; overflow: hidden; }
+  .chrome { height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 22px; border-bottom: 1px solid rgba(255,255,255,0.18); }
+  .chrome i { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+  .chrome .addr { margin-left: 18px; height: 22px; width: 260px; border-radius: 6px; background: rgba(255,255,255,0.06); }
+  .win-body { display: grid; grid-template-columns: 150px 1fr; height: calc(100% - 52px); }
+  .side { border-right: 1px solid rgba(255,255,255,0.18); padding: 26px 20px; display: flex; flex-direction: column; gap: 16px; }
+  .side span { display: block; height: 10px; border-radius: 5px; background: rgba(255,255,255,0.12); }
+  .side span.on { background: rgba(255,255,255,0.5); }
+  .main { padding: 28px 30px; }
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .kpi { height: 78px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.20); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; }
+  .kpi span { display: block; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.16); width: 60%; }
+  .kpi b { display: block; height: 18px; border-radius: 5px; background: rgba(255,255,255,0.55); width: 45%; }
+  .chart { margin-top: 22px; height: 200px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.20); padding: 20px 20px 0; display: flex; align-items: flex-end; gap: 14px; }
+  .chart i { flex: 1; border-radius: 4px 4px 0 0; background: rgba(255,255,255,0.22); }
+  .chart i.hl { background: var(--lime); }
+
+  /* Release checklist card */
+  .release { left: 0; top: 400px; width: 330px; padding: 26px 26px 24px; }
+  .release .head { height: 12px; width: 140px; border-radius: 6px; background: rgba(255,255,255,0.5); }
+  .release ul { list-style: none; margin-top: 22px; display: flex; flex-direction: column; gap: 16px; }
+  .release li { display: flex; align-items: center; gap: 14px; }
+  .release .tick { width: 26px; height: 26px; border-radius: 50%; background: var(--lime); display: grid; place-items: center; flex-shrink: 0; }
+  .release .tick svg { width: 13px; height: 13px; fill: none; stroke: var(--black); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .release .tick.todo { background: transparent; border: 1.5px solid rgba(255,255,255,0.3); }
+  .release li span { display: block; height: 10px; border-radius: 5px; background: rgba(255,255,255,0.18); }
+
+  /* Spark accent */
+  .spark { position: absolute; right: 250px; bottom: 30px; width: 74px; height: 74px; }
+  .spark path { fill: var(--lime); }
+</style>
+</head>
+<body>
+
+  <section class="cover" id="cover">
+    <div class="topo" aria-hidden="true">
+      <svg viewBox="-100 -100 1100 800" preserveAspectRatio="xMidYMid meet">
+        <path class="contour peak" d="M 380 280 Q 460 260 520 300 Q 540 360 480 390 Q 400 400 360 360 Q 340 310 380 280 Z"/>
+        <path class="contour" d="M 330 220 Q 450 190 570 240 Q 610 310 560 390 Q 460 440 360 420 Q 280 360 300 280 Z"/>
+        <path class="contour major" d="M 260 160 Q 440 120 620 180 Q 690 280 620 410 Q 460 480 290 450 Q 200 370 220 260 Z"/>
+        <path class="contour" d="M 180 100 Q 420 60 670 120 Q 770 250 690 410 Q 480 520 250 480 Q 110 380 140 220 Z"/>
+        <path class="contour" d="M 100 30 Q 390 0 730 70 Q 860 220 770 440 Q 510 580 200 520 Q 20 390 60 190 Z"/>
+        <path class="contour major" opacity="0.55" d="M 0 -40 Q 360 -70 810 10 Q 970 190 870 480 Q 560 650 130 580 Q -80 430 -30 160 Z"/>
+      </svg>
+    </div>
+
+    <img class="logo" src="../../Logo-Light.svg" alt="HackerEarth">
+
+    <div class="copy">
+      <h1>Product <em>Matters</em></h1>
+      <p class="edition">November Edition</p>
+    </div>
+
+    <div class="art" aria-hidden="true">
+      <div class="panel window">
+        <div class="chrome"><i></i><i></i><i></i><span class="addr"></span></div>
+        <div class="win-body">
+          <div class="side"><span class="on" style="width:80%"></span><span style="width:65%"></span><span style="width:75%"></span><span style="width:55%"></span><span style="width:70%"></span></div>
+          <div class="main">
+            <div class="kpis"><div class="kpi"><span></span><b></b></div><div class="kpi"><span></span><b style="width:60%"></b></div><div class="kpi"><span></span><b style="width:35%"></b></div></div>
+            <div class="chart"><i style="height:38%"></i><i style="height:52%"></i><i style="height:44%"></i><i style="height:66%"></i><i style="height:58%"></i><i style="height:74%"></i><i class="hl" style="height:92%"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel release">
+        <div class="head"></div>
+        <ul>
+          <li><span class="tick"><svg viewBox="0 0 14 14"><path d="M2.5 7.5 L5.5 10.5 L11.5 3.5"/></svg></span><span style="width:200px"></span></li>
+          <li><span class="tick"><svg viewBox="0 0 14 14"><path d="M2.5 7.5 L5.5 10.5 L11.5 3.5"/></svg></span><span style="width:160px"></span></li>
+          <li><span class="tick"><svg viewBox="0 0 14 14"><path d="M2.5 7.5 L5.5 10.5 L11.5 3.5"/></svg></span><span style="width:185px"></span></li>
+          <li><span class="tick todo"></span><span style="width:130px"></span></li>
+        </ul>
+      </div>
+
+
+      <svg class="spark" viewBox="0 0 24 24"><path d="M12 0 C12.6 7 17 11.4 24 12 C17 12.6 12.6 17 12 24 C11.4 17 7 12.6 0 12 C7 11.4 11.4 7 12 0 Z"/></svg>
+    </div>
+  </section>
+
+<script>
+  // ?export renders the cover edge-to-edge for PNG capture
+  if (new URLSearchParams(location.search).has('export')) document.body.classList.add('export');
+</script>
+</body>
+</html>
