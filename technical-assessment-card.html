@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Assessments Card</title>
+<style>
+  /* Fonts — Geist, loaded from the repo's local files (Product Design System: Geist runs the whole interface) */
+  @font-face { font-family: 'Geist'; src: url('Geist-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+  @font-face { font-family: 'Geist'; src: url('Geist-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+  @font-face { font-family: 'Geist'; src: url('Geist-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
+
+  /* Tokens — HackerEarth Product Design System */
+  :root {
+    --p-bg: #FBFBFC;
+    --p-surface: #FFFFFF;
+    --p-surface-2: #F4F5F7;
+    --p-text: #14151A;
+    --p-text-muted: #5B5E6B;
+    --p-border: #E5E7EB;
+    --p-border-strong: #D1D5DB;
+    --p-primary: #13255D;
+    --p-primary-hover: #0F1D4B;
+    --p-ring: #13255D;
+    --p-font: 'Geist', system-ui, sans-serif;
+    --p-radius-lg: 12px;
+    --p-shadow-sm: 0 1px 2px rgba(20,21,26,0.05);
+
+    /* Derived for this card */
+    --sel-bg: color-mix(in srgb, var(--p-primary) 5%, var(--p-surface));
+    --sel-ring: color-mix(in srgb, var(--p-primary) 10%, transparent);
+    --motif-on: color-mix(in srgb, var(--p-primary) 11%, transparent);
+    --motif-off: color-mix(in srgb, var(--p-text) 7%, transparent);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: var(--p-bg);
+    font-family: var(--p-font);
+    color: var(--p-text);
+    -webkit-font-smoothing: antialiased;
+    padding: 16px;
+  }
+
+  /* ===== Assessment type card · 580 × 240 ===== */
+  .type-card {
+    position: relative;
+    width: 580px;
+    height: 240px;
+    max-width: 100%;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--p-surface);
+    border: 1.5px solid var(--p-border);
+    border-radius: var(--p-radius-lg);
+    box-shadow: var(--p-shadow-sm);
+    overflow: hidden;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    transition: border-color .15s, background-color .15s, box-shadow .15s;
+  }
+  .type-card:hover { border-color: var(--p-border-strong); }
+  .type-card:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--p-ring) 15%, transparent); }
+
+  .type-card[aria-checked="true"] {
+    background: var(--sel-bg);
+    border-color: var(--p-primary);
+    box-shadow: 0 0 0 3px var(--sel-ring);
+  }
+
+  /* Icon tile */
+  .tile {
+    position: relative;
+    z-index: 1;
+    width: 64px;
+    height: 64px;
+    border-radius: var(--p-radius-lg);
+    display: grid;
+    place-items: center;
+    background: var(--p-surface-2);
+    color: var(--p-primary);
+    transition: background-color .15s, color .15s;
+  }
+  .type-card[aria-checked="true"] .tile { background: var(--p-primary); color: #FFFFFF; }
+  .tile svg { width: 30px; height: 30px; }
+
+  /* Radio / check indicator */
+  .indicator {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid var(--p-border-strong);
+    background: var(--p-surface);
+    display: grid;
+    place-items: center;
+    transition: background-color .15s, border-color .15s;
+  }
+  .indicator svg { width: 14px; height: 14px; opacity: 0; transition: opacity .15s; }
+  .type-card[aria-checked="true"] .indicator { background: var(--p-primary); border-color: var(--p-primary); box-shadow: 0 0 0 3px var(--sel-ring); }
+  .type-card[aria-checked="true"] .indicator svg { opacity: 1; }
+
+  /* Title */
+  .title {
+    position: relative;
+    z-index: 1;
+    font-size: 22px;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--p-text);
+  }
+
+  /* Background motif — oversized code chevrons bleeding off the bottom-right */
+  .motif {
+    position: absolute;
+    right: -28px;
+    bottom: -36px;
+    width: 224px;
+    height: 161px;
+    color: var(--motif-off);
+    pointer-events: none;
+    transition: color .15s;
+  }
+  .type-card[aria-checked="true"] .motif { color: var(--motif-on); }
+</style>
+</head>
+<body>
+
+  <button class="type-card" type="button" role="radio" aria-checked="true" aria-label="Technical Assessments">
+    <span class="tile" aria-hidden="true">
+      <!-- code-simple, Phosphor regular geometry -->
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="11,8 3,16 11,24"/>
+        <polyline points="21,8 29,16 21,24"/>
+      </svg>
+    </span>
+
+    <span class="indicator" aria-hidden="true">
+      <svg viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3.5,8.5 6.5,11.5 12.5,4.5"/>
+      </svg>
+    </span>
+
+    <span class="title">Technical Assessments</span>
+
+    <svg class="motif" viewBox="0 0 250 180" fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="78,20 14,90 78,160"/>
+      <polyline points="172,20 236,90 172,160"/>
+    </svg>
+  </button>
+
+  <script>
+    // Click / Space / Enter toggles the selected state so both states can be previewed.
+    document.querySelectorAll('.type-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        card.setAttribute('aria-checked', card.getAttribute('aria-checked') === 'true' ? 'false' : 'true');
+      });
+    });
+  </script>
+</body>
+</html>
