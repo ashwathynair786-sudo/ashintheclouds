@@ -51,28 +51,28 @@
 
   /* ----- Right: layered product-UI graphic ----- */
   .art { position: absolute; z-index: 1; right: 120px; top: 50%; width: 760px; height: 720px; transform: translateY(-50%); }
-  .panel { position: absolute; border-radius: 24px; background: #0D0C14; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 40px 80px -30px rgba(0,0,0,0.8); }
+  .panel { position: absolute; border-radius: 24px; background: #0D0C14; border: 1.5px solid rgba(255,255,255,0.30); box-shadow: 0 40px 80px -30px rgba(0,0,0,0.8); }
 
   /* Main window — product dashboard */
-  .window { left: 40px; top: 90px; width: 640px; height: 440px; padding: 0; overflow: hidden; }
-  .chrome { height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 22px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .window { left: 80px; top: 70px; width: 640px; height: 440px; padding: 0; overflow: hidden; }
+  .chrome { height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 22px; border-bottom: 1px solid rgba(255,255,255,0.18); }
   .chrome i { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.18); }
   .chrome .addr { margin-left: 18px; height: 22px; width: 260px; border-radius: 6px; background: rgba(255,255,255,0.06); }
   .win-body { display: grid; grid-template-columns: 150px 1fr; height: calc(100% - 52px); }
-  .side { border-right: 1px solid rgba(255,255,255,0.08); padding: 26px 20px; display: flex; flex-direction: column; gap: 16px; }
+  .side { border-right: 1px solid rgba(255,255,255,0.18); padding: 26px 20px; display: flex; flex-direction: column; gap: 16px; }
   .side span { display: block; height: 10px; border-radius: 5px; background: rgba(255,255,255,0.12); }
   .side span.on { background: rgba(255,255,255,0.5); }
   .main { padding: 28px 30px; }
   .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .kpi { height: 78px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; }
+  .kpi { height: 78px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.20); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; }
   .kpi span { display: block; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.16); width: 60%; }
   .kpi b { display: block; height: 18px; border-radius: 5px; background: rgba(255,255,255,0.55); width: 45%; }
-  .chart { margin-top: 22px; height: 200px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 20px 20px 0; display: flex; align-items: flex-end; gap: 14px; }
+  .chart { margin-top: 22px; height: 200px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.20); padding: 20px 20px 0; display: flex; align-items: flex-end; gap: 14px; }
   .chart i { flex: 1; border-radius: 4px 4px 0 0; background: rgba(255,255,255,0.22); }
   .chart i.hl { background: var(--lime); }
 
   /* Release checklist card */
-  .release { left: 0; top: 420px; width: 330px; padding: 26px 26px 24px; }
+  .release { left: 0; top: 400px; width: 330px; padding: 26px 26px 24px; }
   .release .head { height: 12px; width: 140px; border-radius: 6px; background: rgba(255,255,255,0.5); }
   .release ul { list-style: none; margin-top: 22px; display: flex; flex-direction: column; gap: 16px; }
   .release li { display: flex; align-items: center; gap: 14px; }
@@ -80,15 +80,6 @@
   .release .tick svg { width: 13px; height: 13px; fill: none; stroke: var(--black); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
   .release .tick.todo { background: transparent; border: 1.5px solid rgba(255,255,255,0.3); }
   .release li span { display: block; height: 10px; border-radius: 5px; background: rgba(255,255,255,0.18); }
-
-  /* Calendar tile — November */
-  .cal { right: 0; top: 0; width: 220px; height: 230px; background: #fff; border: none; color: var(--black); overflow: hidden; }
-  .cal .ring { height: 46px; background: #E9E7E1; border-bottom: 1px solid rgba(2,1,9,0.08); display: flex; justify-content: space-around; align-items: center; padding: 0 40px; }
-  .cal .ring i { width: 14px; height: 14px; border-radius: 50%; background: var(--black); }
-  .cal .month { margin-top: 26px; text-align: center; font-family: var(--body); font-weight: 600; font-size: 76px; letter-spacing: -2px; line-height: 1; }
-  .cal .dots { margin: 22px auto 0; width: 150px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
-  .cal .dots i { width: 10px; height: 10px; border-radius: 3px; background: rgba(2,1,9,0.14); }
-  .cal .dots i.hl { background: var(--cta); }
 
   /* Spark accent */
   .spark { position: absolute; right: 250px; bottom: 30px; width: 74px; height: 74px; }
@@ -138,11 +129,6 @@
         </ul>
       </div>
 
-      <div class="panel cal">
-        <div class="ring"><i></i><i></i></div>
-        <div class="month">NOV</div>
-        <div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="hl"></i><i></i><i></i><i></i><i></i></div>
-      </div>
 
       <svg class="spark" viewBox="0 0 24 24"><path d="M12 0 C12.6 7 17 11.4 24 12 C17 12.6 12.6 17 12 24 C11.4 17 7 12.6 0 12 C7 11.4 11.4 7 12 0 Z"/></svg>
     </div>
