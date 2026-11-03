@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-labelledby="t">
+<title id="t">HackerEarth Elite Profiling System</title>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="120" cy="124" r="98" fill="#EEF1F8" stroke="none"/>
+
+<rect x="62" y="48" width="132" height="164" rx="16" fill="#C9D0E4" stroke="none"/>
+<rect x="52" y="38" width="132" height="164" rx="16" fill="#FFFFFF" stroke="#13255D" stroke-width="5"/>
+<clipPath id="av"><circle cx="118" cy="92" r="28"/></clipPath>
+<circle cx="118" cy="92" r="28" fill="#DCE3FF" stroke="none"/>
+<g clip-path="url(#av)">
+  <circle cx="118" cy="86" r="11" fill="#13255D" stroke="none"/>
+  <ellipse cx="118" cy="126" rx="22" ry="20" fill="#13255D" stroke="none"/>
+</g>
+<circle cx="118" cy="92" r="28" stroke="#13255D" stroke-width="5"/>
+<path d="M76,146 H160" stroke="#E5E7EB" stroke-width="8"/>
+<path d="M76,146 H146" stroke="#13255D" stroke-width="8"/>
+<path d="M76,166 H160" stroke="#E5E7EB" stroke-width="8"/>
+<path d="M76,166 H128" stroke="#9FB1FE" stroke-width="8"/>
+<path d="M76,186 H160" stroke="#E5E7EB" stroke-width="8"/>
+<path d="M76,186 H112" stroke="#13255D" stroke-width="8"/>
+<path d="M174,72 L166,104 L178,97 L186,108 L190,76 Z" fill="#13255D" stroke="#13255D" stroke-width="3"/>
+<path d="M190,72 L198,104 L186,97 L178,108 L174,76 Z" fill="#9FB1FE" stroke="#13255D" stroke-width="3"/>
+<circle cx="182" cy="60" r="24" fill="#C7F252" stroke="#13255D" stroke-width="5"/>
+<polygon points="182.0,49.0 184.9,57.0 193.4,57.3 186.8,62.5 189.1,70.7 182.0,66.0 174.9,70.7 177.2,62.5 170.6,57.3 179.1,57.0" fill="#13255D" stroke="#13255D" stroke-width="2"/>
+<path d="M36,60 Q37.8,68.2 46,70 Q37.8,71.8 36,80 Q34.2,71.8 26,70 Q34.2,68.2 36,60 Z" fill="#C7F252" stroke="#13255D" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="214" cy="150" r="5" fill="#9FB1FE" stroke="none"/>
+
+</g>
+</svg>

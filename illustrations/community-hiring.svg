@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-labelledby="t">
+<title id="t">Community Hiring</title>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="120" cy="124" r="98" fill="#EEF1F8" stroke="none"/>
+
+<ellipse cx="120" cy="132" rx="86" ry="58" stroke="#9FB1FE" stroke-width="3" stroke-dasharray="2 9"/>
+<circle cx="34" cy="132" r="6" fill="#C7F252" stroke="#13255D" stroke-width="3"/>
+<circle cx="206" cy="132" r="6" fill="#C7F252" stroke="#13255D" stroke-width="3"/>
+<path d="M44,184 V176 A26,26 0 0 1 96,176 V184 Z" fill="#9FB1FE" stroke="#13255D" stroke-width="5"/>
+<circle cx="70" cy="128" r="17" fill="#FFFFFF" stroke="#13255D" stroke-width="5"/>
+<path d="M144,184 V176 A26,26 0 0 1 196,176 V184 Z" fill="#9FB1FE" stroke="#13255D" stroke-width="5"/>
+<circle cx="170" cy="128" r="17" fill="#FFFFFF" stroke="#13255D" stroke-width="5"/>
+<path d="M84,184 V176 A36,36 0 0 1 156,176 V184 Z" fill="#13255D" stroke="#13255D" stroke-width="5"/>
+<circle cx="120" cy="112" r="23" fill="#FFFFFF" stroke="#13255D" stroke-width="5"/>
+<path d="M152,40 H200 A10,10 0 0 1 210,50 V70 A10,10 0 0 1 200,80 H170 L158,90 V80 H152 A10,10 0 0 1 142,70 V50 A10,10 0 0 1 152,40 Z" fill="#FFFFFF" stroke="#13255D" stroke-width="5"/>
+<circle cx="162" cy="60" r="4" fill="#13255D" stroke="none"/>
+<circle cx="176" cy="60" r="4" fill="#13255D" stroke="none"/>
+<circle cx="190" cy="60" r="4" fill="#13255D" stroke="none"/>
+<path d="M48,49 Q49.98,58.02 59,60 Q49.98,61.98 48,71 Q46.02,61.98 37,60 Q46.02,58.02 48,49 Z" fill="#C7F252" stroke="#13255D" stroke-width="3" stroke-linejoin="round"/>
+
+</g>
+</svg>

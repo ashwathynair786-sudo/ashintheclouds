@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-labelledby="t">
+<title id="t">Capstone</title>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="120" cy="124" r="98" fill="#EEF1F8" stroke="none"/>
+
+<path d="M78,100 V132 Q120,156 162,132 V100" fill="#DCE3FF" stroke="#13255D" stroke-width="5"/>
+<polygon points="120,44 200,78 120,112 40,78" fill="#13255D" stroke="#13255D" stroke-width="5"/>
+<path d="M120,78 L178,90 V128" stroke="#C7F252" stroke-width="4"/>
+<circle cx="120" cy="78" r="5" fill="#C7F252" stroke="none"/>
+<path d="M171,126 H185 L188,146 H168 Z" fill="#C7F252" stroke="#13255D" stroke-width="3.5"/>
+<rect x="62" y="166" width="124" height="30" rx="15" fill="#FFFFFF" stroke="#13255D" stroke-width="5"/>
+<circle cx="77" cy="181" r="8" fill="#EEF1F8" stroke="#13255D" stroke-width="3.5"/>
+<path d="M116,166 V196" stroke="#13255D" stroke-width="10"/>
+<path d="M116,166 V196" stroke="#C7F252" stroke-width="5"/>
+<path d="M116,196 L108,214 M116,196 L124,214" stroke="#13255D" stroke-width="4"/>
+<path d="M206,37 Q207.98,46.02 217,48 Q207.98,49.98 206,59 Q204.02,49.98 195,48 Q204.02,46.02 206,37 Z" fill="#C7F252" stroke="#13255D" stroke-width="3" stroke-linejoin="round"/>
+<path d="M34,132 Q35.44,138.56 42,140 Q35.44,141.44 34,148 Q32.56,141.44 26,140 Q32.56,138.56 34,132 Z" fill="#9FB1FE" stroke="#13255D" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="208" cy="176" r="5" fill="#9FB1FE" stroke="none"/>
+
+</g>
+</svg>
