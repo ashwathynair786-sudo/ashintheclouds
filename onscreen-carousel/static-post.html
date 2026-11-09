@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Real Interview Post</title>
+<style>
+  @font-face { font-family: "Bricolage"; src: url("../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf") format("truetype"); font-weight: 200 800; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Regular.ttf"); font-weight: 400; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Medium.ttf"); font-weight: 500; }
+
+  :root {
+    --bg: #FBF9F3; --bg-card: #FFFFFF; --text: #020109; --text-muted: #545459;
+    --accent: #13255D; --cta: #FF5722; --lime: #C7F252;
+    --display: "Bricolage", "Geist", sans-serif;
+    --body: "Geist", sans-serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; }
+
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; font-family: var(--body); }
+  .slide.cream { background: var(--bg); color: var(--text); }
+  .slide.dark  { background: var(--text); color: #fff; }
+
+  .topbar { position: absolute; top: 72px; left: 80px; right: 80px; display: flex; justify-content: space-between; align-items: center; z-index: 5; }
+  .topbar img { height: 34px; display: block; }
+  .counter { font-family: var(--mono); font-size: 20px; letter-spacing: 2px; }
+  .cream .counter { color: rgba(2,1,9,0.45); }
+  .dark .counter { color: rgba(255,255,255,0.5); }
+  .counter b { font-weight: 500; }
+  .cream .counter b { color: var(--text); }
+  .dark .counter b { color: #fff; }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 20px; letter-spacing: 2.5px; text-transform: uppercase; }
+  .eyebrow svg { width: 34px; height: 34px; }
+  .c-ring { fill: none; stroke: rgba(2,1,9,0.32); stroke-width: 0.7; }
+  .c-tick { stroke: rgba(2,1,9,0.45); stroke-width: 0.9; }
+  .c-n { stroke: var(--cta); stroke-width: 1.2; }
+  .c-dot { fill: var(--cta); }
+  .cream .eyebrow { color: rgba(2,1,9,0.45); }
+  .dark .eyebrow { color: rgba(255,255,255,0.45); }
+  .dark .c-ring { stroke: rgba(255,255,255,0.42); }
+  .dark .c-tick { stroke: rgba(255,255,255,0.55); }
+  .dark .c-n { stroke: var(--lime); }
+  .dark .c-dot { fill: var(--lime); }
+
+  h1, h2 { font-family: var(--display); font-weight: 500; font-variation-settings: "opsz" 96; }
+  h1 em, h2 em { font-style: normal; color: var(--cta); }
+  h2 { font-size: 92px; line-height: 0.98; letter-spacing: -2.8px; }
+  .lead { font-size: 31px; line-height: 1.42; }
+  .cream .lead { color: var(--text-muted); }
+  .dark .lead { color: rgba(255,255,255,0.68); }
+  .lead strong { font-weight: 500; }
+  .cream .lead strong { color: var(--text); }
+  .dark .lead strong { color: #fff; }
+
+  .topo { position: absolute; pointer-events: none; }
+  .topo path { fill: none; stroke-width: 0.9; }
+  .cream .topo path { stroke: rgba(19,37,93,0.22); }
+  .cream .topo path.major { stroke: rgba(19,37,93,0.36); stroke-width: 1.1; }
+  .cream .topo path.cta { stroke: rgba(255,87,34,0.45); }
+  .dark .topo path { stroke: rgba(255,255,255,0.18); }
+  .dark .topo path.major { stroke: rgba(255,255,255,0.28); stroke-width: 1.1; }
+  .dark .topo path.lime { stroke: rgba(199,242,82,0.55); }
+
+  /* tick-frame divider (DS stat-tick pattern) */
+  .marks { position: absolute; top: -4px; left: 0; right: 0; height: 8px; display: flex; justify-content: space-between; }
+  .marks span { width: 1px; height: 8px; }
+  .cream .marks span { background: rgba(2,1,9,0.3); }
+  .dark .marks span { background: rgba(255,255,255,0.3); }
+  .cream .marks span:first-child { background: var(--cta); width: 2px; }
+  .dark .marks span:first-child { background: var(--lime); width: 2px; }
+
+  
+  /* ---------- STATIC POST ---------- */
+  .p .content { position: absolute; top: 160px; left: 80px; right: 80px; }
+  .stack { margin-top: 40px; }
+  .stack .line { position: relative; border-top: 1px solid rgba(2,1,9,0.2); padding: 28px 0 24px; font-family: var(--display); font-weight: 500; font-size: 104px; line-height: 1; letter-spacing: -3.2px; font-variation-settings: "opsz" 96; }
+  .stack .line.muted { color: rgba(2,1,9,0.36); }
+  .stack .line em { font-style: normal; color: var(--cta); }
+  .stack .line:last-child { border-bottom: 1px dashed rgba(2,1,9,0.14); }
+  .p .lead { margin-top: 34px; }
+  .p .shot { position: absolute; left: 80px; right: 80px; top: 826px; bottom: -40px; border-radius: 24px; overflow: hidden; border: 1px solid rgba(2,1,9,0.08); box-shadow: 0 30px 60px -20px rgba(19,37,93,0.35); background: #0d0e12; }
+  .p .shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><g id="compass">
+  <circle cx="11" cy="11" r="9" class="c-ring"/><circle cx="11" cy="11" r="5" class="c-ring"/>
+  <line x1="11" y1="2" x2="11" y2="6" class="c-n"/><line x1="20" y1="11" x2="16" y2="11" class="c-tick"/>
+  <line x1="11" y1="20" x2="11" y2="16" class="c-tick"/><line x1="2" y1="11" x2="6" y2="11" class="c-tick"/>
+  <circle cx="11" cy="11" r="1.2" class="c-dot"/></g></defs></svg>
+
+<section class="slide cream p">
+  <div class="topbar">
+    <img src="../Logo%20Dark.svg" alt="hackerearth">
+  </div>
+  <div class="content">
+    <div class="stack">
+      <div class="line muted"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>Not a chatbot.</div>
+      <div class="line muted"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>Not a test.</div>
+      <div class="line"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span><em>A real interview.</em></div>
+    </div>
+    <p class="lead">Discover what <strong>AI-powered interviewing</strong> can look like.</p>
+  </div>
+  <div class="shot"><img src="../6a22c828aa7a66ddff2c96c1_1%20(5).webp" alt=""></div>
+</section>
+<script>
+  const compass = document.getElementById('compass').innerHTML;
+  document.querySelectorAll('svg.compass').forEach(s => s.innerHTML = compass);
+</script>
+</body>
+</html>
