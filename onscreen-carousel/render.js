@@ -9,8 +9,9 @@ const path = require('path');
   await p.waitForTimeout(500);
   const fams = await p.evaluate(() => [...document.fonts].map(f => f.family + ':' + f.status));
   console.log(fams.join(', '));
-  for (let i = 1; i <= 5; i++) {
-    await p.locator('#s' + i).screenshot({ path: path.join(out, `slide-0${i}.png`) });
+  const n = await p.locator('.slide').count();
+  for (let i = 0; i < n; i++) {
+    await p.locator('.slide').nth(i).screenshot({ path: path.join(out, `slide-0${i + 1}.png`) });
   }
   await b.close();
 })();
