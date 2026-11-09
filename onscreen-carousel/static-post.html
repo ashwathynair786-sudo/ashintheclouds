@@ -73,15 +73,27 @@
 
   
   /* ---------- STATIC POST ---------- */
-  .p .content { position: absolute; top: 160px; left: 80px; right: 80px; }
-  .stack { margin-top: 40px; }
-  .stack .line { position: relative; border-top: 1px solid rgba(2,1,9,0.2); padding: 28px 0 24px; font-family: var(--display); font-weight: 500; font-size: 104px; line-height: 1; letter-spacing: -3.2px; font-variation-settings: "opsz" 96; }
-  .stack .line.muted { color: rgba(2,1,9,0.36); }
-  .stack .line em { font-style: normal; color: var(--cta); }
-  .stack .line:last-child { border-bottom: 1px dashed rgba(2,1,9,0.14); }
-  .p .lead { margin-top: 34px; }
-  .p .shot { position: absolute; left: 80px; right: 80px; top: 826px; bottom: -40px; border-radius: 24px; overflow: hidden; border: 1px solid rgba(2,1,9,0.08); box-shadow: 0 30px 60px -20px rgba(19,37,93,0.35); background: #0d0e12; }
-  .p .shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+  .p .content { position: absolute; top: 176px; left: 80px; right: 80px; }
+  .nots { display: flex; flex-direction: column; gap: 4px; }
+  .nots span { font-family: var(--display); font-weight: 500; font-size: 64px; line-height: 1.05; letter-spacing: -1.8px; color: rgba(2,1,9,0.34); font-variation-settings: "opsz" 96; }
+  .big { position: relative; margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(2,1,9,0.2); font-family: var(--display); font-weight: 500; font-size: 136px; line-height: 0.95; letter-spacing: -4.6px; color: var(--cta); font-variation-settings: "opsz" 96; }
+  .p .lead { margin-top: 30px; font-size: 32px; }
+
+  .scene { position: absolute; left: 80px; right: 80px; top: 676px; height: 560px; }
+  .photo { position: absolute; inset: 0 0 0 0; border-radius: 24px; overflow: hidden; background: #020109; box-shadow: 0 30px 60px -24px rgba(19,37,93,0.4); }
+  .photo img { position: absolute; width: 1000px; height: 1000px; left: -40px; top: -150px; }
+  .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(2,1,9,0) 55%, rgba(2,1,9,0.55) 100%); }
+  .live { position: absolute; top: 24px; left: 24px; z-index: 2; display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 100px; background: rgba(2,1,9,0.55); border: 1px solid rgba(255,255,255,0.12); font-family: var(--mono); font-size: 18px; letter-spacing: 1.5px; color: #fff; }
+  .live i { width: 10px; height: 10px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px rgba(199,242,82,0.2); }
+
+  .code { position: absolute; right: -28px; bottom: -64px; width: 480px; border-radius: 18px; background: #0d0e12; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 34px 70px -18px rgba(2,1,9,0.6); overflow: hidden; z-index: 3; }
+  .code .bar { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .code .lang { font-family: var(--body); font-size: 17px; color: rgba(255,255,255,0.8); padding: 7px 14px; border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; }
+  .code .run { font-family: var(--body); font-weight: 500; font-size: 17px; color: #fff; background: var(--accent); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.18); }
+  .code pre { margin: 0; padding: 18px 20px 22px; font-family: var(--mono); font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.86); }
+  .code .n { color: rgba(255,255,255,0.28); display: inline-block; width: 30px; }
+  .code .k { color: var(--lime); }
+  .code .c { color: rgba(255,255,255,0.42); }
 </style>
 </head>
 <body>
@@ -96,14 +108,25 @@
     <img src="../Logo%20Dark.svg" alt="hackerearth">
   </div>
   <div class="content">
-    <div class="stack">
-      <div class="line muted"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>Not a chatbot.</div>
-      <div class="line muted"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>Not a test.</div>
-      <div class="line"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span><em>A real interview.</em></div>
-    </div>
+    <div class="nots"><span>Not a chatbot.</span><span>Not a test.</span></div>
+    <div class="big"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>A real interview.</div>
     <p class="lead">Discover what <strong>AI-powered interviewing</strong> can look like.</p>
   </div>
-  <div class="shot"><img src="../6a22c828aa7a66ddff2c96c1_1%20(5).webp" alt=""></div>
+  <div class="scene">
+    <div class="photo">
+      <span class="live"><i></i>00:19:36</span>
+      <img src="../Futuristic%20AI%20Interview%20Analysis.png" alt="">
+    </div>
+    <div class="code">
+      <div class="bar"><span class="lang">Python</span><span class="run">▷ Run</span></div>
+<pre><span class="n">1</span><span class="k">def</span> count_subtree(n, edges):
+<span class="n">2</span>    children = [[] <span class="k">for</span> _ <span class="k">in</span> range(n+1)]
+<span class="n">3</span>    <span class="k">for</span> p, c <span class="k">in</span> edges:
+<span class="n">4</span>        children[p].append(c)
+<span class="n">5</span>    <span class="c"># walk it post-order</span>
+<span class="n">6</span>    <span class="k">def</span> dfs(node):</pre>
+    </div>
+  </div>
 </section>
 <script>
   const compass = document.getElementById('compass').innerHTML;
