@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OnScreen Carousel</title>
+<style>
+  @font-face { font-family: "Bricolage"; src: url("../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf") format("truetype"); font-weight: 200 800; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Regular.ttf"); font-weight: 400; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Medium.ttf"); font-weight: 500; }
+
+  :root {
+    --bg: #FBF9F3; --bg-card: #FFFFFF; --text: #020109; --text-muted: #545459;
+    --accent: #13255D; --cta: #FF5722; --lime: #C7F252;
+    --eyebrow-on-dark: #A5A5AD;
+    --display: "Bricolage", "Geist", sans-serif;
+    --body: "Geist", sans-serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; }
+
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; font-family: var(--body); }
+  .slide.cream { background: var(--bg); color: var(--text); }
+  .slide.dark  { background: var(--text); color: #fff; }
+
+  /* Top bar: wordmark + counter */
+  .topbar { position: absolute; top: 72px; left: 80px; right: 80px; display: flex; justify-content: space-between; align-items: center; z-index: 5; }
+  .topbar img { height: 34px; display: block; }
+  .counter { font-family: var(--mono); font-size: 20px; letter-spacing: 2px; }
+  .cream .counter { color: rgba(2,1,9,0.45); }
+  .dark .counter { color: rgba(255,255,255,0.5); }
+  .counter b { font-weight: 500; }
+  .cream .counter b { color: var(--text); }
+  .dark .counter b { color: #fff; }
+
+  /* Eyebrow: compass + bracket (DS pattern) */
+  .eyebrow { display: inline-flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 20px; letter-spacing: 2.5px; text-transform: uppercase; }
+  .eyebrow svg { width: 34px; height: 34px; }
+  .c-ring { fill: none; stroke: rgba(2,1,9,0.32); stroke-width: 0.7; }
+  .c-tick { stroke: rgba(2,1,9,0.45); stroke-width: 0.9; }
+  .c-n { stroke: var(--cta); stroke-width: 1.2; }
+  .c-dot { fill: var(--cta); }
+  .cream .eyebrow { color: rgba(2,1,9,0.45); }
+  .dark .eyebrow { color: rgba(255,255,255,0.45); }
+  .dark .c-ring { stroke: rgba(255,255,255,0.42); }
+  .dark .c-tick { stroke: rgba(255,255,255,0.55); }
+  .dark .c-n { stroke: var(--lime); }
+  .dark .c-dot { fill: var(--lime); }
+
+  /* Type */
+  h1, h2 { font-family: var(--display); font-weight: 500; font-variation-settings: "opsz" 96; }
+  h1 em, h2 em { font-style: normal; color: var(--cta); }
+  h2 { font-size: 78px; line-height: 1.0; letter-spacing: -2.4px; }
+  .lead { font-size: 31px; line-height: 1.42; }
+  .cream .lead { color: var(--text-muted); }
+  .dark .lead { color: rgba(255,255,255,0.68); }
+  .lead strong { font-weight: 500; }
+  .cream .lead strong { color: var(--text); }
+  .dark .lead strong { color: #fff; }
+
+  /* Contours */
+  .topo { position: absolute; pointer-events: none; }
+  .topo path { fill: none; stroke-width: 0.9; }
+  .cream .topo path { stroke: rgba(19,37,93,0.22); }
+  .cream .topo path.major { stroke: rgba(19,37,93,0.36); stroke-width: 1.1; }
+  .cream .topo path.cta { stroke: rgba(255,87,34,0.45); }
+  .dark .topo path { stroke: rgba(255,255,255,0.18); }
+  .dark .topo path.major { stroke: rgba(255,255,255,0.28); stroke-width: 1.1; }
+  .dark .topo path.lime { stroke: rgba(199,242,82,0.55); }
+
+  /* ---------- SLIDE 1 ---------- */
+  .s1 .hero { position: absolute; top: 0; left: -40px; width: 1160px; height: 1160px; object-fit: cover; }
+  .s1 .fade { position: absolute; inset: 0; background:
+      linear-gradient(180deg, rgba(2,1,9,0.55) 0%, rgba(2,1,9,0) 14%, rgba(2,1,9,0) 46%, rgba(2,1,9,0.85) 64%, #020109 74%); }
+  .s1 .copy { position: absolute; left: 80px; right: 80px; bottom: 96px; }
+  .s1 h1 { font-size: 104px; line-height: 0.96; letter-spacing: -3.4px; margin: 28px 0 32px; }
+  .s1 .lead { max-width: 860px; }
+  .s1 .swipe { margin-top: 56px; display: flex; align-items: center; gap: 18px; font-family: var(--mono); font-size: 22px; letter-spacing: 2.5px; text-transform: uppercase; color: #fff; }
+  .s1 .swipe .rule { flex: 1; height: 1px; background: rgba(255,255,255,0.2); position: relative; }
+  .s1 .swipe .rule::after { content: ""; position: absolute; left: 0; top: -4px; width: 1px; height: 9px; background: var(--lime); }
+  .s1 .swipe .arrow { color: var(--lime); font-size: 30px; letter-spacing: 0; }
+
+  /* ---------- SLIDE 2 ---------- */
+  .s2 .content { position: absolute; top: 200px; left: 80px; right: 80px; }
+  .s2 h2 { margin: 32px 0 36px; font-size: 96px; letter-spacing: -3px; }
+  .s2 .lead { max-width: 880px; }
+  .shot { position: absolute; border-radius: 24px; overflow: hidden; }
+  .shot img { display: block; width: 100%; }
+  .s2 .shot { left: 80px; right: 80px; bottom: 80px; border: 1px solid rgba(2,1,9,0.08); box-shadow: 0 30px 60px -20px rgba(19,37,93,0.35); }
+  .s2 .shot img { margin-top: -38px; margin-bottom: -38px; } /* trim letterbox */
+  .s2 .topo { right: -260px; bottom: -120px; width: 1300px; height: 900px; opacity: 0.5; }
+
+  /* ---------- SLIDE 3 ---------- */
+  .s3 .content { position: absolute; top: 200px; left: 80px; right: 80px; }
+  .s3 h2 { margin: 28px 0 30px; }
+  .s3 .lead + .lead { margin-top: 20px; }
+  .s3 .shot { left: 80px; right: -140px; bottom: 80px; top: 700px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03); padding: 10px; border-radius: 24px; }
+  .s3 .shot img { border-radius: 14px; height: 100%; object-fit: cover; object-position: left top; }
+  .s3 .lead { font-size: 29px; }
+  .s3 .topo { left: -300px; bottom: -260px; width: 1500px; height: 1000px; opacity: 0.4; }
+
+  /* ---------- SLIDE 4 ---------- */
+  .s4 .content { position: absolute; top: 200px; left: 80px; right: 80px; }
+  .s4 h2 { margin: 28px 0 30px; }
+  .rows { margin-top: 52px; display: flex; flex-direction: column; gap: 0; }
+  .row { position: relative; padding: 40px 0 40px; display: flex; align-items: baseline; gap: 32px; border-top: 1px solid rgba(2,1,9,0.2); }
+  .row:last-child { border-bottom: 1px dashed rgba(2,1,9,0.14); }
+  .row .marks { position: absolute; top: -4px; left: 0; right: 0; height: 8px; display: flex; justify-content: space-between; }
+  .row .marks span { width: 1px; height: 8px; background: rgba(2,1,9,0.3); }
+  .row .marks span:first-child { background: var(--cta); width: 2px; }
+  .row .idx { font-family: var(--mono); font-size: 20px; letter-spacing: 1.5px; color: var(--accent); width: 44px; flex-shrink: 0; }
+  .row .txt { font-family: var(--display); font-weight: 500; font-size: 52px; letter-spacing: -1px; line-height: 1.08; }
+  .closer { position: absolute; left: 80px; right: 80px; bottom: 92px; padding: 40px 44px; background: var(--bg-card); border: 1px solid rgba(2,1,9,0.08); border-radius: 20px; }
+  .closer p { font-family: var(--display); font-weight: 500; font-size: 40px; line-height: 1.12; letter-spacing: -0.8px; color: var(--accent); }
+  .s4 .topo { right: -520px; bottom: -330px; width: 1300px; height: 860px; opacity: 0.5; }
+
+  /* ---------- SLIDE 5 ---------- */
+  .s5 .topo { right: -420px; bottom: -420px; width: 1500px; height: 1500px; opacity: 0.45; }
+  .s5 .mist { position: absolute; inset: 0; background: radial-gradient(ellipse 62% 40% at 50% 46%, #020109 0%, rgba(2,1,9,0.9) 45%, rgba(2,1,9,0) 85%); }
+  .s5 .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 80px; }
+  .s5 .logo-big { height: 76px; margin-bottom: 96px; }
+  .s5 h2 { font-size: 96px; line-height: 0.98; letter-spacing: -3px; margin: 0 0 72px; }
+  .btn { display: inline-flex; align-items: center; gap: 16px; background: var(--cta); color: #fff; font-family: var(--body); font-weight: 500; font-size: 34px; padding: 30px 52px; border-radius: 14px; }
+  .btn .arr { font-size: 36px; }
+</style>
+</head>
+<body>
+
+<!-- reusable compass -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="compass">
+      <circle cx="11" cy="11" r="9" class="c-ring"/>
+      <circle cx="11" cy="11" r="5" class="c-ring"/>
+      <line x1="11" y1="2" x2="11" y2="6" class="c-n"/>
+      <line x1="20" y1="11" x2="16" y2="11" class="c-tick"/>
+      <line x1="11" y1="20" x2="11" y2="16" class="c-tick"/>
+      <line x1="2" y1="11" x2="6" y2="11" class="c-tick"/>
+      <circle cx="11" cy="11" r="1.2" class="c-dot"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- ============ 1 · COVER ============ -->
+<section class="slide dark s1" id="s1">
+  <img class="hero" src="../Futuristic%20AI%20Interview%20Analysis.png" alt="">
+  <div class="fade"></div>
+  <div class="topbar">
+    <img src="../Logo-Light.svg" alt="hackerearth">
+    <span class="counter"><b>01</b> / 05</span>
+  </div>
+  <div class="copy">
+    <h1>Your next interviewer <em>might not be human.</em></h1>
+    <p class="lead">But the interview will be equally engaging<br>and <strong>more objective.</strong></p>
+    <div class="swipe"><span>Swipe to see how it works</span><span class="rule"></span><span class="arrow">→</span></div>
+  </div>
+</section>
+
+<!-- ============ 2 · VERIFY ============ -->
+<section class="slide cream s2" id="s2">
+  <svg class="topo" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid meet">
+    <g transform="translate(40,40)">
+      <path class="cta" d="M 380 280 Q 460 260 520 300 Q 540 360 480 390 Q 400 400 360 360 Q 340 310 380 280 Z"/>
+      <path d="M 330 220 Q 450 190 570 240 Q 610 310 560 390 Q 460 440 360 420 Q 280 360 300 280 Z"/>
+      <path class="major" d="M 260 160 Q 440 120 620 180 Q 690 280 620 410 Q 460 480 290 450 Q 200 370 220 260 Z"/>
+      <path d="M 180 100 Q 420 60 670 120 Q 770 250 690 410 Q 480 520 250 480 Q 110 380 140 220 Z"/>
+      <path d="M 100 30 Q 390 0 730 70 Q 860 220 770 440 Q 510 580 200 520 Q 20 390 60 190 Z"/>
+    </g>
+  </svg>
+  <div class="topbar">
+    <img src="../Logo%20Dark.svg" alt="hackerearth">
+    <span class="counter"><b>02</b> / 05</span>
+  </div>
+  <div class="content">
+    <span class="eyebrow"><svg viewBox="0 0 22 22" class="compass"></svg>[ 02 ]</span>
+    <h2>First, make sure<br>it’s <em>really them.</em></h2>
+    <p class="lead">Every interview begins with <strong>KYC-grade identity verification</strong> to confirm that the right candidate is appearing for the interview.</p>
+  </div>
+  <div class="shot"><img src="../6a22d4c0047178e0d8a80610_id-confirmation%20(1).webp" alt=""></div>
+</section>
+
+<!-- ============ 3 · INTERVIEW ============ -->
+<section class="slide dark s3" id="s3">
+  <svg class="topo" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid meet">
+    <g transform="translate(40,40)">
+      <path d="M 330 220 Q 450 190 570 240 Q 610 310 560 390 Q 460 440 360 420 Q 280 360 300 280 Z"/>
+      <path class="major" d="M 260 160 Q 440 120 620 180 Q 690 280 620 410 Q 460 480 290 450 Q 200 370 220 260 Z"/>
+      <path d="M 180 100 Q 420 60 670 120 Q 770 250 690 410 Q 480 520 250 480 Q 110 380 140 220 Z"/>
+      <path d="M 100 30 Q 390 0 730 70 Q 860 220 770 440 Q 510 580 200 520 Q 20 390 60 190 Z"/>
+      <path class="major" d="M 0 -40 Q 360 -70 810 10 Q 970 190 870 480 Q 560 650 130 580 Q -80 430 -30 160 Z"/>
+    </g>
+  </svg>
+  <div class="topbar">
+    <img src="../Logo-Light.svg" alt="hackerearth">
+    <span class="counter"><b>03</b> / 05</span>
+  </div>
+  <div class="content">
+    <span class="eyebrow"><svg viewBox="0 0 22 22" class="compass"></svg>[ 03 ]</span>
+    <h2>Not another screening form. <em>A real conversation.</em></h2>
+    <p class="lead">A <strong>lifelike AI avatar</strong> conducts a dynamic voice and video interview, adapting questions to candidate responses.</p>
+    <p class="lead">For technical roles, candidates can <strong>write and execute real code in a live IDE</strong> while the interview continues.</p>
+  </div>
+  <div class="shot"><img src="../6a22c828aa7a66ddff2c96c1_1%20(4).webp" alt=""></div>
+</section>
+
+<!-- ============ 4 · PROBE ============ -->
+<section class="slide cream s4" id="s4">
+  <svg class="topo" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid meet">
+    <g transform="translate(40,40)">
+      <path d="M 330 220 Q 450 190 570 240 Q 610 310 560 390 Q 460 440 360 420 Q 280 360 300 280 Z"/>
+      <path class="major" d="M 260 160 Q 440 120 620 180 Q 690 280 620 410 Q 460 480 290 450 Q 200 370 220 260 Z"/>
+      <path d="M 180 100 Q 420 60 670 120 Q 770 250 690 410 Q 480 520 250 480 Q 110 380 140 220 Z"/>
+      <path d="M 100 30 Q 390 0 730 70 Q 860 220 770 440 Q 510 580 200 520 Q 20 390 60 190 Z"/>
+    </g>
+  </svg>
+  <div class="topbar">
+    <img src="../Logo%20Dark.svg" alt="hackerearth">
+    <span class="counter"><b>04</b> / 05</span>
+  </div>
+  <div class="content">
+    <span class="eyebrow"><svg viewBox="0 0 22 22" class="compass"></svg>[ 04 ]</span>
+    <h2>The best interviews go <em>beyond the obvious</em> answers.</h2>
+    <p class="lead"><strong>OnScreen</strong> asks relevant follow-up questions to:</p>
+    <div class="rows">
+      <div class="row"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="idx">01</span><span class="txt">Explore the candidate’s reasoning.</span></div>
+      <div class="row"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="idx">02</span><span class="txt">Trace edge cases.</span></div>
+      <div class="row"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="idx">03</span><span class="txt">Evaluate problem-solving depth.</span></div>
+    </div>
+  </div>
+  <div class="closer"><p>Because knowing the answer isn’t the same as understanding the approach.</p></div>
+</section>
+
+<!-- ============ 5 · END CARD ============ -->
+<section class="slide dark s5" id="s5">
+  <svg class="topo" viewBox="0 0 900 900" preserveAspectRatio="xMidYMid meet">
+    <g transform="translate(0,140) scale(1.02)">
+      <path class="lime" d="M 380 280 Q 460 260 520 300 Q 540 360 480 390 Q 400 400 360 360 Q 340 310 380 280 Z"/>
+      <path d="M 330 220 Q 450 190 570 240 Q 610 310 560 390 Q 460 440 360 420 Q 280 360 300 280 Z"/>
+      <path class="major" d="M 260 160 Q 440 120 620 180 Q 690 280 620 410 Q 460 480 290 450 Q 200 370 220 260 Z"/>
+      <path d="M 180 100 Q 420 60 670 120 Q 770 250 690 410 Q 480 520 250 480 Q 110 380 140 220 Z"/>
+      <path d="M 100 30 Q 390 0 730 70 Q 860 220 770 440 Q 510 580 200 520 Q 20 390 60 190 Z"/>
+      <path class="major" d="M 0 -40 Q 360 -70 810 10 Q 970 190 870 480 Q 560 650 130 580 Q -80 430 -30 160 Z"/>
+      <path d="M -100 -120 Q 330 -150 900 -60 Q 1080 160 970 530 Q 610 730 60 650 Q -190 480 -120 130 Z"/>
+    </g>
+  </svg>
+  <div class="mist"></div>
+  <div class="topbar" style="justify-content:flex-end">
+    <span class="counter"><b>05</b> / 05</span>
+  </div>
+  <div class="center">
+    <img class="logo-big" src="../Logo-Light.svg" alt="hackerearth">
+    <h2>AI-powered interviews. <em>Built to feel human.</em></h2>
+    <span class="btn">Explore OnScreen <span class="arr">→</span></span>
+  </div>
+</section>
+
+<script>
+  const c = document.getElementById('compass').innerHTML;
+  document.querySelectorAll('svg.compass').forEach(s => s.innerHTML = c);
+</script>
+</body>
+</html>
