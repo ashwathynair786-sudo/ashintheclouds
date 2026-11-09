@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Evidence Carousel</title>
+<style>
+  @font-face { font-family: "Bricolage"; src: url("../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf") format("truetype"); font-weight: 200 800; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Regular.ttf"); font-weight: 400; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Medium.ttf"); font-weight: 500; }
+
+  :root {
+    --bg: #FBF9F3; --bg-card: #FFFFFF; --text: #020109; --text-muted: #545459;
+    --accent: #13255D; --cta: #FF5722; --lime: #C7F252;
+    --display: "Bricolage", "Geist", sans-serif;
+    --body: "Geist", sans-serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; }
+
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; font-family: var(--body); }
+  .slide.cream { background: var(--bg); color: var(--text); }
+  .slide.dark  { background: var(--text); color: #fff; }
+
+  .topbar { position: absolute; top: 72px; left: 80px; right: 80px; display: flex; justify-content: space-between; align-items: center; z-index: 5; }
+  .topbar img { height: 34px; display: block; }
+  .counter { font-family: var(--mono); font-size: 20px; letter-spacing: 2px; }
+  .cream .counter { color: rgba(2,1,9,0.45); }
+  .dark .counter { color: rgba(255,255,255,0.5); }
+  .counter b { font-weight: 500; }
+  .cream .counter b { color: var(--text); }
+  .dark .counter b { color: #fff; }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 20px; letter-spacing: 2.5px; text-transform: uppercase; }
+  .eyebrow svg { width: 34px; height: 34px; }
+  .c-ring { fill: none; stroke: rgba(2,1,9,0.32); stroke-width: 0.7; }
+  .c-tick { stroke: rgba(2,1,9,0.45); stroke-width: 0.9; }
+  .c-n { stroke: var(--cta); stroke-width: 1.2; }
+  .c-dot { fill: var(--cta); }
+  .cream .eyebrow { color: rgba(2,1,9,0.45); }
+  .dark .eyebrow { color: rgba(255,255,255,0.45); }
+  .dark .c-ring { stroke: rgba(255,255,255,0.42); }
+  .dark .c-tick { stroke: rgba(255,255,255,0.55); }
+  .dark .c-n { stroke: var(--lime); }
+  .dark .c-dot { fill: var(--lime); }
+
+  h1, h2 { font-family: var(--display); font-weight: 500; font-variation-settings: "opsz" 96; }
+  h1 em, h2 em { font-style: normal; color: var(--cta); }
+  h2 { font-size: 92px; line-height: 0.98; letter-spacing: -2.8px; }
+  .lead { font-size: 31px; line-height: 1.42; }
+  .cream .lead { color: var(--text-muted); }
+  .dark .lead { color: rgba(255,255,255,0.68); }
+  .lead strong { font-weight: 500; }
+  .cream .lead strong { color: var(--text); }
+  .dark .lead strong { color: #fff; }
+
+  .topo { position: absolute; pointer-events: none; }
+  .topo path { fill: none; stroke-width: 0.9; }
+  .cream .topo path { stroke: rgba(19,37,93,0.22); }
+  .cream .topo path.major { stroke: rgba(19,37,93,0.36); stroke-width: 1.1; }
+  .cream .topo path.cta { stroke: rgba(255,87,34,0.45); }
+  .dark .topo path { stroke: rgba(255,255,255,0.18); }
+  .dark .topo path.major { stroke: rgba(255,255,255,0.28); stroke-width: 1.1; }
+  .dark .topo path.lime { stroke: rgba(199,242,82,0.55); }
+
+  /* tick-frame divider (DS stat-tick pattern) */
+  .marks { position: absolute; top: -4px; left: 0; right: 0; height: 8px; display: flex; justify-content: space-between; }
+  .marks span { width: 1px; height: 8px; }
+  .cream .marks span { background: rgba(2,1,9,0.3); }
+  .dark .marks span { background: rgba(255,255,255,0.3); }
+  .cream .marks span:first-child { background: var(--cta); width: 2px; }
+  .dark .marks span:first-child { background: var(--lime); width: 2px; }
+
+  
+  h2 { font-size: 80px; line-height: 1.0; letter-spacing: -2.4px; }
+  .content { position: absolute; top: 190px; left: 80px; right: 80px; }
+  .content h2 { margin-bottom: 30px; }
+  .closer { font-family: var(--display); font-weight: 500; font-size: 38px; line-height: 1.15; letter-spacing: -0.8px; color: var(--accent); }
+  .closer b { font-weight: 500; color: var(--text); }
+  .panel { background: var(--bg-card); border: 1px solid rgba(2,1,9,0.08); border-radius: 20px; box-shadow: 0 24px 50px -28px rgba(19,37,93,0.35); }
+  .mono-label { font-family: var(--mono); font-size: 16px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(2,1,9,0.45); }
+
+  /* ---------- 1 · HOOK ---------- */
+  .s1 .hero { position: absolute; top: 0; left: 0; width: 1080px; height: 1000px; object-fit: cover; object-position: 50% 30%; }
+  .s1 .fade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2,1,9,0.85) 0%, rgba(2,1,9,0.2) 12%, rgba(2,1,9,0) 30%, rgba(2,1,9,0.6) 52%, #020109 70%); }
+  .score { position: absolute; top: 200px; right: 80px; width: 400px; padding: 30px 32px; border-radius: 20px; background: rgba(2,1,9,0.62); border: 1px solid rgba(255,255,255,0.14); backdrop-filter: blur(14px); z-index: 4; }
+  .score .lbl { font-family: var(--mono); font-size: 16px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+  .score .num { font-family: var(--display); font-weight: 500; font-size: 120px; line-height: 1; letter-spacing: -4px; margin: 10px 0 22px; }
+  .score .num span { font-size: 0.4em; color: rgba(255,255,255,0.45); letter-spacing: 0; font-weight: 400; }
+  .score .ev { border: 1.5px dashed rgba(255,255,255,0.3); border-radius: 12px; padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 16px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .score .ev b { font-family: var(--display); font-weight: 500; font-size: 34px; color: var(--cta); letter-spacing: 0; }
+  .s1 .copy { position: absolute; left: 80px; right: 80px; bottom: 96px; }
+  .s1 h1 { font-size: 96px; line-height: 0.98; letter-spacing: -3px; margin-bottom: 36px; }
+  .s1 .lead { font-size: 34px; color: rgba(255,255,255,0.75); }
+  .s1 .swipe { margin-top: 52px; display: flex; align-items: center; gap: 18px; }
+  .s1 .swipe .rule { flex: 1; height: 1px; background: rgba(255,255,255,0.2); position: relative; }
+  .s1 .swipe .rule::after { content: ""; position: absolute; left: 0; top: -4px; width: 2px; height: 9px; background: var(--lime); }
+  .s1 .swipe .arrow { color: var(--lime); font-size: 32px; font-family: var(--mono); }
+
+  /* ---------- 2 · COMPETENCIES ---------- */
+  .comp { position: absolute; left: 80px; right: 80px; bottom: 80px; padding: 40px 44px 30px; }
+  .comp .head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 28px; border-bottom: 1px solid rgba(2,1,9,0.1); }
+  .comp .overall { font-family: var(--display); font-weight: 500; font-size: 56px; letter-spacing: -1.6px; line-height: 1; }
+  .comp .overall span { font-size: 0.5em; color: rgba(2,1,9,0.4); font-weight: 400; letter-spacing: 0; }
+  .crow { display: grid; grid-template-columns: 300px 1fr 70px; align-items: center; gap: 24px; padding: 33px 0; border-bottom: 1px dashed rgba(2,1,9,0.1); }
+  .crow:last-child { border-bottom: 0; }
+  .crow .nm { font-size: 29px; font-weight: 500; }
+  .crow .track { position: relative; height: 14px; border-radius: 100px; background: color-mix(in srgb, var(--accent) 8%, transparent); }
+  .crow .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 100px; background: var(--accent); }
+  .crow .val { font-family: var(--mono); font-size: 24px; text-align: right; }
+  .crow.top .fill { background: var(--accent); }
+  .crow.top .val::after { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--lime); border-radius: 2px; margin-left: 8px; vertical-align: 3px; }
+
+  /* ---------- 3 · EVIDENCE ---------- */
+  .ev-list { margin-top: 34px; display: flex; flex-direction: column; gap: 18px; }
+  .evc { display: grid; grid-template-columns: 1fr 372px; gap: 28px; align-items: center; padding: 28px 28px 28px 34px; }
+  .evc .t { display: flex; gap: 20px; align-items: baseline; }
+  .evc .i { font-family: var(--mono); font-size: 18px; color: var(--accent); }
+  .evc .x { font-size: 27px; line-height: 1.32; font-weight: 500; }
+  .viz { height: 150px; border-radius: 14px; overflow: hidden; }
+  .viz.tr { background: #F4F3EE; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.35; color: var(--text-muted); }
+  .viz.tr .q { color: var(--text); }
+  .viz.tr .q b { font-family: var(--mono); font-weight: 500; font-size: 12px; letter-spacing: 1px; color: var(--accent); margin-right: 6px; }
+  .viz.tr mark { background: color-mix(in srgb, var(--lime) 70%, transparent); color: var(--text); padding: 1px 3px; border-radius: 3px; }
+  .viz.cd { background: #0d0e12; padding: 16px 18px; font-family: var(--mono); font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.85); white-space: pre; }
+  .viz.cd .k { color: var(--lime); } .viz.cd .n { color: rgba(255,255,255,0.28); margin-right: 12px; }
+  .viz.ai { background: #F4F3EE; padding: 18px 20px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .meter { display: grid; grid-template-columns: 120px 1fr 36px; gap: 12px; align-items: center; font-family: var(--mono); font-size: 13px; letter-spacing: 0.8px; text-transform: uppercase; color: rgba(2,1,9,0.55); }
+  .meter .tk { height: 8px; border-radius: 100px; background: color-mix(in srgb, var(--accent) 10%, transparent); position: relative; }
+  .meter .tk i { position: absolute; inset: 0 auto 0 0; border-radius: 100px; background: var(--accent); }
+  .meter .v { color: var(--text); text-align: right; }
+  .s3 .closer, .s4 .closer { position: absolute; left: 80px; right: 80px; bottom: 84px; }
+
+  /* ---------- 4 · RECOMMENDATION ---------- */
+  .rec { margin-top: 34px; padding: 0; overflow: hidden; }
+  .rec .top { display: flex; justify-content: space-between; align-items: center; padding: 28px 36px; border-bottom: 1px solid rgba(2,1,9,0.08); }
+  .rec .verdict { display: flex; align-items: center; gap: 16px; margin-top: 10px; font-family: var(--display); font-weight: 500; font-size: 40px; letter-spacing: -1px; }
+  .rec .verdict i { width: 14px; height: 14px; background: #059669; border-radius: 3px; }
+  .rec .btns { display: flex; gap: 12px; }
+  .rec .btn2 { font-size: 20px; font-weight: 500; padding: 14px 22px; border-radius: 8px; border: 1px solid rgba(2,1,9,0.16); color: var(--text); }
+  .rec .btn2.pri { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .rec ul { list-style: none; padding: 8px 36px 14px; }
+  .rec li { display: flex; align-items: center; gap: 22px; padding: 30px 0; border-bottom: 1px dashed rgba(2,1,9,0.1); font-size: 28px; font-weight: 500; }
+  .rec li:last-child { border-bottom: 0; }
+  .rec li .ck { width: 40px; height: 40px; border-radius: 10px; background: #D1FAE5; display: grid; place-items: center; flex-shrink: 0; }
+  .rec li .ck svg { width: 22px; height: 22px; fill: none; stroke: #059669; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+
+  .rec .sig { display: flex; gap: 34px; padding: 24px 36px; background: #F4F3EE; border-top: 1px solid rgba(2,1,9,0.06); font-family: var(--mono); font-size: 17px; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(2,1,9,0.6); }
+  .rec .sig span { display: inline-flex; align-items: center; gap: 10px; }
+  .rec .sig i { width: 10px; height: 10px; border-radius: 2px; }
+  .rec .sig i.ok { background: #059669; } .rec .sig i.nv { background: var(--accent); }
+  /* ---------- 5 · END ---------- */
+  .s5 .center { position: absolute; inset: 0; display: grid; place-items: center; }
+  .s5 .center img { height: 96px; }
+</style>
+</head>
+<body>
+
+<section class="slide dark s1">
+  <img class="hero" src="../ChatGPT%20Image%20Aug%2013,%202026,%2003_15_58%20PM.png" alt="">
+  <div class="fade"></div>
+  <div class="topbar"><img src="../Logo-Light.svg" alt="hackerearth"><span class="counter"><b>01</b> / 05</span></div>
+  <div class="score">
+    <div class="lbl">Overall score</div>
+    <div class="num">82<span> /100</span></div>
+    <div class="ev">Evidence<b>?</b></div>
+  </div>
+  <div class="copy">
+    <h1>AI gave you a score.<br><em>Where’s the evidence<br>to back it up?</em></h1>
+    <p class="lead">Hiring decisions need more than numbers.<br><strong>They need proof.</strong></p>
+    <div class="swipe"><span class="rule"></span><span class="arrow">→</span></div>
+  </div>
+</section>
+
+<section class="slide cream s2">
+  <div class="topbar"><img src="../Logo%20Dark.svg" alt="hackerearth"><span class="counter"><b>02</b> / 05</span></div>
+  <div class="content">
+    <h2>Don’t just score candidates. <em>Show what they’re good at.</em></h2>
+    <p class="lead"><strong>OnScreen</strong> maps candidate performance to your evaluation rubric, with scores across role-specific competencies.</p>
+  </div>
+  <div class="panel comp">
+    <div class="head"><span class="mono-label">Backend engineer · rubric</span><span class="overall">4.2<span> /5</span></span></div>
+    <div class="crow top"><span class="nm">Problem solving</span><span class="track"><span class="fill" style="width:92%"></span></span><span class="val">4.6</span></div>
+    <div class="crow"><span class="nm">Code quality</span><span class="track"><span class="fill" style="width:84%"></span></span><span class="val">4.2</span></div>
+    <div class="crow"><span class="nm">Data structures</span><span class="track"><span class="fill" style="width:80%"></span></span><span class="val">4.0</span></div>
+    <div class="crow"><span class="nm">Communication</span><span class="track"><span class="fill" style="width:88%"></span></span><span class="val">4.4</span></div>
+    <div class="crow"><span class="nm">System design</span><span class="track"><span class="fill" style="width:66%"></span></span><span class="val">3.3</span></div>
+  </div>
+</section>
+
+<section class="slide cream s3">
+  <div class="topbar"><img src="../Logo%20Dark.svg" alt="hackerearth"><span class="counter"><b>03</b> / 05</span></div>
+  <div class="content">
+    <h2>Every score should have <em>proof behind it.</em></h2>
+    <p class="lead">See what actually happened in the interview:</p>
+    <div class="ev-list">
+      <div class="panel evc">
+        <div class="t"><span class="i">01</span><span class="x">Full transcripts with key exchanges highlighted.</span></div>
+        <div class="viz tr">
+          <div class="q"><b>AI</b>How would you handle a node with no children?</div>
+          <div>“Then its subtree is just itself, so <mark>I return a signature of one</mark> and memoise it.”</div>
+        </div>
+      </div>
+      <div class="panel evc">
+        <div class="t"><span class="i">02</span><span class="x">Actual code written by the candidate.</span></div>
+        <div class="viz cd"><span class="n">1</span><span class="k">def</span> dfs(node):
+<span class="n">2</span>  sig = tuple(sorted(
+<span class="n">3</span>    dfs(c) <span class="k">for</span> c <span class="k">in</span> kids[node]))
+<span class="n">4</span>  <span class="k">return</span> ids.setdefault(sig,
+<span class="n">5</span>    len(ids))</div>
+      </div>
+      <div class="panel evc">
+        <div class="t"><span class="i">03</span><span class="x">AI-powered evaluation of code quality, correctness, and problem-solving approach.</span></div>
+        <div class="viz ai">
+          <div class="meter"><span>Quality</span><span class="tk"><i style="width:82%"></i></span><span class="v">4.1</span></div>
+          <div class="meter"><span>Correctness</span><span class="tk"><i style="width:94%"></i></span><span class="v">4.7</span></div>
+          <div class="meter"><span>Approach</span><span class="tk"><i style="width:88%"></i></span><span class="v">4.4</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="closer">No unexplained scores. <b>Just reviewable evidence.</b></p>
+</section>
+
+<section class="slide cream s4">
+  <div class="topbar"><img src="../Logo%20Dark.svg" alt="hackerearth"><span class="counter"><b>04</b> / 05</span></div>
+  <div class="content">
+    <h2>AI provides the insights.<br><em>Your team makes the call.</em></h2>
+    <p class="lead">Get structured recommendations backed by:</p>
+    <div class="panel rec">
+      <div class="top">
+        <div><div class="mono-label">Recommendation</div><div class="verdict"><i></i>Advance to next round</div></div>
+        <div class="btns"><span class="btn2">Hold</span><span class="btn2 pri">Advance</span></div>
+      </div>
+      <ul>
+        <li><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Identity verification and proctoring signals.</li>
+        <li><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Interview transcripts and coding evidence.</li>
+        <li><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Competency scores and evaluation insights.</li>
+      </ul>
+      <div class="sig"><span><i class="ok"></i>ID verified</span><span><i class="ok"></i>Proctoring clear</span><span><i class="nv"></i>Score 4.2 / 5</span></div>
+    </div>
+  </div>
+  <p class="closer">No black-box decisions. <b>Just evidence-backed hiring.</b></p>
+</section>
+
+<section class="slide cream s5">
+  <div class="center"><img src="../Logo%20Dark.svg" alt="hackerearth"></div>
+</section>
+
+</body>
+</html>
