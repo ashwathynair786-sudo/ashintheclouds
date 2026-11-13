@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Next Question Post</title>
+<style>
+  @font-face { font-family: "Bricolage"; src: url("../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf") format("truetype"); font-weight: 200 800; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Regular.ttf"); font-weight: 400; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Medium.ttf"); font-weight: 500; }
+
+  :root {
+    --bg: #FBF9F3; --bg-card: #FFFFFF; --text: #020109; --text-muted: #545459;
+    --accent: #13255D; --cta: #FF5722; --lime: #C7F252;
+    --display: "Bricolage", "Geist", sans-serif;
+    --body: "Geist", sans-serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; }
+
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; font-family: var(--body); }
+  .slide.cream { background: var(--bg); color: var(--text); }
+  .slide.dark  { background: var(--text); color: #fff; }
+
+  .topbar { position: absolute; top: 72px; left: 80px; right: 80px; display: flex; justify-content: space-between; align-items: center; z-index: 5; }
+  .topbar img { height: 34px; display: block; }
+  .counter { font-family: var(--mono); font-size: 20px; letter-spacing: 2px; }
+  .cream .counter { color: rgba(2,1,9,0.45); }
+  .dark .counter { color: rgba(255,255,255,0.5); }
+  .counter b { font-weight: 500; }
+  .cream .counter b { color: var(--text); }
+  .dark .counter b { color: #fff; }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 20px; letter-spacing: 2.5px; text-transform: uppercase; }
+  .eyebrow svg { width: 34px; height: 34px; }
+  .c-ring { fill: none; stroke: rgba(2,1,9,0.32); stroke-width: 0.7; }
+  .c-tick { stroke: rgba(2,1,9,0.45); stroke-width: 0.9; }
+  .c-n { stroke: var(--cta); stroke-width: 1.2; }
+  .c-dot { fill: var(--cta); }
+  .cream .eyebrow { color: rgba(2,1,9,0.45); }
+  .dark .eyebrow { color: rgba(255,255,255,0.45); }
+  .dark .c-ring { stroke: rgba(255,255,255,0.42); }
+  .dark .c-tick { stroke: rgba(255,255,255,0.55); }
+  .dark .c-n { stroke: var(--lime); }
+  .dark .c-dot { fill: var(--lime); }
+
+  h1, h2 { font-family: var(--display); font-weight: 500; font-variation-settings: "opsz" 96; }
+  h1 em, h2 em { font-style: normal; color: var(--cta); }
+  h2 { font-size: 92px; line-height: 0.98; letter-spacing: -2.8px; }
+  .lead { font-size: 31px; line-height: 1.42; }
+  .cream .lead { color: var(--text-muted); }
+  .dark .lead { color: rgba(255,255,255,0.68); }
+  .lead strong { font-weight: 500; }
+  .cream .lead strong { color: var(--text); }
+  .dark .lead strong { color: #fff; }
+
+  .topo { position: absolute; pointer-events: none; }
+  .topo path { fill: none; stroke-width: 0.9; }
+  .cream .topo path { stroke: rgba(19,37,93,0.22); }
+  .cream .topo path.major { stroke: rgba(19,37,93,0.36); stroke-width: 1.1; }
+  .cream .topo path.cta { stroke: rgba(255,87,34,0.45); }
+  .dark .topo path { stroke: rgba(255,255,255,0.18); }
+  .dark .topo path.major { stroke: rgba(255,255,255,0.28); stroke-width: 1.1; }
+  .dark .topo path.lime { stroke: rgba(199,242,82,0.55); }
+
+  /* tick-frame divider (DS stat-tick pattern) */
+  .marks { position: absolute; top: -4px; left: 0; right: 0; height: 8px; display: flex; justify-content: space-between; }
+  .marks span { width: 1px; height: 8px; }
+  .cream .marks span { background: rgba(2,1,9,0.3); }
+  .dark .marks span { background: rgba(255,255,255,0.3); }
+  .cream .marks span:first-child { background: var(--cta); width: 2px; }
+  .dark .marks span:first-child { background: var(--lime); width: 2px; }
+
+  
+  h2 { font-size: 80px; line-height: 1.0; letter-spacing: -2.4px; }
+  .content { position: absolute; top: 190px; left: 80px; right: 80px; }
+  .content h2 { margin-bottom: 30px; }
+  .closer { font-family: var(--display); font-weight: 500; font-size: 38px; line-height: 1.15; letter-spacing: -0.8px; color: var(--accent); }
+  .closer b { font-weight: 500; color: var(--text); }
+  .panel { background: var(--bg-card); border: 1px solid rgba(2,1,9,0.08); border-radius: 20px; box-shadow: 0 24px 50px -28px rgba(19,37,93,0.35); }
+  .mono-label { font-family: var(--mono); font-size: 16px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(2,1,9,0.45); }
+
+  
+
+
+  .p .content { position: absolute; top: 170px; left: 80px; right: 80px; }
+  .p h2 { font-size: 92px; line-height: 0.97; letter-spacing: -3px; margin-bottom: 30px; }
+  .p .lead { font-size: 30px; line-height: 1.42; }
+  .thread { position: absolute; left: 80px; right: 80px; top: 592px; display: flex; flex-direction: column; gap: 22px; }
+  .who { font-family: var(--mono); font-size: 14px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+  .msg { width: fit-content; max-width: 720px; text-align: left; padding: 24px 28px; border-radius: 18px; font-size: 25px; line-height: 1.38; }
+  .msg.ai { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-bottom-left-radius: 6px; color: rgba(255,255,255,0.9); }
+  .msg.cand { align-self: flex-end; background: #fff; color: var(--text); border-bottom-right-radius: 6px; }
+  .msg.cand mark { background: rgba(199,242,82,0.9); color: var(--text); padding: 1px 4px; border-radius: 4px; }
+  .r { align-self: flex-end; display: flex; flex-direction: column; align-items: flex-end; }
+  .next { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+  .opt { border-radius: 16px; padding: 24px 24px 26px; display: flex; flex-direction: column; gap: 12px; }
+  .opt .tg { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 14px; letter-spacing: 1.6px; text-transform: uppercase; }
+  .opt .tx { font-size: 24px; line-height: 1.35; }
+  .opt.skip { border: 1.5px dashed rgba(255,255,255,0.18); }
+  .opt.skip .tg { color: rgba(255,255,255,0.4); }
+  .opt.skip .tx { color: rgba(255,255,255,0.35); text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.3); }
+  .opt.pick { background: rgba(255,255,255,0.06); border: 1.5px solid rgba(199,242,82,0.75); }
+  .opt.pick .tg { color: var(--lime); }
+  .opt.pick .tg i { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px rgba(199,242,82,0.2); }
+  .opt.pick .tx { color: #fff; }
+  .foot { position: absolute; left: 80px; right: 80px; bottom: 80px; }
+  .btn { display: inline-flex; align-items: center; gap: 14px; background: var(--cta); color: #fff; font-weight: 500; font-size: 28px; padding: 22px 38px; border-radius: 12px; }
+</style>
+</head>
+<body>
+
+<section class="slide dark p">
+  <div class="topbar"><img src="../Logo-Light.svg" alt="hackerearth"></div>
+  <div class="content">
+    <h2>AI that knows when to ask <em>the next question.</em></h2>
+    <p class="lead">Dynamic interviews that go beyond scripted questions and explore <strong>how candidates actually think.</strong></p>
+  </div>
+  <div class="thread">
+    <div><div class="who">OnScreen AI</div><div class="msg ai">How would you design a rate limiter for our API?</div></div>
+    <div class="r"><div class="who">Candidate</div><div class="msg cand">A token bucket per user, but I’d <mark>fall back to a global limit under heavy load.</mark></div></div>
+    <div class="next">
+      <div class="opt skip"><span class="tg">Scripted · Q4</span><span class="tx">Tell me about a time you worked in a team.</span></div>
+      <div class="opt pick"><span class="tg"><i></i>Next question</span><span class="tx">How does that global limit stay fair across regions?</span></div>
+    </div>
+  </div>
+  <div class="foot"><span class="btn">Discover OnScreen <span>→</span></span></div>
+</section>
+
+</body>
+</html>
