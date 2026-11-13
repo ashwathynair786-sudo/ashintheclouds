@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Why This Score</title>
+<style>
+  @font-face { font-family: "Bricolage"; src: url("../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf") format("truetype"); font-weight: 200 800; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Regular.ttf"); font-weight: 400; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Medium.ttf"); font-weight: 500; }
+
+  :root {
+    --bg: #FBF9F3; --bg-card: #FFFFFF; --text: #020109; --text-muted: #545459;
+    --accent: #13255D; --cta: #FF5722; --lime: #C7F252;
+    --display: "Bricolage", "Geist", sans-serif;
+    --body: "Geist", sans-serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; }
+
+  .slide { width: 1200px; height: 1200px; position: relative; overflow: hidden; font-family: var(--body); }
+  .slide.cream { background: var(--bg); color: var(--text); }
+  .slide.dark  { background: var(--text); color: #fff; }
+
+  .topbar { position: absolute; top: 72px; left: 80px; right: 80px; display: flex; justify-content: space-between; align-items: center; z-index: 5; }
+  .topbar img { height: 34px; display: block; }
+  .counter { font-family: var(--mono); font-size: 20px; letter-spacing: 2px; }
+  .cream .counter { color: rgba(2,1,9,0.45); }
+  .dark .counter { color: rgba(255,255,255,0.5); }
+  .counter b { font-weight: 500; }
+  .cream .counter b { color: var(--text); }
+  .dark .counter b { color: #fff; }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 20px; letter-spacing: 2.5px; text-transform: uppercase; }
+  .eyebrow svg { width: 34px; height: 34px; }
+  .c-ring { fill: none; stroke: rgba(2,1,9,0.32); stroke-width: 0.7; }
+  .c-tick { stroke: rgba(2,1,9,0.45); stroke-width: 0.9; }
+  .c-n { stroke: var(--cta); stroke-width: 1.2; }
+  .c-dot { fill: var(--cta); }
+  .cream .eyebrow { color: rgba(2,1,9,0.45); }
+  .dark .eyebrow { color: rgba(255,255,255,0.45); }
+  .dark .c-ring { stroke: rgba(255,255,255,0.42); }
+  .dark .c-tick { stroke: rgba(255,255,255,0.55); }
+  .dark .c-n { stroke: var(--lime); }
+  .dark .c-dot { fill: var(--lime); }
+
+  h1, h2 { font-family: var(--display); font-weight: 500; font-variation-settings: "opsz" 96; }
+  h1 em, h2 em { font-style: normal; color: var(--cta); }
+  h2 { font-size: 92px; line-height: 0.98; letter-spacing: -2.8px; }
+  .lead { font-size: 31px; line-height: 1.42; }
+  .cream .lead { color: var(--text-muted); }
+  .dark .lead { color: rgba(255,255,255,0.68); }
+  .lead strong { font-weight: 500; }
+  .cream .lead strong { color: var(--text); }
+  .dark .lead strong { color: #fff; }
+
+  .topo { position: absolute; pointer-events: none; }
+  .topo path { fill: none; stroke-width: 0.9; }
+  .cream .topo path { stroke: rgba(19,37,93,0.22); }
+  .cream .topo path.major { stroke: rgba(19,37,93,0.36); stroke-width: 1.1; }
+  .cream .topo path.cta { stroke: rgba(255,87,34,0.45); }
+  .dark .topo path { stroke: rgba(255,255,255,0.18); }
+  .dark .topo path.major { stroke: rgba(255,255,255,0.28); stroke-width: 1.1; }
+  .dark .topo path.lime { stroke: rgba(199,242,82,0.55); }
+
+  /* tick-frame divider (DS stat-tick pattern) */
+  .marks { position: absolute; top: -4px; left: 0; right: 0; height: 8px; display: flex; justify-content: space-between; }
+  .marks span { width: 1px; height: 8px; }
+  .cream .marks span { background: rgba(2,1,9,0.3); }
+  .dark .marks span { background: rgba(255,255,255,0.3); }
+  .cream .marks span:first-child { background: var(--cta); width: 2px; }
+  .dark .marks span:first-child { background: var(--lime); width: 2px; }
+
+  
+  h2 { font-size: 80px; line-height: 1.0; letter-spacing: -2.4px; }
+  .content { position: absolute; top: 190px; left: 80px; right: 80px; }
+  .content h2 { margin-bottom: 30px; }
+  .closer { font-family: var(--display); font-weight: 500; font-size: 38px; line-height: 1.15; letter-spacing: -0.8px; color: var(--accent); }
+  .closer b { font-weight: 500; color: var(--text); }
+  .panel { background: var(--bg-card); border: 1px solid rgba(2,1,9,0.08); border-radius: 20px; box-shadow: 0 24px 50px -28px rgba(19,37,93,0.35); }
+  .mono-label { font-family: var(--mono); font-size: 16px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(2,1,9,0.45); }
+
+  
+
+  .p .content { position: absolute; top: 172px; left: 80px; right: 80px; }
+  .p h2 { font-size: 70px; line-height: 1.0; letter-spacing: -2.2px; margin-bottom: 26px; }
+  .p .lead { font-size: 27px; line-height: 1.45; max-width: 1020px; }
+  .panel { position: absolute; left: 80px; right: 80px; top: 560px; height: 440px; display: grid; grid-template-columns: 300px 1fr; border-radius: 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
+  .scorecol { padding: 34px 32px; border-right: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; }
+  .lbl { font-family: var(--mono); font-size: 14px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .big { font-family: var(--display); font-weight: 500; font-size: 104px; line-height: 1; letter-spacing: -3.5px; margin: 14px 0 0; }
+  .big span { font-size: 0.4em; color: rgba(255,255,255,0.45); letter-spacing: 0; font-weight: 400; }
+  .ask { margin-top: auto; display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; padding: 14px 18px; border-radius: 14px 14px 14px 4px; background: #fff; color: var(--text); font-size: 21px; font-weight: 500; }
+  .rows { display: flex; flex-direction: column; }
+  .row { flex: 1; padding: 22px 30px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; justify-content: center; gap: 12px; position: relative; }
+  .row:last-child { border-bottom: 0; }
+  .row::before { content: ""; position: absolute; left: -1px; top: 50%; width: 14px; height: 1px; background: rgba(255,255,255,0.35); }
+  .row .lbl { display: flex; align-items: center; gap: 10px; }
+  .row .lbl i { width: 8px; height: 8px; border-radius: 2px; background: rgba(255,255,255,0.4); }
+  .q { font-size: 19px; line-height: 1.4; color: rgba(255,255,255,0.75); }
+  .q mark { background: rgba(199,242,82,0.85); color: var(--text); padding: 1px 4px; border-radius: 3px; }
+  .bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .bar { font-size: 16px; color: rgba(255,255,255,0.75); display: flex; flex-direction: column; gap: 8px; }
+  .bar .top { display: flex; justify-content: space-between; }
+  .bar .top b { font-family: var(--mono); font-weight: 400; color: #fff; }
+  .bar .tk { height: 7px; border-radius: 100px; background: rgba(255,255,255,0.1); position: relative; }
+  .bar .tk i { position: absolute; inset: 0 auto 0 0; border-radius: 100px; background: #fff; }
+  .code { display: flex; gap: 12px; flex-wrap: wrap; }
+  .chip { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); font-family: var(--mono); font-size: 15px; color: rgba(255,255,255,0.85); }
+  .chip i { width: 9px; height: 9px; border-radius: 2px; background: #059669; }
+  .closer { position: absolute; left: 80px; right: 80px; bottom: 76px; display: flex; align-items: center; gap: 24px; font-family: var(--display); font-weight: 500; font-size: 40px; letter-spacing: -1px; color: #fff; }
+  .closer .mut { color: rgba(255,255,255,0.5); }
+  .closer .rule { flex: 1; height: 1px; background: rgba(255,255,255,0.18); position: relative; }
+  .closer .rule::after { content: ""; position: absolute; right: 0; top: -4px; width: 2px; height: 9px; background: var(--lime); }
+</style>
+</head>
+<body>
+
+<section class="slide dark p">
+  <div class="topbar"><img src="../Logo-Light.svg" alt="hackerearth"></div>
+  <div class="content">
+    <h2>When a hiring manager asks<br>“Why this score?”, <em>you should<br>have an answer.</em></h2>
+    <p class="lead"><strong>OnScreen</strong> backs candidate evaluations with highlighted interview exchanges, competency scores, code insights, and clear evidence.</p>
+  </div>
+  <div class="panel">
+    <div class="scorecol">
+      <span class="lbl">Overall score</span>
+      <div class="big">4.2<span> /5</span></div>
+      <span class="ask">Why this score?</span>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <span class="lbl"><i></i>Highlighted exchange</span>
+        <div class="q">“I’d cache at the edge first, because <mark>reads outnumber writes 50 to 1</mark> here.”</div>
+      </div>
+      <div class="row">
+        <span class="lbl"><i></i>Competency scores</span>
+        <div class="bars">
+          <div class="bar"><span class="top">System design <b>4.4</b></span><span class="tk"><i style="width:88%"></i></span></div>
+          <div class="bar"><span class="top">Coding <b>4.1</b></span><span class="tk"><i style="width:82%"></i></span></div>
+          <div class="bar"><span class="top">Reasoning <b>4.3</b></span><span class="tk"><i style="width:86%"></i></span></div>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl"><i></i>Code insights</span>
+        <div class="code"><span class="chip"><i></i>All tests pass</span><span class="chip"><i></i>Edge cases handled</span><span class="chip"><i></i>O(n log n)</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="closer"><span><span class="mut">Less guesswork.</span> Better hiring decisions.</span><span class="rule"></span></div>
+</section>
+
+</body>
+</html>
