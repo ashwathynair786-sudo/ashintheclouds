@@ -81,60 +81,25 @@
   .mono-label { font-family: var(--mono); font-size: 16px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(2,1,9,0.45); }
 
   
-  .p .content { position: absolute; top: 168px; left: 80px; right: 80px; }
-  .p h2 { font-size: 78px; line-height: 0.98; letter-spacing: -2.6px; margin-bottom: 28px; }
-  .p .lead { font-size: 29px; max-width: 980px; }
-  .pair { position: absolute; left: 80px; right: 80px; top: 500px; height: 470px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .card { position: relative; border-radius: 20px; overflow: hidden; }
-  .card.resume { background: #1a2333; }
-  .card.resume img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 55%; filter: saturate(0.35) brightness(0.92); }
-  .card .tag { position: absolute; top: 20px; left: 20px; display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 100px; font-family: var(--mono); font-size: 15px; letter-spacing: 1.4px; text-transform: uppercase; }
-  .card.resume .tag { background: rgba(2,1,9,0.6); color: rgba(255,255,255,0.8); }
-  .card.iv { background: var(--bg-card); border: 1px solid rgba(2,1,9,0.08); box-shadow: 0 26px 54px -26px rgba(19,37,93,0.4); padding: 84px 30px 32px; display: flex; flex-direction: column; gap: 12px; }
-  .card.iv .tag { background: #F4F3EE; color: var(--accent); }
-  .card.iv .tag i { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 3px rgba(199,242,82,0.3); }
-  .quote { background: #F4F3EE; border-radius: 12px; padding: 18px 20px; font-size: 19px; line-height: 1.4; color: var(--text-muted); }
-  .quote b { text-transform: uppercase; font-family: var(--mono); font-weight: 500; font-size: 14px; letter-spacing: 1px; color: var(--accent); margin-right: 6px; }
-  .quote mark { background: color-mix(in srgb, var(--lime) 70%, transparent); color: var(--text); padding: 1px 3px; border-radius: 3px; }
-  .meters { display: flex; flex-direction: column; gap: 18px; padding: 22px 2px 0; margin-top: auto; border-top: 1px dashed rgba(2,1,9,0.12); }
-  .quote.fu { background: color-mix(in srgb, var(--accent) 6%, transparent); color: var(--text); }
-  .quote.fu b { color: var(--accent); }
-  .m { display: grid; grid-template-columns: 186px 1fr 38px; gap: 14px; align-items: center; font-size: 21px; font-weight: 500; }
-  .m .tk { height: 9px; border-radius: 100px; background: color-mix(in srgb, var(--accent) 10%, transparent); position: relative; }
-  .m .tk i { position: absolute; inset: 0 auto 0 0; border-radius: 100px; background: var(--accent); }
-  .m .v { font-family: var(--mono); font-size: 18px; text-align: right; font-weight: 400; }
-  .arrow-chip { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; z-index: 5; border: 5px solid var(--bg); }
-  .arrow-chip svg { width: 26px; height: 26px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-  .foot { position: absolute; left: 80px; right: 80px; bottom: 72px; display: flex; align-items: center; }
-  .btn { display: inline-flex; align-items: center; gap: 14px; background: var(--cta); color: #fff; font-weight: 500; font-size: 28px; padding: 22px 38px; border-radius: 12px; }
+  .p .content { position: absolute; top: 160px; left: 80px; right: 80px; z-index: 3; }
+  .p h2 { font-size: 80px; line-height: 0.98; letter-spacing: -2.6px; margin-bottom: 28px; }
+  .p .lead { font-size: 29px; max-width: 1000px; }
+  .btn { display: inline-flex; align-items: center; gap: 14px; margin-top: 40px; background: var(--cta); color: #fff; font-weight: 500; font-size: 27px; padding: 20px 34px; border-radius: 12px; }
+  .hero { position: absolute; left: 0; bottom: 0; width: 1200px; height: 676px; object-fit: cover; }
+  .fade { position: absolute; left: 0; right: 0; bottom: 0; height: 676px; background: linear-gradient(180deg, #020109 0%, rgba(2,1,9,0.55) 14%, rgba(2,1,9,0) 32%); }
 </style>
 </head>
 <body>
 
-<section class="slide cream p">
-  <div class="topbar"><img src="../Logo%20Dark.svg" alt="hackerearth"></div>
+<section class="slide dark p">
+  <img class="hero" src="../Futuristic%20AI%20Interview%20Call.png" alt="">
+  <div class="fade"></div>
+  <div class="topbar"><img src="../Logo-Light.svg" alt="hackerearth"></div>
   <div class="content">
     <h2>A resume shows experience.<br><em>An interview reveals expertise.</em></h2>
     <p class="lead">Go beyond candidate credentials with adaptive interviews that evaluate <strong>reasoning, technical depth, and problem-solving.</strong></p>
+    <span class="btn">Discover OnScreen <span>→</span></span>
   </div>
-  <div class="pair">
-    <div class="card resume">
-      <img src="../shutterstock_1799890306.jpg" alt="">
-      <span class="tag">Experience</span>
-    </div>
-    <div class="card iv">
-      <span class="tag"><i></i>Expertise</span>
-      <div class="quote"><b>AI</b>Why a heap here and not a sorted list?<br>“Inserts stay <mark>O(log n) while we stream events</mark>, and we only ever need the minimum.”</div>
-      <div class="quote fu"><b>Follow-up</b>And if events arrive out of order?</div>
-      <div class="meters">
-        <div class="m"><span>Reasoning</span><span class="tk"><i style="width:90%"></i></span><span class="v">4.5</span></div>
-        <div class="m"><span>Technical depth</span><span class="tk"><i style="width:84%"></i></span><span class="v">4.2</span></div>
-        <div class="m"><span>Problem-solving</span><span class="tk"><i style="width:92%"></i></span><span class="v">4.6</span></div>
-      </div>
-    </div>
-    <span class="arrow-chip"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-  </div>
-  <div class="foot"><span class="btn">Discover OnScreen <span>→</span></span></div>
 </section>
 
 </body>
