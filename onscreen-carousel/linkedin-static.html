@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Resume vs Interview</title>
+<style>
+  @font-face { font-family: "Bricolage"; src: url("../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf") format("truetype"); font-weight: 200 800; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Regular.ttf"); font-weight: 400; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Medium.ttf"); font-weight: 500; }
+
+  :root {
+    --bg: #FBF9F3; --bg-card: #FFFFFF; --text: #020109; --text-muted: #545459;
+    --accent: #13255D; --cta: #FF5722; --lime: #C7F252;
+    --display: "Bricolage", "Geist", sans-serif;
+    --body: "Geist", sans-serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; }
+
+  .slide { width: 1200px; height: 1200px; position: relative; overflow: hidden; font-family: var(--body); }
+  .slide.cream { background: var(--bg); color: var(--text); }
+  .slide.dark  { background: var(--text); color: #fff; }
+
+  .topbar { position: absolute; top: 72px; left: 80px; right: 80px; display: flex; justify-content: space-between; align-items: center; z-index: 5; }
+  .topbar img { height: 34px; display: block; }
+  .counter { font-family: var(--mono); font-size: 20px; letter-spacing: 2px; }
+  .cream .counter { color: rgba(2,1,9,0.45); }
+  .dark .counter { color: rgba(255,255,255,0.5); }
+  .counter b { font-weight: 500; }
+  .cream .counter b { color: var(--text); }
+  .dark .counter b { color: #fff; }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 20px; letter-spacing: 2.5px; text-transform: uppercase; }
+  .eyebrow svg { width: 34px; height: 34px; }
+  .c-ring { fill: none; stroke: rgba(2,1,9,0.32); stroke-width: 0.7; }
+  .c-tick { stroke: rgba(2,1,9,0.45); stroke-width: 0.9; }
+  .c-n { stroke: var(--cta); stroke-width: 1.2; }
+  .c-dot { fill: var(--cta); }
+  .cream .eyebrow { color: rgba(2,1,9,0.45); }
+  .dark .eyebrow { color: rgba(255,255,255,0.45); }
+  .dark .c-ring { stroke: rgba(255,255,255,0.42); }
+  .dark .c-tick { stroke: rgba(255,255,255,0.55); }
+  .dark .c-n { stroke: var(--lime); }
+  .dark .c-dot { fill: var(--lime); }
+
+  h1, h2 { font-family: var(--display); font-weight: 500; font-variation-settings: "opsz" 96; }
+  h1 em, h2 em { font-style: normal; color: var(--cta); }
+  h2 { font-size: 92px; line-height: 0.98; letter-spacing: -2.8px; }
+  .lead { font-size: 31px; line-height: 1.42; }
+  .cream .lead { color: var(--text-muted); }
+  .dark .lead { color: rgba(255,255,255,0.68); }
+  .lead strong { font-weight: 500; }
+  .cream .lead strong { color: var(--text); }
+  .dark .lead strong { color: #fff; }
+
+  .topo { position: absolute; pointer-events: none; }
+  .topo path { fill: none; stroke-width: 0.9; }
+  .cream .topo path { stroke: rgba(19,37,93,0.22); }
+  .cream .topo path.major { stroke: rgba(19,37,93,0.36); stroke-width: 1.1; }
+  .cream .topo path.cta { stroke: rgba(255,87,34,0.45); }
+  .dark .topo path { stroke: rgba(255,255,255,0.18); }
+  .dark .topo path.major { stroke: rgba(255,255,255,0.28); stroke-width: 1.1; }
+  .dark .topo path.lime { stroke: rgba(199,242,82,0.55); }
+
+  /* tick-frame divider (DS stat-tick pattern) */
+  .marks { position: absolute; top: -4px; left: 0; right: 0; height: 8px; display: flex; justify-content: space-between; }
+  .marks span { width: 1px; height: 8px; }
+  .cream .marks span { background: rgba(2,1,9,0.3); }
+  .dark .marks span { background: rgba(255,255,255,0.3); }
+  .cream .marks span:first-child { background: var(--cta); width: 2px; }
+  .dark .marks span:first-child { background: var(--lime); width: 2px; }
+
+  
+  h2 { font-size: 80px; line-height: 1.0; letter-spacing: -2.4px; }
+  .content { position: absolute; top: 190px; left: 80px; right: 80px; }
+  .content h2 { margin-bottom: 30px; }
+  .closer { font-family: var(--display); font-weight: 500; font-size: 38px; line-height: 1.15; letter-spacing: -0.8px; color: var(--accent); }
+  .closer b { font-weight: 500; color: var(--text); }
+  .panel { background: var(--bg-card); border: 1px solid rgba(2,1,9,0.08); border-radius: 20px; box-shadow: 0 24px 50px -28px rgba(19,37,93,0.35); }
+  .mono-label { font-family: var(--mono); font-size: 16px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(2,1,9,0.45); }
+
+  
+  .p .content { position: absolute; top: 168px; left: 80px; right: 80px; }
+  .p h2 { font-size: 78px; line-height: 0.98; letter-spacing: -2.6px; margin-bottom: 28px; }
+  .p .lead { font-size: 29px; max-width: 980px; }
+  .pair { position: absolute; left: 80px; right: 80px; top: 500px; height: 470px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .card { position: relative; border-radius: 20px; overflow: hidden; }
+  .card.resume { background: #1a2333; }
+  .card.resume img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 55%; filter: saturate(0.35) brightness(0.92); }
+  .card .tag { position: absolute; top: 20px; left: 20px; display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 100px; font-family: var(--mono); font-size: 15px; letter-spacing: 1.4px; text-transform: uppercase; }
+  .card.resume .tag { background: rgba(2,1,9,0.6); color: rgba(255,255,255,0.8); }
+  .card.iv { background: var(--bg-card); border: 1px solid rgba(2,1,9,0.08); box-shadow: 0 26px 54px -26px rgba(19,37,93,0.4); padding: 84px 30px 32px; display: flex; flex-direction: column; gap: 12px; }
+  .card.iv .tag { background: #F4F3EE; color: var(--accent); }
+  .card.iv .tag i { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 3px rgba(199,242,82,0.3); }
+  .quote { background: #F4F3EE; border-radius: 12px; padding: 18px 20px; font-size: 19px; line-height: 1.4; color: var(--text-muted); }
+  .quote b { text-transform: uppercase; font-family: var(--mono); font-weight: 500; font-size: 14px; letter-spacing: 1px; color: var(--accent); margin-right: 6px; }
+  .quote mark { background: color-mix(in srgb, var(--lime) 70%, transparent); color: var(--text); padding: 1px 3px; border-radius: 3px; }
+  .meters { display: flex; flex-direction: column; gap: 18px; padding: 22px 2px 0; margin-top: auto; border-top: 1px dashed rgba(2,1,9,0.12); }
+  .quote.fu { background: color-mix(in srgb, var(--accent) 6%, transparent); color: var(--text); }
+  .quote.fu b { color: var(--accent); }
+  .m { display: grid; grid-template-columns: 186px 1fr 38px; gap: 14px; align-items: center; font-size: 21px; font-weight: 500; }
+  .m .tk { height: 9px; border-radius: 100px; background: color-mix(in srgb, var(--accent) 10%, transparent); position: relative; }
+  .m .tk i { position: absolute; inset: 0 auto 0 0; border-radius: 100px; background: var(--accent); }
+  .m .v { font-family: var(--mono); font-size: 18px; text-align: right; font-weight: 400; }
+  .arrow-chip { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; z-index: 5; border: 5px solid var(--bg); }
+  .arrow-chip svg { width: 26px; height: 26px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .foot { position: absolute; left: 80px; right: 80px; bottom: 72px; display: flex; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 14px; background: var(--cta); color: #fff; font-weight: 500; font-size: 28px; padding: 22px 38px; border-radius: 12px; }
+</style>
+</head>
+<body>
+
+<section class="slide cream p">
+  <div class="topbar"><img src="../Logo%20Dark.svg" alt="hackerearth"></div>
+  <div class="content">
+    <h2>A resume shows experience.<br><em>An interview reveals expertise.</em></h2>
+    <p class="lead">Go beyond candidate credentials with adaptive interviews that evaluate <strong>reasoning, technical depth, and problem-solving.</strong></p>
+  </div>
+  <div class="pair">
+    <div class="card resume">
+      <img src="../shutterstock_1799890306.jpg" alt="">
+      <span class="tag">Experience</span>
+    </div>
+    <div class="card iv">
+      <span class="tag"><i></i>Expertise</span>
+      <div class="quote"><b>AI</b>Why a heap here and not a sorted list?<br>“Inserts stay <mark>O(log n) while we stream events</mark>, and we only ever need the minimum.”</div>
+      <div class="quote fu"><b>Follow-up</b>And if events arrive out of order?</div>
+      <div class="meters">
+        <div class="m"><span>Reasoning</span><span class="tk"><i style="width:90%"></i></span><span class="v">4.5</span></div>
+        <div class="m"><span>Technical depth</span><span class="tk"><i style="width:84%"></i></span><span class="v">4.2</span></div>
+        <div class="m"><span>Problem-solving</span><span class="tk"><i style="width:92%"></i></span><span class="v">4.6</span></div>
+      </div>
+    </div>
+    <span class="arrow-chip"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </div>
+  <div class="foot"><span class="btn">Discover OnScreen <span>→</span></span></div>
+</section>
+
+</body>
+</html>
