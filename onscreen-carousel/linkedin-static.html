@@ -81,12 +81,14 @@
   .mono-label { font-family: var(--mono); font-size: 16px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(2,1,9,0.45); }
 
   
-  .p .content { position: absolute; top: 160px; left: 80px; right: 80px; z-index: 3; }
-  .p h2 { font-size: 80px; line-height: 0.98; letter-spacing: -2.6px; margin-bottom: 28px; }
+  .p .content { position: absolute; top: 180px; left: 80px; right: 80px; z-index: 3; }
+  .p h2 { font-size: 80px; line-height: 0.98; letter-spacing: -2.6px; margin-bottom: 26px; }
   .p .lead { font-size: 29px; max-width: 1000px; }
-  .btn { display: inline-flex; align-items: center; gap: 14px; margin-top: 40px; background: var(--cta); color: #fff; font-weight: 500; font-size: 27px; padding: 20px 34px; border-radius: 12px; }
-  .hero { position: absolute; left: 0; bottom: 0; width: 1200px; height: 676px; object-fit: cover; }
-  .fade { position: absolute; left: 0; right: 0; bottom: 0; height: 676px; background: linear-gradient(180deg, #020109 0%, rgba(2,1,9,0.55) 14%, rgba(2,1,9,0) 32%); }
+  .hero { position: absolute; left: 0; top: 424px; width: 1200px; height: 676px; object-fit: cover; }
+  .fade { position: absolute; left: 0; right: 0; top: 424px; height: 676px; background:
+      linear-gradient(180deg, #020109 0%, rgba(2,1,9,0.5) 12%, rgba(2,1,9,0) 28%, rgba(2,1,9,0) 66%, rgba(2,1,9,0.85) 86%, #020109 100%); }
+  .foot { position: absolute; left: 80px; right: 80px; bottom: 72px; z-index: 3; display: flex; align-items: center; justify-content: space-between; }
+  .btn { display: inline-flex; align-items: center; gap: 14px; background: var(--cta); color: #fff; font-weight: 500; font-size: 27px; padding: 20px 34px; border-radius: 12px; }
 </style>
 </head>
 <body>
@@ -98,8 +100,8 @@
   <div class="content">
     <h2>A resume shows experience.<br><em>An interview reveals expertise.</em></h2>
     <p class="lead">Go beyond candidate credentials with adaptive interviews that evaluate <strong>reasoning, technical depth, and problem-solving.</strong></p>
-    <span class="btn">Discover OnScreen <span>→</span></span>
   </div>
+  <div class="foot"><span class="btn">Discover OnScreen <span>→</span></span></div>
 </section>
 
 </body>
