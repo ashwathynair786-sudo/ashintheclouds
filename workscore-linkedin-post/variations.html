@@ -15,12 +15,12 @@ body { background: var(--bg-dark); color: #fff; font-family: var(--body); overfl
 .slide.on { display: block; }
 
 /* Image backdrop: fills the top, melts into brand black where the text sits */
-.art { position: absolute; top: 0; left: 0; right: 0; height: 760px; background-size: cover; background-position: 50% 50%; }
+.art { position: absolute; top: 0; left: 0; right: 0; height: 860px; background-size: cover; background-position: 50% 50%; }
 .art::after { content: ''; position: absolute; inset: 0; background:
   linear-gradient(to bottom, rgba(2,1,9,0.55) 0%, rgba(2,1,9,0) 22%, rgba(2,1,9,0) 48%, rgba(2,1,9,0.82) 82%, var(--bg-dark) 100%); }
 .grain { position: absolute; inset: 0; opacity: 0.16; mix-blend-mode: overlay; pointer-events: none; }
 
-.frame { position: absolute; inset: 0; padding: 76px 80px 68px; display: flex; flex-direction: column; }
+.frame { position: absolute; inset: 0; padding: 76px 80px 84px; display: flex; flex-direction: column; }
 .logo svg { height: 40px; width: auto; display: block; }
 .main { margin-top: auto; }
 .eyebrow { display: flex; align-items: center; gap: 14px; font-family: var(--mono); font-size: 19px; letter-spacing: 2.4px; text-transform: uppercase; color: #D6D6DB; margin-bottom: 28px; }
@@ -115,7 +115,6 @@ h1 em { font-style: normal; color: var(--cta); }
         <div class="main">
           <div class="eyebrow">${document.getElementById('compass').innerHTML}${s.dataset.eyebrow}</div>
           ${inner}
-          <div class="foot"><div class="marks">${'<i></i>'.repeat(41)}</div><span><b>HackerEarth WorkScore&trade;</b></span><span>The agentic skills evaluation platform</span></div>
         </div>
       </div>`;
     if (n === want) s.classList.add('on');
