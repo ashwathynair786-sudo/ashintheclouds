@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>WorkScore LinkedIn Carousel</title>
+<title>WorkScore LinkedIn Variations</title>
 <style>
 @font-face { font-family: 'Bricolage Grotesque'; src: url('../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype'); font-weight: 200 800; }
 @font-face { font-family: 'Geist'; src: url('../Geist-Regular.ttf') format('truetype'); font-weight: 400; }
@@ -15,7 +15,7 @@ body { background: var(--bg-dark); color: #fff; font-family: var(--body); overfl
 .slide.on { display: block; }
 
 /* Image backdrop: fills the top, melts into brand black where the text sits */
-.art { position: absolute; top: 0; left: 0; right: 0; height: 900px; background-size: cover; background-position: 50% 50%; }
+.art { position: absolute; top: 0; left: 0; right: 0; height: 760px; background-size: cover; background-position: 50% 50%; }
 .art::after { content: ''; position: absolute; inset: 0; background:
   linear-gradient(to bottom, rgba(2,1,9,0.55) 0%, rgba(2,1,9,0) 22%, rgba(2,1,9,0) 48%, rgba(2,1,9,0.82) 82%, var(--bg-dark) 100%); }
 .grain { position: absolute; inset: 0; opacity: 0.16; mix-blend-mode: overlay; pointer-events: none; }
@@ -30,16 +30,19 @@ body { background: var(--bg-dark); color: #fff; font-family: var(--body); overfl
 .compass .c-n { stroke: var(--lime); stroke-width: 1.2; }
 .compass .c-dot { fill: var(--lime); }
 
-h1 { font-family: var(--display); font-weight: 500; font-size: 86px; line-height: 0.99; letter-spacing: -2.4px; font-variation-settings: 'opsz' 96; }
+h1 { font-family: var(--display); font-weight: 500; font-size: 72px; line-height: 1; letter-spacing: -2px; font-variation-settings: 'opsz' 96; }
 h1.md { font-size: 78px; letter-spacing: -2.1px; }
 h1 span { display: block; }
-h1 span + span { margin-top: 18px; }
+h1 span + span { margin-top: 12px; }
+.support { margin-top: 34px; max-width: 840px; font-size: 27px; line-height: 1.4; color: var(--muted); }
+.support p + p { margin-top: 12px; }
+.support p.key { color: #fff; }
 h1 em { font-style: normal; color: var(--cta); }
 .lead { font-size: 33px; line-height: 1.36; color: #D6D6DB; max-width: 860px; }
 .lead.before { margin-bottom: 30px; }
 .lead.after { margin-top: 34px; }
 
-.foot { margin-top: 56px; position: relative; padding-top: 24px; display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); font-size: 16px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--muted); }
+.foot { margin-top: 46px; position: relative; padding-top: 24px; display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); font-size: 16px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--muted); }
 .foot::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(255,255,255,0.2); }
 .marks { position: absolute; top: -5px; left: 0; right: 0; height: 11px; display: flex; justify-content: space-between; }
 .marks i { display: block; width: 1px; height: 11px; background: rgba(255,255,255,0.3); }
@@ -73,22 +76,35 @@ h1 em { font-style: normal; color: var(--cta); }
 </div></template>
 <template id="compass"><svg class="compass" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" class="c-ring"/><circle cx="11" cy="11" r="5" class="c-ring"/><line x1="11" y1="2" x2="11" y2="6" class="c-n"/><line x1="20" y1="11" x2="16" y2="11" class="c-tick"/><line x1="11" y1="20" x2="11" y2="16" class="c-tick"/><line x1="2" y1="11" x2="6" y2="11" class="c-tick"/><circle cx="11" cy="11" r="1.2" class="c-dot"/></svg></template>
 
-<section class="slide" data-n="1" data-bg="bg/bg-2.jpeg" data-pos="50% 40%" data-eyebrow="Introducing WorkScore&trade;">
+<section class="slide" data-n="1" data-bg="bg/bg-2.jpeg" data-pos="50% 0%" data-eyebrow="Introducing WorkScore&trade;">
   <h1><span>Your workforce is&nbsp;changing.</span><span>Is your <em>definition of&nbsp;talent</em> changing with&nbsp;it?</span></h1>
+  <div class="support">
+    <p>AI is changing how people think, build, solve and deliver.</p>
+    <p>The skills that made someone successful yesterday may not be enough tomorrow.</p>
+    <p class="key">The next generation of talent needs more than technical knowledge. They need to know how to work effectively with&nbsp;AI.</p>
+  </div>
 </section>
 
-<section class="slide" data-n="2" data-bg="bg/bg-1.jpeg" data-pos="50% 50%" data-eyebrow="The shift">
-  <h1 class="md">AI is changing how people <em>think, build, solve and&nbsp;deliver.</em></h1>
-  <p class="lead after">The skills that made someone successful yesterday may not be enough tomorrow.</p>
+<section class="slide" data-n="2" data-bg="bg/bg-1.jpeg" data-pos="50% 100%" data-eyebrow="Introducing WorkScore&trade;">
+  <h1><span>Your workforce is&nbsp;changing.</span><span>Is your <em>definition of&nbsp;talent</em> changing with&nbsp;it?</span></h1>
+  <div class="support">
+    <p>AI is changing how people think, build, solve and deliver.</p>
+    <p>The skills that made someone successful yesterday may not be enough tomorrow.</p>
+    <p class="key">The next generation of talent needs more than technical knowledge. They need to know how to work effectively with&nbsp;AI.</p>
+  </div>
 </section>
 
-<section class="slide" data-n="3" data-bg="bg/bg-3.jpeg" data-pos="50% 30%" data-eyebrow="The new bar">
-  <p class="lead before">The next generation of talent needs more than technical knowledge.</p>
-  <h1 class="md">They need to know how to work <em>effectively with&nbsp;AI.</em></h1>
+<section class="slide" data-n="3" data-bg="bg/bg-3.jpeg" data-pos="50% 0%" data-eyebrow="Introducing WorkScore&trade;">
+  <h1><span>Your workforce is&nbsp;changing.</span><span>Is your <em>definition of&nbsp;talent</em> changing with&nbsp;it?</span></h1>
+  <div class="support">
+    <p>AI is changing how people think, build, solve and deliver.</p>
+    <p>The skills that made someone successful yesterday may not be enough tomorrow.</p>
+    <p class="key">The next generation of talent needs more than technical knowledge. They need to know how to work effectively with&nbsp;AI.</p>
+  </div>
 </section>
 
 <script>
-  const want = new URLSearchParams(location.search).get('slide') || '1';
+  const want = new URLSearchParams(location.search).get('v') || '1';
   document.querySelectorAll('.slide').forEach(s => {
     const inner = s.innerHTML, n = s.dataset.n;
     s.innerHTML = `
@@ -99,7 +115,7 @@ h1 em { font-style: normal; color: var(--cta); }
         <div class="main">
           <div class="eyebrow">${document.getElementById('compass').innerHTML}${s.dataset.eyebrow}</div>
           ${inner}
-          <div class="foot"><div class="marks">${'<i></i>'.repeat(41)}</div><span><b>HackerEarth WorkScore&trade;</b></span><span>0${n} / 03</span></div>
+          <div class="foot"><div class="marks">${'<i></i>'.repeat(41)}</div><span><b>HackerEarth WorkScore&trade;</b></span><span>The agentic skills evaluation platform</span></div>
         </div>
       </div>`;
     if (n === want) s.classList.add('on');
