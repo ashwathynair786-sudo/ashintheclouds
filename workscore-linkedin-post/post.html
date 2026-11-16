@@ -21,6 +21,14 @@ body { background: var(--bg); color: var(--text); font-family: var(--body); posi
 .topo svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .topo::after { content: ''; position: absolute; inset: 0;
   background: radial-gradient(ellipse 78% 62% at 14% 62%, var(--bg) 0%, var(--bg) 46%, transparent 100%); }
+.topo-map { position: absolute; inset: 0; background: url('contour-portland.svg') 72% 50% / cover no-repeat; }
+body.dark .topo-map { display: none; }
+body:not(.dark) .topo svg { display: none; }
+body:not(.dark) .topo { opacity: 0.85; }
+body:not(.dark) .topo::after { background:
+  radial-gradient(ellipse 80% 44% at 30% 60%, var(--bg) 0%, color-mix(in srgb, var(--bg) 93%, transparent) 55%, transparent 100%),
+  radial-gradient(ellipse 85% 26% at 34% 86%, var(--bg) 0%, color-mix(in srgb, var(--bg) 92%, transparent) 60%, transparent 100%),
+  radial-gradient(ellipse 34% 9% at 16% 7.5%, var(--bg) 0%, transparent 100%); }
 .contour { fill: none; stroke-width: 1.35; stroke: rgba(19,37,93,0.22); }
 .contour.major { stroke-width: 1.65; stroke: rgba(19,37,93,0.36); }
 .contour.peak { stroke: rgba(255,87,34,0.45); }
@@ -72,7 +80,7 @@ body.dark .marks i { background: rgba(255,255,255,0.3); } body.dark .marks i:fir
 </style>
 </head>
 <body>
-  <div class="topo"><svg id="topo" viewBox="0 0 1080 1350" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <div class="topo"><div class="topo-map"></div><svg id="topo" viewBox="0 0 1080 1350" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"></svg></div>
 
   <div class="frame">
     <div class="logo"><span class="on-cream"><svg width="161" height="30" viewBox="0 0 161 30" fill="none" xmlns="http://www.w3.org/2000/svg">
