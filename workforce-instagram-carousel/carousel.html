@@ -37,6 +37,9 @@ h1 em { font-style: normal; color: var(--cta); }
 .vis svg { display: block; width: 100%; height: auto; overflow: visible; }
 .vis text { font-family: var(--mono); letter-spacing: 1.6px; }
 
+/* text-only slides */
+.text .support { margin-top: 64px; font-size: 38px; line-height: 1.38; max-width: none; }
+.text .support p + p { margin-top: 30px; }
 /* slide 4 steps */
 .lead4 { margin-top: 36px; }
 .steps { margin: auto 0; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 14px; background: var(--card); overflow: hidden; }
@@ -62,33 +65,8 @@ h1 em { font-style: normal; color: var(--cta); }
 </section>
 
 <!-- 02 -->
-<section class="slide" data-n="2">
+<section class="slide text" data-n="2">
   <h1><span>The agent works with <em>the context you give&nbsp;it.</em></span></h1>
-  <div class="vis">
-    <svg viewBox="0 0 920 440" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.6">
-        <path d="M280 46 C 370 46, 370 220, 450 220"/>
-        <path d="M280 162 C 370 162, 370 220, 450 220"/>
-        <path d="M280 278 C 370 278, 370 220, 450 220"/>
-        <path d="M280 394 C 370 394, 370 220, 450 220"/>
-        <path d="M650 220 L 682 220"/>
-      </g>
-      <path d="M682 211 L 696 220 L 682 229 Z" fill="rgba(255,255,255,0.55)"/>
-      <g font-size="20" fill="#fff">
-        <rect x="0" y="10" width="280" height="72" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)"/><text x="28" y="53">PROBLEM</text>
-        <rect x="0" y="126" width="280" height="72" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)"/><text x="28" y="169">INSTRUCTIONS</text>
-        <rect x="0" y="242" width="280" height="72" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)"/><text x="28" y="285">FILES</text>
-        <rect x="0" y="358" width="280" height="72" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)"/><text x="28" y="401">CONSTRAINTS</text>
-      </g>
-      <rect x="450" y="160" width="200" height="120" rx="14" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.32)"/>
-      <circle cx="480" cy="220" r="6" fill="#C7F252"/>
-      <text x="500" y="227" font-size="20" fill="#fff">AI AGENT</text>
-      <rect x="698" y="160" width="222" height="120" rx="14" fill="none" stroke="rgba(255,255,255,0.32)" stroke-dasharray="6 6"/>
-      <text x="809" y="227" font-size="20" fill="#fff" text-anchor="middle">OUTPUT</text>
-      <text x="809" y="318" font-size="14" fill="#A5A5AD" text-anchor="middle">ONLY AS GOOD AS</text>
-      <text x="809" y="342" font-size="14" fill="#A5A5AD" text-anchor="middle">THE CONTEXT</text>
-    </svg>
-  </div>
   <div class="support">
     <p>Your original problem, instructions, files and constraints shape what the agent produces.</p>
     <p>If you leave out an important requirement or fail to explain what needs to be solved, the agent may deliver something that looks right but misses the actual objective.</p>
@@ -97,26 +75,8 @@ h1 em { font-style: normal; color: var(--cta); }
 </section>
 
 <!-- 03 -->
-<section class="slide" data-n="3">
+<section class="slide text" data-n="3">
   <h1><span>But the agent also <em>shapes your next&nbsp;decision.</em></span></h1>
-  <div class="vis">
-    <svg viewBox="0 0 920 440" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="rgba(255,255,255,0.6)"/></marker>
-      </defs>
-      <rect x="0" y="160" width="290" height="120" rx="14" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.32)"/>
-      <circle cx="34" cy="220" r="6" fill="rgba(255,255,255,0.55)"/>
-      <text x="56" y="227" font-size="20" fill="#fff">AI AGENT</text>
-      <rect x="630" y="160" width="290" height="120" rx="14" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.32)"/>
-      <circle cx="664" cy="220" r="6" fill="#C7F252"/>
-      <text x="686" y="227" font-size="20" fill="#fff">YOU</text>
-      <path d="M190 158 C 290 40, 630 40, 730 154" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" marker-end="url(#ah)"/>
-      <path d="M730 282 C 630 400, 290 400, 190 286" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" marker-end="url(#ah)"/>
-      <text x="460" y="30" font-size="17" fill="#A5A5AD" text-anchor="middle">SUGGESTIONS &#183; CHANGES &#183; RESULTS</text>
-      <text x="460" y="430" font-size="17" fill="#fff" text-anchor="middle">TRUST &#183; QUESTION &#183; OVERRULE</text>
-      <text x="460" y="226" font-size="14" fill="#A5A5AD" text-anchor="middle">REVIEW</text>
-    </svg>
-  </div>
   <div class="support">
     <p>The agent generates suggestions, makes changes and returns results. You review those changes and decide what happens next.</p>
     <p>Sometimes you accept its approach. Sometimes you need to correct its assumptions, provide additional context or redirect its work.</p>
