@@ -12,6 +12,8 @@
 html, body { width: 1080px; height: 1350px; }
 body { background: var(--bg-dark); color: #fff; font-family: var(--body); overflow: hidden; -webkit-font-smoothing: antialiased; }
 .frame { position: absolute; inset: 0; padding: 76px 80px 84px; display: flex; flex-direction: column; }
+.top { display: flex; justify-content: space-between; align-items: center; }
+.tag { font-family: 'JetBrains Mono', monospace; font-size: 18px; letter-spacing: 2.6px; text-transform: uppercase; color: #fff; }
 .logo svg { height: 40px; width: auto; display: block; }
 
 h1 { margin-top: 56px; font-family: var(--display); font-weight: 500; font-size: 68px; line-height: 1.02; letter-spacing: -1.9px; font-variation-settings: 'opsz' 96; }
@@ -31,7 +33,7 @@ h1 em { font-style: normal; color: var(--cta); }
 </head>
 <body>
   <div class="frame">
-    <div class="logo"><svg width="161" height="30" viewBox="0 0 161 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="top"><div class="logo"><svg width="161" height="30" viewBox="0 0 161 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M148.164 22.0002L148.137 2.80322H150.702V22.0002H148.164ZM157.506 22.0002V15.0882L160.044 14.2782V22.0002H157.506ZM157.506 15.0882C157.506 13.8642 157.362 12.9372 157.074 12.3072C156.786 11.6592 156.39 11.2092 155.886 10.9572C155.4 10.7052 154.842 10.5702 154.212 10.5522C153.096 10.5522 152.232 10.9392 151.62 11.7132C151.008 12.4872 150.702 13.5762 150.702 14.9802H149.622C149.622 13.5582 149.829 12.3432 150.243 11.3352C150.657 10.3092 151.251 9.52622 152.025 8.98622C152.817 8.44622 153.753 8.17622 154.833 8.17622C156.471 8.17622 157.749 8.68022 158.667 9.68822C159.603 10.6782 160.062 12.2082 160.044 14.2782L157.506 15.0882Z" fill="white"/>
 <path d="M142.985 22.3241C141.635 22.3241 140.591 21.9821 139.853 21.2981C139.115 20.5961 138.746 19.5971 138.746 18.3011V4.28809H141.311V17.9231C141.311 18.5891 141.473 19.1021 141.797 19.4621C142.139 19.8041 142.625 19.9751 143.255 19.9751C143.435 19.9751 143.633 19.9391 143.849 19.8671C144.065 19.7951 144.326 19.6511 144.632 19.4351L145.604 21.4331C145.136 21.7391 144.686 21.9641 144.254 22.1081C143.84 22.2521 143.417 22.3241 142.985 22.3241ZM136.451 10.7141V8.50009H145.145V10.7141H136.451Z" fill="white"/>
 <path d="M129.927 14.7373C129.927 13.2793 130.206 12.0913 130.764 11.1733C131.322 10.2553 132.042 9.57129 132.924 9.12129C133.806 8.67129 134.733 8.44629 135.705 8.44629V10.8763C134.895 10.8763 134.121 11.0023 133.383 11.2543C132.663 11.4883 132.069 11.8843 131.601 12.4423C131.151 12.9823 130.926 13.7203 130.926 14.6563L129.927 14.7373ZM128.361 22.0003V8.50029H130.926V22.0003H128.361Z" fill="white"/>
@@ -51,7 +53,7 @@ h1 em { font-style: normal; color: var(--cta); }
 </clipPath>
 </defs>
 </svg>
-</div>
+</div><span class="tag">Workforce</span></div>
     <h1>
       <span>The more AI does, the more <em>judgment&nbsp;matters.</em></span>
       <span>Who decides whether the work is&nbsp;right?</span>
