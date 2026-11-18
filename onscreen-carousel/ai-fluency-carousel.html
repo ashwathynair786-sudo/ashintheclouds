@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Fluency Carousel</title>
+<style>
+  @font-face { font-family: "Bricolage"; src: url("../BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf") format("truetype"); font-weight: 200 800; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Regular.ttf"); font-weight: 400; }
+  @font-face { font-family: "Geist"; src: url("../Geist-Medium.ttf"); font-weight: 500; }
+
+  :root {
+    --bg: #FBF9F3; --bg-card: #FFFFFF; --text: #020109; --text-muted: #545459;
+    --accent: #13255D; --cta: #FF5722; --lime: #C7F252;
+    --display: "Bricolage", "Geist", sans-serif;
+    --body: "Geist", sans-serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; }
+
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; font-family: var(--body); }
+  .slide.cream { background: var(--bg); color: var(--text); }
+  .slide.dark  { background: var(--text); color: #fff; }
+
+  .topbar { position: absolute; top: 72px; left: 80px; right: 80px; display: flex; justify-content: space-between; align-items: center; z-index: 5; }
+  .topbar img { height: 34px; display: block; }
+  .counter { font-family: var(--mono); font-size: 20px; letter-spacing: 2px; }
+  .cream .counter { color: rgba(2,1,9,0.45); }
+  .dark .counter { color: rgba(255,255,255,0.5); }
+  .counter b { font-weight: 500; }
+  .cream .counter b { color: var(--text); }
+  .dark .counter b { color: #fff; }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 20px; letter-spacing: 2.5px; text-transform: uppercase; }
+  .eyebrow svg { width: 34px; height: 34px; }
+  .c-ring { fill: none; stroke: rgba(2,1,9,0.32); stroke-width: 0.7; }
+  .c-tick { stroke: rgba(2,1,9,0.45); stroke-width: 0.9; }
+  .c-n { stroke: var(--cta); stroke-width: 1.2; }
+  .c-dot { fill: var(--cta); }
+  .cream .eyebrow { color: rgba(2,1,9,0.45); }
+  .dark .eyebrow { color: rgba(255,255,255,0.45); }
+  .dark .c-ring { stroke: rgba(255,255,255,0.42); }
+  .dark .c-tick { stroke: rgba(255,255,255,0.55); }
+  .dark .c-n { stroke: var(--lime); }
+  .dark .c-dot { fill: var(--lime); }
+
+  h1, h2 { font-family: var(--display); font-weight: 500; font-variation-settings: "opsz" 96; }
+  h1 em, h2 em { font-style: normal; color: var(--cta); }
+  h2 { font-size: 92px; line-height: 0.98; letter-spacing: -2.8px; }
+  .lead { font-size: 31px; line-height: 1.42; }
+  .cream .lead { color: var(--text-muted); }
+  .dark .lead { color: rgba(255,255,255,0.68); }
+  .lead strong { font-weight: 500; }
+  .cream .lead strong { color: var(--text); }
+  .dark .lead strong { color: #fff; }
+
+  .topo { position: absolute; pointer-events: none; }
+  .topo path { fill: none; stroke-width: 0.9; }
+  .cream .topo path { stroke: rgba(19,37,93,0.22); }
+  .cream .topo path.major { stroke: rgba(19,37,93,0.36); stroke-width: 1.1; }
+  .cream .topo path.cta { stroke: rgba(255,87,34,0.45); }
+  .dark .topo path { stroke: rgba(255,255,255,0.18); }
+  .dark .topo path.major { stroke: rgba(255,255,255,0.28); stroke-width: 1.1; }
+  .dark .topo path.lime { stroke: rgba(199,242,82,0.55); }
+
+  /* tick-frame divider (DS stat-tick pattern) */
+  .marks { position: absolute; top: -4px; left: 0; right: 0; height: 8px; display: flex; justify-content: space-between; }
+  .marks span { width: 1px; height: 8px; }
+  .cream .marks span { background: rgba(2,1,9,0.3); }
+  .dark .marks span { background: rgba(255,255,255,0.3); }
+  .cream .marks span:first-child { background: var(--cta); width: 2px; }
+  .dark .marks span:first-child { background: var(--lime); width: 2px; }
+
+  
+  .content { position: absolute; top: 180px; left: 80px; right: 80px; }
+  h1, h2, .take { text-wrap: balance; }
+  .body p { text-wrap: pretty; }
+  h2 { font-size: 70px; line-height: 1.0; letter-spacing: -2.2px; margin: 26px 0 30px; }
+  .body p { font-size: 27px; line-height: 1.45; color: var(--text-muted); }
+  .body p + p { margin-top: 16px; }
+  .body strong { font-weight: 500; color: var(--text); }
+  .take { position: absolute; left: 80px; right: 80px; bottom: 84px; padding-top: 26px; border-top: 1px solid rgba(2,1,9,0.2); font-family: var(--display); font-weight: 500; font-size: 36px; line-height: 1.15; letter-spacing: -0.8px; color: var(--accent); }
+  .take .marks { top: -4px; }
+
+  /* COVER */
+  .s1 .hero { position: absolute; top: 0; left: -120px; width: 1320px; height: 742px; object-fit: cover; }
+  .s1 .fade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2,1,9,0.75) 0%, rgba(2,1,9,0) 14%, rgba(2,1,9,0) 30%, rgba(2,1,9,0.85) 46%, #020109 54%); }
+  .s1 .copy { position: absolute; left: 80px; right: 80px; bottom: 84px; }
+  .s1 h1 { font-size: 76px; line-height: 0.98; letter-spacing: -2.6px; text-wrap: nowrap; margin: 24px 0 30px; }
+  .s1 .body p { color: rgba(255,255,255,0.68); }
+  .s1 .body strong { color: #fff; }
+  .s1 .swipe { margin-top: 40px; display: flex; align-items: center; gap: 18px; }
+  .s1 .swipe .rule { flex: 1; height: 1px; background: rgba(255,255,255,0.2); position: relative; }
+  .s1 .swipe .rule::after { content: ""; position: absolute; left: 0; top: -4px; width: 2px; height: 9px; background: var(--lime); }
+  .s1 .swipe .arrow { color: var(--lime); font-size: 32px; font-family: var(--mono); }
+
+  /* diagram bits */
+  .dg { position: absolute; left: 80px; right: 80px; }
+  .chip { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 12px; background: var(--bg-card); border: 1px solid rgba(2,1,9,0.1); font-size: 22px; font-weight: 500; }
+  .chip i { width: 9px; height: 9px; border-radius: 2px; background: var(--accent); flex-shrink: 0; }
+  .chip.miss { background: transparent; border: 1.5px dashed rgba(2,1,9,0.28); color: rgba(2,1,9,0.45); }
+  .chip.miss i { background: #F59E0B; }
+  .node { width: 160px; height: 160px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; text-align: center; font-family: var(--mono); font-size: 18px; letter-spacing: 1.6px; text-transform: uppercase; box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 10%, transparent); }
+  .node.you { background: var(--text); box-shadow: 0 0 0 10px rgba(2,1,9,0.06); }
+  .arr { color: rgba(2,1,9,0.35); font-family: var(--mono); font-size: 34px; }
+  .lbl { font-family: var(--mono); font-size: 15px; letter-spacing: 1.6px; text-transform: uppercase; color: rgba(2,1,9,0.45); }
+
+  .s2 .dg { top: 760px; display: grid; grid-template-columns: 300px 60px 150px 60px 1fr; align-items: center; gap: 0; }
+  .s2 .ins { display: flex; flex-direction: column; gap: 10px; }
+  .s2 .arr { text-align: center; }
+  .out { background: var(--bg-card); border: 1px solid rgba(2,1,9,0.1); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+  .out .ok { display: flex; align-items: center; gap: 10px; font-size: 21px; font-weight: 500; }
+  .out .ok i { width: 22px; height: 22px; border-radius: 6px; background: #D1FAE5; display: grid; place-items: center; color: #059669; font-size: 14px; font-style: normal; }
+  .out .warn { display: flex; align-items: center; gap: 10px; font-size: 21px; font-weight: 500; padding: 12px 14px; border-radius: 10px; background: #FEF3C7; color: #92400E; }
+  .out .sk { height: 9px; border-radius: 100px; background: rgba(2,1,9,0.08); }
+
+  .s3 .dg { top: 690px; display: grid; grid-template-columns: 160px 1fr 160px 1fr 320px; align-items: center; }
+  .s3 .flow { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 8px; text-align: center; }
+  .s3 .flow .arr { line-height: 1; }
+  .s3 .flow .lbl { font-size: 14px; line-height: 1.4; }
+  .decs { display: flex; flex-direction: column; gap: 12px; }
+  .dec { padding: 16px 20px; border-radius: 12px; background: var(--bg-card); border: 1px solid rgba(2,1,9,0.1); }
+  .dec b { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 500; font-size: 30px; letter-spacing: -0.4px; }
+  .dec b i { width: 9px; height: 9px; border-radius: 2px; }
+  .dec span { display: block; font-size: 18px; color: var(--text-muted); margin-top: 2px; }
+
+  .s4 .dg { top: 560px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .step { position: relative; background: var(--bg-card); border: 1px solid rgba(2,1,9,0.1); border-radius: 16px; padding: 28px 30px 30px; min-height: 236px; display: flex; flex-direction: column; justify-content: space-between; }
+  .step .n { font-family: var(--mono); font-size: 18px; color: var(--accent); letter-spacing: 1px; }
+  .step .t { font-family: var(--display); font-weight: 500; font-size: 46px; line-height: 1.05; letter-spacing: -0.6px; }
+  .step .who { font-family: var(--mono); font-size: 13px; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(2,1,9,0.45); display: flex; align-items: center; gap: 8px; }
+  .step .who i { width: 8px; height: 8px; border-radius: 2px; background: var(--text); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><g id="compass">
+  <circle cx="11" cy="11" r="9" class="c-ring"/><circle cx="11" cy="11" r="5" class="c-ring"/>
+  <line x1="11" y1="2" x2="11" y2="6" class="c-n"/><line x1="20" y1="11" x2="16" y2="11" class="c-tick"/>
+  <line x1="11" y1="20" x2="11" y2="16" class="c-tick"/><line x1="2" y1="11" x2="6" y2="11" class="c-tick"/>
+  <circle cx="11" cy="11" r="1.2" class="c-dot"/></g></defs></svg>
+
+<section class="slide dark s1">
+  <img class="hero" src="../Human%E2%80%93Robot%20Collaboration%20Interface.png" alt="">
+  <div class="fade"></div>
+  <div class="topbar"><img src="../Logo-Light.svg" alt="hackerearth"><span class="counter"><b>01</b> / 04</span></div>
+  <div class="copy">
+    <span class="eyebrow"><svg viewBox="0 0 22 22" class="compass"></svg>[ 01 ] AI fluency</span>
+    <h1>You’re working with<br>an AI agent. <em>But who’s<br>actually steering the work?</em></h1>
+    <div class="body">
+      <p>AI agents can plan, make decisions, edit files and complete entire tasks. But the quality of that work still depends on <strong>the person directing them.</strong></p>
+      <p><strong>Giving an agent a task is one thing. Knowing how to guide it throughout the process is another.</strong></p>
+    </div>
+    <div class="swipe"><span class="rule"></span><span class="arrow">→</span></div>
+  </div>
+</section>
+
+<section class="slide cream s2">
+  <div class="topbar"><img src="../Logo%20Dark.svg" alt="hackerearth"><span class="counter"><b>02</b> / 04</span></div>
+  <div class="content">
+    <span class="eyebrow"><svg viewBox="0 0 22 22" class="compass"></svg>[ 02 ] AI fluency</span>
+    <h2>The agent works with <em>the context you give it.</em></h2>
+    <div class="body">
+      <p>Your original problem, instructions, files and constraints shape what the agent produces.</p>
+      <p>If you leave out an important requirement or fail to explain what needs to be solved, the agent may deliver something that <strong>looks right but misses the actual objective.</strong></p>
+    </div>
+  </div>
+  <div class="dg">
+    <div class="ins">
+      <span class="chip"><i></i>Problem</span>
+      <span class="chip"><i></i>Instructions</span>
+      <span class="chip"><i></i>Files</span>
+      <span class="chip"><i></i>Constraints</span>
+      <span class="chip miss"><i></i>Key requirement?</span>
+    </div>
+    <span class="arr" style="text-align:center">→</span>
+    <span class="node">Agent</span>
+    <span class="arr" style="text-align:center">→</span>
+    <div class="out">
+      <span class="lbl">Output</span>
+      <span class="ok"><i>✓</i>Looks right</span>
+      <span class="sk" style="width:90%"></span><span class="sk" style="width:70%"></span>
+      <span class="warn">Misses the objective</span>
+    </div>
+  </div>
+  <p class="take"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>The quality of the output starts with the quality of the context.</p>
+</section>
+
+<section class="slide cream s3">
+  <div class="topbar"><img src="../Logo%20Dark.svg" alt="hackerearth"><span class="counter"><b>03</b> / 04</span></div>
+  <div class="content">
+    <span class="eyebrow"><svg viewBox="0 0 22 22" class="compass"></svg>[ 03 ] AI fluency</span>
+    <h2>But the agent also <em>shapes your next decision.</em></h2>
+    <div class="body">
+      <p>The agent generates suggestions, makes changes and returns results. You review those changes and decide what happens next.</p>
+      <p>Sometimes you accept its approach. Sometimes you need to correct its assumptions, provide additional context or redirect its work.</p>
+    </div>
+  </div>
+  <div class="dg">
+    <span class="node">Agent</span>
+    <div class="flow"><span class="arr">→</span><span class="lbl">Returns<br>results</span></div>
+    <span class="node you">You</span>
+    <div class="flow"><span class="arr">→</span><span class="lbl">Decide<br>next</span></div>
+    <div class="decs">
+      <div class="dec"><b><i style="background:#059669"></i>Trust</b><span>Accept its approach</span></div>
+      <div class="dec"><b><i style="background:#F59E0B"></i>Question</b><span>Correct assumptions, add context</span></div>
+      <div class="dec"><b><i style="background:#DC2626"></i>Overrule</b><span>Redirect its work</span></div>
+    </div>
+  </div>
+  <p class="take"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>Knowing when to trust, question or overrule the agent is part of working effectively with AI.</p>
+</section>
+
+<section class="slide cream s4">
+  <div class="topbar"><img src="../Logo%20Dark.svg" alt="hackerearth"><span class="counter"><b>04</b> / 04</span></div>
+  <div class="content">
+    <span class="eyebrow"><svg viewBox="0 0 22 22" class="compass"></svg>[ 04 ] AI fluency</span>
+    <h2>Good AI work requires <em>human judgment throughout.</em></h2>
+    <div class="body">
+      <p>The goal isn’t to let an agent take over the entire process. It’s to <strong>direct its capabilities towards the right outcome.</strong></p>
+    </div>
+  </div>
+  <div class="dg">
+    <div class="step"><span class="n">01</span><span class="t">Understand the problem.</span></div>
+    <div class="step"><span class="n">02</span><span class="t">Provide context.</span></div>
+    <div class="step"><span class="n">03</span><span class="t">Review the changes.</span></div>
+    <div class="step"><span class="n">04</span><span class="t">Validate the result.</span></div>
+  </div>
+  <p class="take"><span class="marks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>That’s what separates someone who simply uses AI from someone who knows how to work with it.</p>
+</section>
+
+<script>
+  const c = document.getElementById('compass').innerHTML;
+  document.querySelectorAll('svg.compass').forEach(s => s.innerHTML = c);
+</script>
+</body>
+</html>
