@@ -22,6 +22,7 @@ def contours(cx, cy, n=14, base=60, step=46, seed=3, focal=2, cls_focal="cta"):
 compass = '''<span class="compass"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" class="c-ring"/><circle cx="11" cy="11" r="5" class="c-ring"/><line x1="11" y1="2" x2="11" y2="6" class="c-n"/><line x1="20" y1="11" x2="16" y2="11" class="c-tick"/><line x1="11" y1="20" x2="11" y2="16" class="c-tick"/><line x1="2" y1="11" x2="6" y2="11" class="c-tick"/><circle cx="11" cy="11" r="1.2" class="c-dot"/></svg></span>'''
 
 def eyebrow(num, label):
+    return ''  # eyebrows removed
     return f'<div class="eyebrow">{compass}<span class="bracket">[ {num} ]</span><span>{label}</span></div>'
 
 def footer(i, dark, swipe=True):
