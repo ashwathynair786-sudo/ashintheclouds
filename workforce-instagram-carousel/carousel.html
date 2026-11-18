@@ -38,8 +38,12 @@ h1 em { font-style: normal; color: var(--cta); }
 .vis text { font-family: var(--mono); letter-spacing: 1.6px; }
 
 /* text-only slides */
-.text .support { margin-top: 64px; font-size: 38px; line-height: 1.38; max-width: none; }
-.text .support p + p { margin-top: 30px; }
+.text .group { margin: auto 0; }
+.text h1 { margin-top: 0; }
+.text .support { margin-top: 52px; font-size: 33px; line-height: 1.45; max-width: 900px; }
+.text .support p + p { margin-top: 24px; }
+.text .punch { margin-top: 56px; padding-top: 36px; position: relative; font-family: var(--display); font-weight: 500; font-size: 46px; line-height: 1.12; letter-spacing: -1px; font-variation-settings: 'opsz' 72; max-width: 880px; }
+.text .punch::before { content: ''; position: absolute; top: 0; left: 0; width: 120px; height: 3px; background: var(--cta); }
 /* slide 4 steps */
 .lead4 { margin-top: 36px; }
 .steps { margin: auto 0; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 14px; background: var(--card); overflow: hidden; }
@@ -66,21 +70,25 @@ h1 em { font-style: normal; color: var(--cta); }
 
 <!-- 02 -->
 <section class="slide text" data-n="2">
-  <h1><span>The agent works with <em>the context you give&nbsp;it.</em></span></h1>
-  <div class="support">
-    <p>Your original problem, instructions, files and constraints shape what the agent produces.</p>
-    <p>If you leave out an important requirement or fail to explain what needs to be solved, the agent may deliver something that looks right but misses the actual objective.</p>
-    <p>The quality of the output starts with the quality of the&nbsp;context.</p>
+  <div class="group">
+    <h1><span>The agent works with <em>the context you give&nbsp;it.</em></span></h1>
+    <div class="support">
+      <p>Your original problem, instructions, files and constraints shape what the agent produces.</p>
+      <p>If you leave out an important requirement or fail to explain what needs to be solved, the agent may deliver something that looks right but misses the actual objective.</p>
+    </div>
+    <p class="punch">The quality of the output starts with the quality of the&nbsp;context.</p>
   </div>
 </section>
 
 <!-- 03 -->
 <section class="slide text" data-n="3">
-  <h1><span>But the agent also <em>shapes your next&nbsp;decision.</em></span></h1>
-  <div class="support">
-    <p>The agent generates suggestions, makes changes and returns results. You review those changes and decide what happens next.</p>
-    <p>Sometimes you accept its approach. Sometimes you need to correct its assumptions, provide additional context or redirect its work.</p>
-    <p>Knowing when to trust, question or overrule the agent is part of working effectively with&nbsp;AI.</p>
+  <div class="group">
+    <h1><span>But the agent also <em>shapes your next&nbsp;decision.</em></span></h1>
+    <div class="support">
+      <p>The agent generates suggestions, makes changes and returns results. You review those changes and decide what happens next.</p>
+      <p>Sometimes you accept its approach. Sometimes you need to correct its assumptions, provide additional context or redirect its work.</p>
+    </div>
+    <p class="punch">Knowing when to trust, question or overrule the agent is part of working effectively with&nbsp;AI.</p>
   </div>
 </section>
 
