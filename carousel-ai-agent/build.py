@@ -51,8 +51,6 @@ S.append(f'''<section class="slide dark">
 items2 = [("The problem","you're trying to solve."),("The context","and information it needs."),("The constraints","and requirements it must follow.")]
 cards2 = "".join(f'<div class="row-card"><span class="idx">0{k+1}</span><div class="rc-text"><strong>{a}</strong> {b}</div></div>' for k,(a,b) in enumerate(items2))
 S.append(f'''<section class="slide cream">
-{contours(1020, 140, n=10, base=40, step=40, seed=11, focal=-1)}
-<div class="mask m2"></div>
 <div class="inner">
   {eyebrow("02","What goes in")}
   <h2 class="h-sec">The agent works with <em>the context you give it.</em></h2>
