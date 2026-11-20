@@ -1,0 +1,22 @@
+/* cover */
+.big5{font-family:var(--display);font-weight:500;font-variation-settings:"opsz" 96;font-size:400px;line-height:.8;letter-spacing:-12px;color:var(--cta);margin-left:-14px}
+.slide .cover-h{font-size:104px;line-height:.98;letter-spacing:-3.2px;margin-top:36px}
+.cover-sub{margin-top:40px;font-size:36px;line-height:1.4;color:rgba(255,255,255,.62)}
+/* progress */
+.progress{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:56px}
+.seg{border-top:3px solid rgba(2,1,9,.12);padding-top:14px}
+.seg b{font-family:var(--mono);font-weight:500;font-size:18px;letter-spacing:1.5px;color:rgba(2,1,9,.3)}
+.seg.on{border-top-color:var(--cta)}.seg.on b{color:var(--cta)}
+/* sign cards */
+.signs{display:flex;flex-direction:column;gap:18px}
+.sign{background:var(--card);border:1px solid rgba(2,1,9,.09);border-radius:20px;padding:40px 44px 44px}
+.s-top{display:flex;align-items:baseline;gap:24px}
+.s-num{font-family:var(--mono);font-size:22px;letter-spacing:1.5px;color:var(--cta);font-weight:500}
+.sign h3{font-family:var(--display);font-weight:500;font-variation-settings:"opsz" 72;font-size:56px;line-height:1.02;letter-spacing:-1.6px;color:var(--accent)}
+.sign p{margin-top:18px;padding-left:52px;font-size:32px;line-height:1.4;color:var(--muted)}
+.signs.two .sign{padding:56px 48px 60px}
+.signs.two .sign h3{font-size:68px;letter-spacing:-2px}
+.signs.two .sign p{font-size:36px;margin-top:22px}
+/* closing */
+.product .p-line{font-size:30px}
+.cta{margin-top:28px;align-self:flex-start;display:inline-flex;align-items:center;gap:16px;background:var(--cta);color:#fff;font-size:32px;font-weight:500;padding:24px 34px;border-radius:10px}
