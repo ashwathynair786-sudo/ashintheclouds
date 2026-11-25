@@ -2,37 +2,23 @@
 <html><head><meta charset="utf-8"><title>Responsibility Post v2</title>
 <link rel="stylesheet" href="../carousel-ai-agent/style.css">
 <style>
-  .inner{top:92px;bottom:170px;justify-content:center}
+  .inner{top:92px;bottom:200px;justify-content:flex-end}
+  .photo{position:absolute;top:0;left:0;right:0;height:700px;background:url("../Human and Robot Hands Typing.png") center 30%/cover no-repeat;filter:brightness(.92) contrast(1.05)}
+  .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,1,9,0) 35%,rgba(2,1,9,.75) 72%,var(--ink) 100%)}
   .h{font-family:var(--display);font-weight:500;font-variation-settings:"opsz" 96;font-size:96px;line-height:.98;letter-spacing:-3px;color:#fff}
   .h .pre{display:block;font-size:52px;line-height:1.1;letter-spacing:-1.3px;color:rgba(255,255,255,.45);margin-bottom:18px}
   .h em{font-style:normal;color:var(--cta)}
   .flow{margin-top:56px;padding:26px 30px 10px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
   .flow svg{display:block;width:100%;height:auto}
-  .copy{margin-top:44px;display:flex;flex-direction:column;gap:22px}
+  .copy{margin-top:40px;display:flex;flex-direction:column;gap:22px}
   .copy p{font-size:29.5px;line-height:1.42;color:rgba(255,255,255,.62)}
   .copy strong{color:#fff;font-weight:500}
 </style></head>
 <body>
 <section class="slide dark">
+  <div class="photo"></div>
   <div class="inner">
     <h1 class="h"><span class="pre">AI can do more of the work.</span>But who takes <em>responsibility</em> for the result?</h1>
-    <div class="flow"><svg viewBox="0 0 840 210" xmlns="http://www.w3.org/2000/svg">
-  <style>.l{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:1.4px;text-transform:uppercase}</style>
-  <line x1="24" y1="110" x2="214" y2="110" stroke="#C7F252" stroke-width="2.5" stroke-dasharray="7 7"/>
-  <line x1="214" y1="110" x2="790" y2="110" stroke="rgba(255,255,255,.35)" stroke-width="2"/>
-  <text x="119" y="84" text-anchor="middle" class="l" fill="#C7F252">Faster than ever</text>
-  <path d="M376 62 v-10 h338 v10" fill="none" stroke="rgba(255,87,34,.7)" stroke-width="1.5"/>
-  <text x="545" y="40" text-anchor="middle" class="l" fill="#FF5722">Human judgment</text>
-  <circle cx="24" cy="110" r="9" fill="#020109" stroke="rgba(255,255,255,.55)" stroke-width="2"/>
-  <circle cx="214" cy="110" r="12" fill="#C7F252"/>
-  <g fill="#FF5722"><circle cx="400" cy="110" r="10"/><circle cx="545" cy="110" r="10"/><circle cx="690" cy="110" r="10"/></g>
-  <circle cx="790" cy="110" r="20" fill="none" stroke="rgba(255,255,255,.35)"/><circle cx="790" cy="110" r="10" fill="#fff"/>
-  <g class="l" text-anchor="middle" fill="rgba(255,255,255,.6)">
-    <text x="24" y="152">Task</text><text x="214" y="152" fill="#fff">AI output</text>
-    <text x="400" y="152" fill="#fff">Understand</text><text x="545" y="152" fill="#fff">Question</text><text x="690" y="152" fill="#fff">Decide</text>
-    <text x="790" y="152" fill="#fff">Result</text><text x="790" y="172" fill="rgba(255,255,255,.6)">you trust</text>
-  </g>
-</svg></div>
     <div class="copy">
       <p>AI can write, analyse, summarise and solve problems faster than ever. <strong>But speed doesn't guarantee accuracy.</strong></p>
       <p>Someone still needs to <strong>understand the task, question the output</strong> and <strong>decide whether the final result is good enough to trust.</strong></p>
