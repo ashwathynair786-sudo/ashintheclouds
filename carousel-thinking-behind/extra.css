@@ -9,8 +9,8 @@
 .dark .body p{color:#fff}
 .cream .body p{color:var(--ink)}
 /* slide 1 photo */
-.photo{position:absolute;top:0;left:0;right:0;height:620px;background:url("../Human and Robot Hands Typing.png") center 30%/cover no-repeat;filter:brightness(.92) contrast(1.05)}
-.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,1,9,0) 35%,rgba(2,1,9,.75) 72%,var(--ink) 100%)}
+.photo{position:absolute;top:0;left:0;right:0;height:760px;background:url("../Human and Robot Puzzle Pieces.png") center 36%/cover no-repeat}
+.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,1,9,0) 55%,rgba(2,1,9,.8) 85%,var(--ink) 100%)}
 /* slide 2 question card */
 .qcard{background:var(--card);border:1px solid rgba(2,1,9,.09);border-left:4px solid var(--accent);border-radius:16px;padding:32px 36px}
 .qcard p{font-family:var(--display);font-weight:500;font-variation-settings:"opsz" 48;font-size:38px !important;line-height:1.22 !important;letter-spacing:-.6px;color:var(--accent) !important}
